@@ -10,7 +10,6 @@ const Viewer = () => {
   return (
 		<div className={styles.camera}>
     	<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment'  />
-			<div className={styles.tempvideo}></div>
       <img src={image} alt='Image preview' className={styles.image} />
       <button
 				className={styles.takephoto}
