@@ -1,0 +1,34 @@
+.camera video {
+	width: 300px!important;
+	height: 300px!important;
+	position: absolute;
+	top: 300px;
+	left: 300px;
+	opacity: 1;
+	
+}
+.tempvideo {
+	width: 100%;
+	height: 100%;
+	background-color: grey;
+	position: absolute;
+}
+.takephoto {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 20px;
+	margin: auto;
+	background: transparent;
+	border: none;
+	width: min-content;
+}
+.takephoto:hover {
+	opacity: .5;
+	cursor: pointer;
+}
+.image {
+	position: absolute;
+	top: 350px;
+	width: 200px!important; 
+}

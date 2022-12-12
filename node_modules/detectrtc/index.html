@@ -1,0 +1,563 @@
+<!--
+> Muaz Khan     - www.MuazKhan.com
+> MIT License   - www.WebRTC-Experiment.com/licence
+> Documentation - github.com/muaz-khan/DetectRTC
+> npm install detectrtc
+> bower install detectrtc
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DetectRTC | Is WebRTC Supported In Your Browser?</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="author" type="text/html" href="https://plus.google.com/+MuazKhan">
+        <meta name="author" content="Muaz Khan">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <link rel="stylesheet" href="https://www.webrtc-experiment.com/style.css">
+
+        <style>
+            audio {
+                vertical-align: bottom;
+                width: 10em;
+            }
+
+            video {
+                max-width: 100%;
+                vertical-align: top;
+            }
+
+            input {
+                border: 1px solid #d9d9d9;
+                border-radius: 1px;
+                font-size: 2em;
+                margin: .2em;
+                width: 30%;
+            }
+
+            p, .inner { padding: 1em; }
+
+            li {
+                border-bottom: 1px solid rgb(189, 189, 189);
+                border-left: 1px solid rgb(189, 189, 189);
+                padding: .5em;
+            }
+
+            label {
+                display: inline-block;
+                width: 8em;
+            }
+
+            .info-div {
+                display: inline-block;
+                vertical-align: middle;
+                background-repeat: no-repeat;
+                background-image: url(https://i.imgur.com/tnMN9tG.png?1);
+                background-position: center center;
+                width: 32px;
+                height: 32px;
+            }
+
+            .inline-pre {
+                margin: 0;
+                padding: 0;
+                border: 0;
+            }
+        </style>
+        <script>
+            document.createElement('article');
+            document.createElement('footer');
+        </script>
+
+        <!--
+            Script used to detect WebRTC features!
+            https://github.com/muaz-khan/DetectRTC#how-to-link
+        -->
+        <script src="/DetectRTC.js"> </script>
+        <script src="https://www.webrtc-experiment.com/screenshot.js"></script>
+        <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    </head>
+
+    <body>
+        <article>
+            <header style="text-align: center;">
+                <h1>
+                    <a href="https://github.com/muaz-khan/DetectRTC">DetectRTC</a> | Is WebRTC Supported In Your Browser?
+                </h1>
+                <p style="margin: 0;">
+                    <a href="https://github.com/muaz-khan/DetectRTC">Github Source Codes</a> |
+                    <a href="https://github.com/muaz-khan/DetectRTC/commits/master">What's New?</a>
+                </p>
+            </header>
+
+            <div style="text-align:center;">
+                <a href="https://www.npmjs.com/package/detectrtc" target="_blank">
+                    <img src="https://img.shields.io/npm/v/detectrtc.svg">
+                </a>
+
+                <a href="https://www.npmjs.com/package/detectrtc" target="_blank">
+                    <img src="https://img.shields.io/npm/dm/detectrtc.svg">
+                </a>
+
+                <a href="https://travis-ci.org/muaz-khan/DetectRTC">
+                    <img src="https://travis-ci.org/muaz-khan/DetectRTC.png?branch=master">
+                </a>
+            </div>
+
+            <div class="github-stargazers" style="margin-top: 30px;"></div>
+
+            <section class="experiment" id="detectrtc-output">
+                <button id="generate-image" style="float:right;">Open as Image</button>
+                <h2 id="welcome">DetectRTC!</h2>
+                <table id="browser-features"></table>
+            </section>
+
+            <!-- dirty trick to bypass webrtc blockers -->
+            <iframe id="iframe" sandbox="allow-same-origin" style="display: none"></iframe>
+
+            <script>
+                var browserFeaturesTable = document.querySelector('#browser-features');
+
+                var screenWidth00 = innerWidth;
+                if(document.querySelector('article')) {
+                    screenWidth00 = document.querySelector('article').clientWidth;
+                }
+
+                function appendTR(firstValue, secondValue, orignal) {
+                    var tr = document.createElement('tr');
+                    tr.id = orignal;
+                    var html = '<td style="padding: 5px!important; text-aling: center!important;width:20px!important;"><a style="cursor:pointer;" href="#' + orignal + '">#</a></td>';
+                    html += '<td style="padding:5px;width:' + (parseInt(screenWidth00 / 2) -  180) + 'px!important; overflow:hidden;padding: 5px!important; text-aling: center!important;width:50%!important;">' + firstValue + '</td>';
+                    html += '<td style="padding:5px;">' + secondValue + '</td>';
+                    tr.innerHTML = html;
+
+                    if(orignal === 'error') {
+                        tr.style.color = 'red';
+                    }
+
+                    browserFeaturesTable.appendChild(tr);
+                    return tr;
+                }
+
+                window.onerror = console.error = function() {
+                    appendTR('Error', JSON.stringify(arguments), 'error');
+                };
+
+                function printVal(value) {
+                    return value == true ? 'Yep' : value == false ? 'Nope' : value;
+                }
+
+                function getInfoDiv(id) {
+                    return '<div class="info-div" id="' + id + '"></div>';
+                }
+
+                var output = '';
+
+                function onDetectRTCLoaded() {
+                    browserFeaturesTable.innerHTML = '';
+
+                    appendTR('Operating System', printVal(DetectRTC.osName) + ' version: ' + printVal(DetectRTC.osVersion), 'osVersion');
+                    appendTR('Browser', printVal(DetectRTC.browser.name) + ' version: ' + printVal(DetectRTC.browser.fullVersion) + '<br>Private browsing? ' + printVal(DetectRTC.browser.isPrivateBrowsing), 'fullVersion');
+
+                    appendTR('Display resolutions', printVal(DetectRTC.displayResolution), 'displayResolution');
+                    appendTR('Display aspect ratio', printVal(DetectRTC.displayAspectRatio), 'displayAspectRatio');
+
+                    output = printVal(DetectRTC.hasSpeakers);
+                    if(DetectRTC.audioOutputDevices.length) {
+                        output += '<br>Found speaker devices: ' + DetectRTC.audioOutputDevices.length;
+
+                        var labels = [];
+                        DetectRTC.audioOutputDevices.forEach(function(device) {
+
+                           if(DetectRTC.browser.name === 'Edge' && device.isCustomLabel) {
+                                device.label = 'Microsoft Edge is unable to detect label for this speaker device.';
+                           }
+
+                           labels.push(device.label);
+                        });
+
+                        output += '<br><div style="margin-left:15px;">' + labels.join('<br>') + '</div>';
+                    }
+                    appendTR('System has Speakers?', output, 'audioOutputDevices');
+
+                    output = printVal(DetectRTC.hasMicrophone);
+                    if(DetectRTC.audioInputDevices.length) {
+                        output += '<br>Found microphone devices: ' + DetectRTC.audioInputDevices.length;
+
+                        var labels = [];
+                        DetectRTC.audioInputDevices.forEach(function(device) {
+                           labels.push(device.label);
+                        });
+
+                        output += '<br><div style="margin-left:15px;">' + labels.join('<br>') + '</div>';
+                    }
+                    appendTR('System has Microphone?', output, 'audioInputDevices');
+
+                    output = printVal(DetectRTC.hasWebcam);
+                    if(DetectRTC.videoInputDevices.length) {
+                        output += '<br>Found webcam devices: ' + DetectRTC.videoInputDevices.length;
+
+                        var labels = [];
+                        DetectRTC.videoInputDevices.forEach(function(device) {
+                           labels.push(device.label);
+                        });
+
+                        output += '<br><div style="margin-left:15px;">' + labels.join('<br>') + '</div>';
+                    }
+                    appendTR('System has Webcam?', output, 'videoInputDevices');
+
+                    appendTR('Website has webcam permissions?', printVal(DetectRTC.isWebsiteHasWebcamPermissions), 'isWebsiteHasWebcamPermissions');
+                    appendTR('Website has microphone permissions?', printVal(DetectRTC.isWebsiteHasMicrophonePermissions), 'isWebsiteHasMicrophonePermissions');
+
+                    appendTR('Browser allows getUserMedia on this page?', printVal(DetectRTC.isGetUserMediaSupported), 'isGetUserMediaSupported');
+
+                    appendTR('Can you change output audio devices?' + getInfoDiv('infoIcon-set-sink-id'), printVal(DetectRTC.isSetSinkIdSupported), 'isSetSinkIdSupported');
+
+                    appendTR('Can you change camera resolutions without making new getUserMedia request?' + getInfoDiv('infoIcon-apply-constraints'), printVal(DetectRTC.isApplyConstraintsSupported), 'isApplyConstraintsSupported');
+
+                    appendTR('Browser Supports WebRTC (Either 1.0 or 1.1)?', printVal(DetectRTC.isWebRTCSupported), 'isWebRTCSupported');
+                    appendTR('Browser Supports ORTC (WebRTC 1.1)?', printVal(DetectRTC.isORTCSupported), 'isORTCSupported');
+
+                    appendTR('Can you replace tracks without renegotiating peers?' + getInfoDiv('infoIcon-replace-tracks'), printVal(DetectRTC.isRTPSenderReplaceTracksSupported), 'isRTPSenderReplaceTracksSupported');
+
+                    appendTR('Can your browser record remote audio or process remote audio stream in WebAudio API?', printVal(DetectRTC.isRemoteStreamProcessingSupported), 'isRemoteStreamProcessingSupported');
+
+                    appendTR('Browser Supports WebSockets API?', printVal(DetectRTC.isWebSocketsSupported), 'isWebSocketsSupported');
+
+                    var tr = appendTR('Your system blocked WebSockets protocol or WebSockets server is not accessible?', printVal(DetectRTC.isWebSocketsBlocked), 'isWebSocketsBlocked');
+                    DetectRTC.checkWebSocketsSupport(function() {
+                        tr.querySelectorAll('td')[2].innerHTML = printVal(DetectRTC.isWebSocketsBlocked);
+                    });
+
+                    appendTR('Browser Supports WebAudio API?', printVal(DetectRTC.isAudioContextSupported), 'isAudioContextSupported');
+                    appendTR('Browser Supports SCTP Data Channels?', printVal(DetectRTC.isSctpDataChannelsSupported), 'isSctpDataChannelsSupported');
+                    appendTR('Browser Supports RTP Data Channels?', printVal(DetectRTC.isRtpDataChannelsSupported), 'isRtpDataChannelsSupported');
+                    appendTR('This page Supports Screen Capturing API?' + getInfoDiv('infoIcon-isScreenCapturingSupported'), printVal(DetectRTC.isScreenCapturingSupported), 'isScreenCapturingSupported');
+
+                    appendTR('Does Browser Support multi-monitor selection & capturing screen of any monitor?', printVal(DetectRTC.isMultiMonitorScreenCapturingSupported), 'isMultiMonitorScreenCapturingSupported');
+
+
+                    appendTR('Is it a mobile device?', printVal(DetectRTC.isMobileDevice), 'isMobileDevice');
+
+                    appendTR('Does Browser Support Stream Capturing from Canvas?', printVal(DetectRTC.isVideoSupportsStreamCapturing), 'isVideoSupportsStreamCapturing');
+                    appendTR('Does Browser Support Stream Capturing from Video?', printVal(DetectRTC.isVideoSupportsStreamCapturing), 'isVideoSupportsStreamCapturing');
+
+                    appendTR('Does Browser Support Promises?', printVal(DetectRTC.isPromisesSupported), 'isPromisesSupported');
+
+                    appendTR('<a id="btn-show-ip-addresses" href"#" style="cursor:pointer;">Click to show IP addresses</a>', '', '');
+
+                    document.getElementById('btn-show-ip-addresses').onclick = function(e) {
+                        e.preventDefault();
+
+                        var parentNode = this.parentNode.parentNode;
+                        parentNode.parentNode.removeChild(parentNode);
+
+                        if(DetectRTC.browser.name === 'Edge') {
+                            navigator.mediaDevices.getUserMedia({video: true}).then(function(stream) {
+                                detectIpAddresses(stream);
+                            });
+                            return;
+                        }
+
+                        detectIpAddresses();
+                    };
+
+                    function detectIpAddresses(stream) {
+                        DetectRTC.DetectLocalIPAddress(function(ipAddress, isPublic, isIpv4) {
+                            if(!ipAddress) return;
+
+                            // console.log(ipAddress, isPublic, isIpv4);
+                            if (ipAddress.indexOf('Local') !== -1) {
+                                appendTR('Your <strong>Local</strong> IP Address', ipAddress);
+                            } else {
+                                appendTR('Your <strong>Public</strong> IP Address', ipAddress);
+                            }
+
+                            if(!stream) return;
+
+                            stream.getTracks().forEach(function(track) {
+                                track.stop();
+                            });
+
+                            stream = null;
+                        }, stream);
+                    }
+
+                    // appendTR(DetectRTC.MediaStream === false ? 'Your system does NOT supports MediaStream.' : 'Your system supports MediaStream.', '<strong>MediaStream.prototype:</strong><br>' + DetectRTC.MediaStream.toString().split(',').join(', '), 'MediaStream');
+                    // appendTR(DetectRTC.MediaStreamTrack === false ? 'Your system does NOT supports MediaStreamTrack.' : 'Your system supports MediaStreamTrack.', '<strong>MediaStreamTrack.prototype:</strong><br>' + DetectRTC.MediaStreamTrack.toString().split(',').join(', '), 'MediaStreamTrack');
+                    // appendTR(DetectRTC.RTCPeerConnection === false ? 'Your system does NOT supports RTCPeerConnection API.' : 'Your system supports RTCPeerConnection API.', '<strong>RTCPeerConnection.prototype:</strong><br>' + DetectRTC.RTCPeerConnection.toString().split(',').join(', '), 'RTCPeerConnection');
+                    document.getElementById('infoIcon-isScreenCapturingSupported').onclick = function() {
+                        var pre = this.parentNode.querySelector('pre');
+                        if(pre) {
+                            pre.parentNode.removeChild(pre);
+                            return;
+                        }
+
+                        pre = document.createElement('pre');
+                        pre.className = 'sh_javascript inline-pre';
+                        pre.innerHTML += '\
+# Edge &gt= 17 or Firefox &gt= 60 or Safari &gt=13<br>\
+navigator.getDisplayMedia({<br>\
+    video: true<br>\
+}).then(screenStream => {<br>\
+    video.srcObject = screenStream;<br>\
+}, error => {<br>\
+    alert(error);<br>\
+});<br>\
+<br>\
+# Firefox<br>\
+navigator.mediaDevices.getUserMedia({<br>\
+    video: {<br>\
+        mediaSource: \'window\' || \'screen\'<br>\
+    }<br>\
+}).then(function(screenStream) {<br>\
+    video.srcObject = screenStream;<br>\
+});<br><br>\
+# Chrome+Opera desktopCapture API i.e. extension';
+                        this.parentNode.appendChild(pre);
+                        pre.focus();
+                    };
+
+                    document.getElementById('infoIcon-set-sink-id').onclick = function() {
+                        var pre = this.parentNode.querySelector('pre');
+                        if(pre) {
+                            pre.parentNode.removeChild(pre);
+                            return;
+                        }
+
+                        pre = document.createElement('pre');
+                        pre.className = 'sh_javascript inline-pre';
+                        pre.innerHTML += '\
+var secondarySpeakers = DetectRTC.audioOutputDevices[1];<br>\
+if(secondarySpeakers) {<br>\
+   videoElement.setSinkId(secondarySpeakers.deviceId);<br>\
+}';
+                        this.parentNode.appendChild(pre);
+                        pre.focus();
+                    };
+
+                    document.getElementById('infoIcon-apply-constraints').onclick = function() {
+                        var pre = this.parentNode.querySelector('pre');
+                        if(pre) {
+                            pre.parentNode.removeChild(pre);
+                            return;
+                        }
+
+                        pre = document.createElement('pre');
+                        pre.className = 'sh_javascript inline-pre';
+                        pre.innerHTML += '\
+oldMediaStream.getVideoTracks().forEach(function(track) {<br>\
+    var videoConstraints = {<br>\
+        width: {min: 640, ideal: 1280},<br>\
+        height: {min: 480, ideal: 720},<br>\
+    };<br>\
+    track.applyConstraints(videoConstraints); <br>\
+});';
+                        this.parentNode.appendChild(pre);
+                        pre.focus();
+                    };
+
+                    document.getElementById('infoIcon-replace-tracks').onclick = function() {
+                        var pre = this.parentNode.querySelector('pre');
+                        if(pre) {
+                            pre.parentNode.removeChild(pre);
+                            return;
+                        }
+
+                        pre = document.createElement('pre');
+                        pre.className = 'sh_javascript inline-pre';
+                        pre.innerHTML += '\
+var newTrack = newMediaStream.getVideoTracks()[0];<br>\
+var rtpSenders = rtcPeerConnection.getSenders()[0];<br>\
+rtpSenders.replaceTrack(newTrack);';
+                        this.parentNode.appendChild(pre);
+                        pre.focus();
+                    };
+                }
+
+                function reloadDetectRTC(callback) {
+                    DetectRTC.load(function() {
+                        onDetectRTCLoaded();
+
+                        if(callback && typeof callback == 'function') {
+                            callback();
+                        }
+                    });
+                }
+
+                DetectRTC.load(function() {
+                    reloadDetectRTC();
+
+                    try {
+                        if(DetectRTC.MediaDevices[0] && DetectRTC.MediaDevices[0].isCustomLabel) {
+                            navigator.mediaDevices.getUserMedia({audio: true, video: true}).then(function(stream) {
+                                var video;
+                                try {
+                                    video = document.createElement('video');
+                                    video.muted = true;
+                                    video.volume = 0;
+                                    video.src = URL.createObjectURL(stream);
+                                    video.style.display = 'none';
+                                    video.style.opacity = 0;
+                                    (document.body || document.documentElement).appendChild(vide);
+                                }
+                                catch(e) {}
+
+                                reloadDetectRTC(function() {
+                                    // release camera
+                                    stream.getTracks().forEach(function(track) {
+                                        track.stop();
+                                    });
+
+                                    if(video && video.parentNode) {
+                                        video.parentNode.removeChild(video);
+                                    }
+                                });
+                            }).catch(reloadDetectRTC);
+                            return;
+                        }
+                    }
+                    catch(e) {}
+
+                    onDetectRTCLoaded();
+                });
+
+                document.getElementById('generate-image').onclick = function() {
+                    document.getElementById('generate-image').style.display = 'none';
+
+                    html2canvas(browserFeaturesTable.parentNode, {
+                        background :'#FFFFFF',
+                        grabMouse: false,
+                        onrendered: function(canvas) {
+                            var image = canvas.toDataURL('image/jpeg');
+                            window.open(image);
+
+                            document.getElementById('generate-image').style.display = 'inline-block';
+                        }
+                    });
+                };
+
+                function dataURLToBlob(dataURL) {
+                    var BASE64_MARKER = ';base64,';
+                    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+                        var parts = dataURL.split(',');
+                        var contentType = parts[0].split(':')[1];
+                        var raw = decodeURIComponent(parts[1]);
+
+                        return new Blob([raw], {
+                            type: contentType
+                        });
+                    }
+
+                    var parts = dataURL.split(BASE64_MARKER);
+                    var contentType = parts[0].split(':')[1];
+                    var raw = window.atob(parts[1]);
+                    var rawLength = raw.length;
+
+                    var uInt8Array = new Uint8Array(rawLength);
+
+                    for (var i = 0; i < rawLength; ++i) {
+                        uInt8Array[i] = raw.charCodeAt(i);
+                    }
+
+                    return new Blob([uInt8Array], {
+                        type: contentType
+                    });
+                }
+
+                if(DetectRTC.version) {
+                    document.getElementById('welcome').innerHTML = 'DetectRTC v' + DetectRTC.version;
+                }
+            </script>
+
+            <section class="experiment">
+                <h2 class="header" id="updates" style="color: red; padding-bottom: .1em;"><a href="https://github.com/muaz-khan/DetectRTC/issues" target="_blank">DetectRTC Issues</a>
+                </h2>
+                <div id="github-issues"></div>
+            </section>
+
+            <section class="experiment">
+                <h2 class="header" id="updates" style="color: red; padding-bottom: .1em;"><a href="https://github.com/muaz-khan/DetectRTC/commits/master" target="_blank">Latest Updates</a></h2>
+                <div id="github-commits"></div>
+            </section>
+
+            <section class="experiment"><small id="send-message"></small></section>
+
+            <section class="experiment">
+                <h2 class="header">
+                    How to use <a href="https://github.com/muaz-khan/DetectRTC" target="_blank">DetectRTC</a>?</h2>
+                <pre class="sh_html">
+&lt;script src="https://www.webrtc-experiment.com/DetectRTC.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+// OR otherwise use <a href="https://www.npmjs.com/package/detectrtc">NPM</a>
+var DetectRTC = require('detectrtc');
+&lt;/script&gt;
+</pre>
+            </section>
+            <section class="experiment">
+                <pre class="sh_javascript">
+DetectRTC.load(function() {
+    DetectRTC.hasWebcam (has webcam device!)
+    DetectRTC.hasMicrophone (has microphone device!)
+    DetectRTC.hasSpeakers (has speakers!)
+    DetectRTC.isScreenCapturingSupported
+    DetectRTC.isSctpDataChannelsSupported
+    DetectRTC.isRtpDataChannelsSupported
+    DetectRTC.isAudioContextSupported
+    DetectRTC.isWebRTCSupported
+    DetectRTC.isDesktopCapturingSupported
+    DetectRTC.isMobileDevice
+
+    DetectRTC.isWebSocketsSupported
+    DetectRTC.isWebSocketsBlocked
+    DetectRTC.checkWebSocketsSupport(callback)
+
+    DetectRTC.isWebsiteHasWebcamPermissions        // getUserMedia allowed for HTTPs domain in Chrome?
+    DetectRTC.isWebsiteHasMicrophonePermissions    // getUserMedia allowed for HTTPs domain in Chrome?
+
+    DetectRTC.audioInputDevices    // microphones
+    DetectRTC.audioOutputDevices   // speakers
+    DetectRTC.videoInputDevices    // cameras
+
+    DetectRTC.osName
+    DetectRTC.osVersion
+
+    DetectRTC.browser.name === 'Edge' || 'Chrome' || 'Firefox'
+    DetectRTC.browser.version
+    DetectRTC.browser.isChrome
+    DetectRTC.browser.isFirefox
+    DetectRTC.browser.isOpera
+    DetectRTC.browser.isIE
+    DetectRTC.browser.isSafari
+    DetectRTC.browser.isEdge
+
+    DetectRTC.browser.isPrivateBrowsing // incognito or private modes
+
+    DetectRTC.isCanvasSupportsStreamCapturing
+    DetectRTC.isVideoSupportsStreamCapturing
+
+    DetectRTC.DetectLocalIPAddress(callback)
+});
+</pre>
+
+            </section>
+        </article>
+
+        <footer>
+            <p>
+                <a href="https://www.webrtc-experiment.com/">WebRTC Experiments</a> |
+                <a href="http://www.muazkhan.com/">Muaz Khan</a> |
+                <a href="https://twitter.com/WebRTCWeb">@WebRTCWeb</a> |
+                <a href="https://twitter.com/muazkh">@muazkh</a>
+            </p>
+        </footer>
+
+        <!-- commits.js is useless for you!  -->
+        <script>
+            window.useThisGithubPath = 'muaz-khan/DetectRTC';
+        </script>
+        <script src="https://www.webrtc-experiment.com/commits.js" async> </script>
+    </body>
+</html>
