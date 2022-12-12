@@ -1,4 +1,4 @@
-# slash [![Build Status](https://travis-ci.org/sindresorhus/slash.svg?branch=master)](https://travis-ci.org/sindresorhus/slash)
+# slash
 
 > Convert Windows backslash paths to slash paths: `foo\\bar` ➔ `foo/bar`
 
@@ -6,19 +6,17 @@
 
 This was created since the `path` methods in Node.js outputs `\\` paths on Windows.
 
-
 ## Install
 
 ```
 $ npm install slash
 ```
 
-
 ## Usage
 
 ```js
-const path = require('path');
-const slash = require('slash');
+import path from 'path';
+import slash from 'slash';
 
 const string = path.join('foo', 'bar');
 // Unix    => foo/bar
@@ -29,7 +27,6 @@ slash(string);
 // Windows => foo/bar
 ```
 
-
 ## API
 
 ### slash(path)
@@ -38,7 +35,14 @@ Type: `string`
 
 Accepts a Windows backslash path and returns a path with forward slashes.
 
+---
 
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)
+<div align="center">
+	<b>
+		<a href="https://tidelift.com/subscription/pkg/npm-slash?utm_source=npm-slash&utm_medium=referral&utm_campaign=readme">Get professional support for this package with a Tidelift subscription</a>
+	</b>
+	<br>
+	<sub>
+		Tidelift helps make open source sustainable for maintainers while giving companies<br>assurances about security, maintenance, and licensing for their dependencies.
+	</sub>
+</div>

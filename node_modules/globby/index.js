@@ -1,23 +1,28 @@
-'use strict';
-const fs = require('fs');
-const arrayUnion = require('array-union');
-const merge2 = require('merge2');
-const fastGlob = require('fast-glob');
-const dirGlob = require('dir-glob');
-const gitignore = require('./gitignore');
-const {FilterStream, UniqueStream} = require('./stream-utils');
-
-const DEFAULT_FILTER = () => false;
-
-const isNegative = pattern => pattern[0] === '!';
+import fs from 'node:fs';
+import nodePath from 'node:path';
+import merge2 from 'merge2';
+import fastGlob from 'fast-glob';
+import dirGlob from 'dir-glob';
+import {
+	GITIGNORE_FILES_PATTERN,
+	isIgnoredByIgnoreFiles,
+	isIgnoredByIgnoreFilesSync,
+} from './ignore.js';
+import {FilterStream, toPath, isNegativePattern} from './utilities.js';
 
 const assertPatternsInput = patterns => {
-	if (!patterns.every(pattern => typeof pattern === 'string')) {
+	if (patterns.some(pattern => typeof pattern !== 'string')) {
 		throw new TypeError('Patterns must be a string or an array of strings');
 	}
 };
 
-const checkCwdOption = (options = {}) => {
+const toPatternsArray = patterns => {
+	patterns = [...new Set([patterns].flat())];
+	assertPatternsInput(patterns);
+	return patterns;
+};
+
+const checkCwdOption = options => {
 	if (!options.cwd) {
 		return;
 	}
@@ -34,148 +39,189 @@ const checkCwdOption = (options = {}) => {
 	}
 };
 
-const getPathString = p => p.stats instanceof fs.Stats ? p.path : p;
-
-const generateGlobTasks = (patterns, taskOptions) => {
-	patterns = arrayUnion([].concat(patterns));
-	assertPatternsInput(patterns);
-	checkCwdOption(taskOptions);
-
-	const globTasks = [];
-
-	taskOptions = {
+const normalizeOptions = (options = {}) => {
+	options = {
 		ignore: [],
 		expandDirectories: true,
-		...taskOptions
+		...options,
+		cwd: toPath(options.cwd),
 	};
 
-	for (const [index, pattern] of patterns.entries()) {
-		if (isNegative(pattern)) {
-			continue;
-		}
+	checkCwdOption(options);
 
-		const ignore = patterns
-			.slice(index)
-			.filter(pattern => isNegative(pattern))
-			.map(pattern => pattern.slice(1));
-
-		const options = {
-			...taskOptions,
-			ignore: taskOptions.ignore.concat(ignore)
-		};
-
-		globTasks.push({pattern, options});
-	}
-
-	return globTasks;
+	return options;
 };
 
-const globDirs = (task, fn) => {
-	let options = {};
-	if (task.options.cwd) {
-		options.cwd = task.options.cwd;
+const normalizeArguments = fn => async (patterns, options) => fn(toPatternsArray(patterns), normalizeOptions(options));
+const normalizeArgumentsSync = fn => (patterns, options) => fn(toPatternsArray(patterns), normalizeOptions(options));
+
+const getIgnoreFilesPatterns = options => {
+	const {ignoreFiles, gitignore} = options;
+
+	const patterns = ignoreFiles ? toPatternsArray(ignoreFiles) : [];
+	if (gitignore) {
+		patterns.push(GITIGNORE_FILES_PATTERN);
 	}
 
-	if (Array.isArray(task.options.expandDirectories)) {
-		options = {
-			...options,
-			files: task.options.expandDirectories
-		};
-	} else if (typeof task.options.expandDirectories === 'object') {
-		options = {
-			...options,
-			...task.options.expandDirectories
-		};
-	}
-
-	return fn(task.pattern, options);
+	return patterns;
 };
 
-const getPattern = (task, fn) => task.options.expandDirectories ? globDirs(task, fn) : [task.pattern];
+const getFilter = async options => {
+	const ignoreFilesPatterns = getIgnoreFilesPatterns(options);
+	return createFilterFunction(
+		ignoreFilesPatterns.length > 0 && await isIgnoredByIgnoreFiles(ignoreFilesPatterns, {cwd: options.cwd}),
+	);
+};
 
 const getFilterSync = options => {
-	return options && options.gitignore ?
-		gitignore.sync({cwd: options.cwd, ignore: options.ignore}) :
-		DEFAULT_FILTER;
+	const ignoreFilesPatterns = getIgnoreFilesPatterns(options);
+	return createFilterFunction(
+		ignoreFilesPatterns.length > 0 && isIgnoredByIgnoreFilesSync(ignoreFilesPatterns, {cwd: options.cwd}),
+	);
 };
 
-const globToTask = task => glob => {
-	const {options} = task;
-	if (options.ignore && Array.isArray(options.ignore) && options.expandDirectories) {
-		options.ignore = dirGlob.sync(options.ignore);
-	}
+const createFilterFunction = isIgnored => {
+	const seen = new Set();
 
-	return {
-		pattern: glob,
-		options
+	return fastGlobResult => {
+		const path = fastGlobResult.path || fastGlobResult;
+		const pathKey = nodePath.normalize(path);
+		const seenOrIgnored = seen.has(pathKey) || (isIgnored && isIgnored(path));
+		seen.add(pathKey);
+		return !seenOrIgnored;
 	};
 };
 
-module.exports = async (patterns, options) => {
-	const globTasks = generateGlobTasks(patterns, options);
+const unionFastGlobResults = (results, filter) => results.flat().filter(fastGlobResult => filter(fastGlobResult));
+const unionFastGlobStreams = (streams, filter) => merge2(streams).pipe(new FilterStream(fastGlobResult => filter(fastGlobResult)));
 
-	const getFilter = async () => {
-		return options && options.gitignore ?
-			gitignore({cwd: options.cwd, ignore: options.ignore}) :
-			DEFAULT_FILTER;
-	};
-
-	const getTasks = async () => {
-		const tasks = await Promise.all(globTasks.map(async task => {
-			const globs = await getPattern(task, dirGlob);
-			return Promise.all(globs.map(globToTask(task)));
-		}));
-
-		return arrayUnion(...tasks);
-	};
-
-	const [filter, tasks] = await Promise.all([getFilter(), getTasks()]);
-	const paths = await Promise.all(tasks.map(task => fastGlob(task.pattern, task.options)));
-
-	return arrayUnion(...paths).filter(path_ => !filter(getPathString(path_)));
-};
-
-module.exports.sync = (patterns, options) => {
-	const globTasks = generateGlobTasks(patterns, options);
-
+const convertNegativePatterns = (patterns, options) => {
 	const tasks = [];
-	for (const task of globTasks) {
-		const newTask = getPattern(task, dirGlob.sync).map(globToTask(task));
-		tasks.push(...newTask);
+
+	while (patterns.length > 0) {
+		const index = patterns.findIndex(pattern => isNegativePattern(pattern));
+
+		if (index === -1) {
+			tasks.push({patterns, options});
+			break;
+		}
+
+		const ignorePattern = patterns[index].slice(1);
+
+		for (const task of tasks) {
+			task.options.ignore.push(ignorePattern);
+		}
+
+		if (index !== 0) {
+			tasks.push({
+				patterns: patterns.slice(0, index),
+				options: {
+					...options,
+					ignore: [
+						...options.ignore,
+						ignorePattern,
+					],
+				},
+			});
+		}
+
+		patterns = patterns.slice(index + 1);
 	}
 
-	const filter = getFilterSync(options);
-
-	let matches = [];
-	for (const task of tasks) {
-		matches = arrayUnion(matches, fastGlob.sync(task.pattern, task.options));
-	}
-
-	return matches.filter(path_ => !filter(path_));
+	return tasks;
 };
 
-module.exports.stream = (patterns, options) => {
-	const globTasks = generateGlobTasks(patterns, options);
+const getDirGlobOptions = (options, cwd) => ({
+	...(cwd ? {cwd} : {}),
+	...(Array.isArray(options) ? {files: options} : options),
+});
 
-	const tasks = [];
-	for (const task of globTasks) {
-		const newTask = getPattern(task, dirGlob.sync).map(globToTask(task));
-		tasks.push(...newTask);
+const generateTasks = async (patterns, options) => {
+	const globTasks = convertNegativePatterns(patterns, options);
+
+	const {cwd, expandDirectories} = options;
+
+	if (!expandDirectories) {
+		return globTasks;
 	}
 
-	const filter = getFilterSync(options);
-	const filterStream = new FilterStream(p => !filter(p));
-	const uniqueStream = new UniqueStream();
+	const patternExpandOptions = getDirGlobOptions(expandDirectories, cwd);
+	const ignoreExpandOptions = cwd ? {cwd} : undefined;
 
-	return merge2(tasks.map(task => fastGlob.stream(task.pattern, task.options)))
-		.pipe(filterStream)
-		.pipe(uniqueStream);
+	return Promise.all(
+		globTasks.map(async task => {
+			let {patterns, options} = task;
+
+			[
+				patterns,
+				options.ignore,
+			] = await Promise.all([
+				dirGlob(patterns, patternExpandOptions),
+				dirGlob(options.ignore, ignoreExpandOptions),
+			]);
+
+			return {patterns, options};
+		}),
+	);
 };
 
-module.exports.generateGlobTasks = generateGlobTasks;
+const generateTasksSync = (patterns, options) => {
+	const globTasks = convertNegativePatterns(patterns, options);
 
-module.exports.hasMagic = (patterns, options) => []
-	.concat(patterns)
-	.some(pattern => fastGlob.isDynamicPattern(pattern, options));
+	const {cwd, expandDirectories} = options;
 
-module.exports.gitignore = gitignore;
+	if (!expandDirectories) {
+		return globTasks;
+	}
+
+	const patternExpandOptions = getDirGlobOptions(expandDirectories, cwd);
+	const ignoreExpandOptions = cwd ? {cwd} : undefined;
+
+	return globTasks.map(task => {
+		let {patterns, options} = task;
+		patterns = dirGlob.sync(patterns, patternExpandOptions);
+		options.ignore = dirGlob.sync(options.ignore, ignoreExpandOptions);
+		return {patterns, options};
+	});
+};
+
+export const globby = normalizeArguments(async (patterns, options) => {
+	const [
+		tasks,
+		filter,
+	] = await Promise.all([
+		generateTasks(patterns, options),
+		getFilter(options),
+	]);
+	const results = await Promise.all(tasks.map(task => fastGlob(task.patterns, task.options)));
+
+	return unionFastGlobResults(results, filter);
+});
+
+export const globbySync = normalizeArgumentsSync((patterns, options) => {
+	const tasks = generateTasksSync(patterns, options);
+	const filter = getFilterSync(options);
+	const results = tasks.map(task => fastGlob.sync(task.patterns, task.options));
+
+	return unionFastGlobResults(results, filter);
+});
+
+export const globbyStream = normalizeArgumentsSync((patterns, options) => {
+	const tasks = generateTasksSync(patterns, options);
+	const filter = getFilterSync(options);
+	const streams = tasks.map(task => fastGlob.stream(task.patterns, task.options));
+
+	return unionFastGlobStreams(streams, filter);
+});
+
+export const isDynamicPattern = normalizeArgumentsSync(
+	(patterns, options) => patterns.some(pattern => fastGlob.isDynamicPattern(pattern, options)),
+);
+
+export const generateGlobTasks = normalizeArguments(generateTasks);
+export const generateGlobTasksSync = normalizeArgumentsSync(generateTasksSync);
+
+export {
+	isGitIgnored,
+	isGitIgnoredSync,
+} from './ignore.js';

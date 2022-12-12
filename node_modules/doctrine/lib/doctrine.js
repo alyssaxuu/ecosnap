@@ -28,6 +28,7 @@
             return func.call(obj, name);
         };
     }());
+
     function shallowCopy(obj) {
         var ret = {}, key;
         for (key in obj) {
