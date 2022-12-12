@@ -6,6 +6,7 @@
 	margin: auto;
 	top: 20px;
 	z-index: 9999999;
+	color: #FFF;
 }
 .camera video {
 	width: 100%;
