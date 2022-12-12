@@ -1,9 +1,14 @@
+@font-face {
+  font-family: "Mattone";
+  src: url("./../public/Mattone-150.woff2") format("woff2"),
+       url("./../public/Mattone-150.woff") format("woff");
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Mattone";
 }
 
 a {

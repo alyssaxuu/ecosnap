@@ -9,6 +9,8 @@ const Viewer = () => {
 
   return (
 		<div className={styles.camera}>
+			<div className={styles.title}>Scan</div>
+			<div className={styles.overlay}></div>
     	<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment'  />
       <img src={image} alt='Image preview' className={styles.image} />
       <button
@@ -20,11 +22,11 @@ const Viewer = () => {
       ><img src="cam.svg"/></button>
       <button
 				className={styles.switchcamera}
-        hidden={numberOfCameras <= 1}
+        hidden={numberOfCameras >= 5}
         onClick={() => {
           camera.current.switchCamera();
         }}
-      >Switch the camera</button>
+      ><img src="rotate.svg"/></button>
 		</div>
   )
 }
