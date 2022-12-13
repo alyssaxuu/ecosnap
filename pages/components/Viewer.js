@@ -45,7 +45,9 @@ const Viewer = () => {
 			</button>
 			<div className={scanning ? styles.scanning : styles.off}>
 				<img src="scan.svg"/>
-				Scanning...
+				<span>Scanning...</span>
+				{recyclable && 
+				<span><img src="smile.svg"/> Awesome, it's recyclable!</span>}
 			</div>
 		</div>
   )
