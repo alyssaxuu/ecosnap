@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import styles from "./../../styles/Viewer.module.css"
+import PlasticInfo from "./PlasticInfo";
 import {Camera} from "react-camera-pro";
 
 const Viewer = () => {
@@ -50,10 +51,14 @@ const Viewer = () => {
 			}
 			<div className={recyclable ? styles.full : scanning ? styles.scanning : styles.off}>
 				{!recyclable &&
-				<span><img className={styles.rotate} src="scan.svg"/> Scanning...</span>
+					<span><img className={styles.rotate} src="scan.svg"/> Scanning...</span>
 				}
 				{recyclable && 
-				<span className={styles.scanrecyclable}><img src="smile.svg"/> Awesome, it's recyclable!</span>}
+					<span className={styles.scanrecyclable}><img src="smile.svg"/> Awesome, it's recyclable!</span>
+				}
+				{recyclable &&
+					<PlasticInfo />
+				}
 			</div>
 		</div>
   )
