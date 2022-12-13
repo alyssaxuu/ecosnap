@@ -14,6 +14,7 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	opacity: 1;
 }
 .overlay {
 	background: linear-gradient(179.99deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.7) 83.17%), linear-gradient(179.95deg, rgba(0, 0, 0, 0.7) 0.04%, rgba(0, 0, 0, 0) 25.96%);
@@ -22,8 +23,11 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	z-index: 9;
+	opacity: .75;
 }
 .takephoto {
+	z-index: 99999;
 	position: absolute;
 	left: 0px;
 	right: 0px;
@@ -33,10 +37,6 @@
 	border: none;
 	width: min-content;
 }
-.takephoto:hover, .switchcamera:hover {
-	opacity: .5;
-	cursor: pointer;
-}
 .image {
 	position: absolute;
 	top: 0px;
@@ -44,6 +44,7 @@
 	opacity: 0;
 	width: 100%;
 	height: 100%;
+	display: none;
 }
 .switchcamera {
 	position: absolute;
@@ -53,4 +54,117 @@
 	background: none;
 	border: none;
 	width: min-content;
+}
+.off {
+	opacity: 0!important;
+	animation: none!important;
+	display: none;
+}
+.scanning, .off {
+	height: 100px;
+	width: 90%;
+	font-size: 16px;
+	line-height: 100px;
+	border-radius: 15px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	bottom: 20px;
+	position: absolute;
+	color: #000;
+	text-align: center;
+	z-index: 999999999;
+	animation-name: fadein;
+	animation-duration: .25s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.scanning:before, .off:before {
+	display: block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: #FFF;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border-radius: 15px;
+	z-index: -1;
+	transform: scale(0);
+	animation-name: scanning;
+	animation-duration: .5s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.scanning img, .off img {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+	animation-name: rotate;
+	animation-duration: .5s;
+	animation-delay: .5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	margin-top: -5px;
+}
+@keyframes scanning {
+  from {
+		transform: scale(0);
+	}
+  to {
+		transform: scale(1);
+	}
+}
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(180deg);
+	}
+}
+.scanline {
+	z-index: 99999999999;
+	height: 200px;
+	position: absolute;
+	top: 100px;
+	left: 0px;
+	border-top: 2px dashed #FFFFFF;
+	width: 100%;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+	animation-name: moving;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+	pointer-events: none;
+}
+@keyframes moving {
+	from {
+		top: 10%;
+	}
+	to {
+		top: 85%;
+	}
+}
+.scanarea {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	z-index: 9999999999;
+	margin: auto;
 }
