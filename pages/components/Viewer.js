@@ -48,7 +48,7 @@ const Viewer = () => {
 					<img src="rotate.svg"/>
 				</button>
 			}
-			<div className={scanning ? styles.scanning : styles.off}>
+			<div className={recyclable ? styles.full : scanning ? styles.scanning : styles.off}>
 				{!recyclable &&
 				<span><img className={styles.rotate} src="scan.svg"/> Scanning...</span>
 				}
