@@ -8,24 +8,67 @@ const Viewer = () => {
 	const [numberOfCameras, setNumberOfCameras] = useState(0);
   const [image, setImage] = useState(null);
 	const [scanning, setScanning] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [recyclable, setRecyclable] = useState(false);
+	const [next, setNext] = useState(false);
 	const [plastic, setPlastic] = useState(1);
+	const inputRef = useRef(null);
+
+	const handleUploadClick = () => {
+    inputRef.current?.click();
+  };
+
+	const handleReturn = () => {
+		setScanning(false);
+		setLoading(false);
+		setNext(false);
+	}
+
+	const handleFileChange = (event) => {
+    if (!event.target.files) {
+      return;
+    }
+
+    setImage(URL.createObjectURL(event.target.files[0]));
+		scan();
+  };
+
+	const scan = () => {
+		setScanning(true);
+		setLoading(true);
+		setTimeout(() => {
+			setLoading(false);
+			setNext(true);
+			if (Math.floor(Math.random()*2) === 0) {
+				setPlastic(Math.floor(Math.random() * 3)+3);
+				setRecyclable(false);
+			} else {
+				setPlastic(1);
+				setRecyclable(true);
+			}
+		}, 5000);
+	}
 
 	const takePhoto = () => {
 		const photo = camera.current.takePhoto();
     setImage(photo);
-		setScanning(true);
-		setTimeout(() => {
-			setRecyclable(true);
-		}, 5000);
+		scan();
 	}
 
   return (
 		<div className={styles.camera}>
-			<div className={styles.title}>Scan</div>
+			{!next &&
+				<div className={styles.title}>Scan</div>
+			}
+			{scanning &&
+				<img className={styles.preview} src={image}/>
+			}
+			{next && 
+			<img className={styles.goback} src="close.svg" onClick={() => handleReturn(true)}/>
+			}
 			<div className={styles.overlay}></div>
 			{
-				(scanning && !recyclable) &&
+				loading &&
 				<div className={styles.scanline}></div>
 			}
 			<img className={styles.scanarea} src="scanarea.svg"/>
@@ -42,7 +85,7 @@ const Viewer = () => {
 			{!scanning &&
 				<button
 					className={styles.switchcamera}
-					hidden={numberOfCameras >= 5}
+					hidden={numberOfCameras <= 1}
 					onClick={() => {
 						camera.current.switchCamera();
 					}}
@@ -50,15 +93,28 @@ const Viewer = () => {
 					<img src="rotate.svg"/>
 				</button>
 			}
-			<div className={recyclable ? styles.full : scanning ? styles.scanning : styles.off}>
-				{!recyclable &&
+			{!scanning &&
+				<img src="upload.svg" className={styles.upload} onClick={handleUploadClick}/>
+			}
+			<input
+        type="file"
+        ref={inputRef}
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
+			<div className={next ? styles.full : loading ? styles.scanning : styles.off}>
+				{loading &&
 					<span><img className={styles.rotate} src="scan.svg"/> Scanning...</span>
 				}
-				{recyclable && 
+				{recyclable && next && 
 					<span className={styles.scanrecyclable}><img src="smile.svg"/> Awesome, it's recyclable!</span>
 				}
-				{recyclable &&
-					<PlasticInfo type={plastic} />
+				{
+				!recyclable && next &&
+					<span className={styles.scannotrecyclable}><img src="frown.svg"/> Oh no, it’s not recyclable</span>
+				}
+				{next &&
+					<PlasticInfo type={plastic} handleReturn={handleReturn} />
 				}
 			</div>
 		</div>

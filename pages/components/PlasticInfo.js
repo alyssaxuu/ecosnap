@@ -1,85 +1,133 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./../../styles/PlasticInfo.module.css"
 
 const PlasticInfo = (props) => {
+	const [info, setInfo] = useState({
+		title:"How to recycle",
+		steps: [
+			"Empty and rinse the container",
+			"Leave labels, lids, and tops on",
+			"Squash to save space",
+			"Recycle with a clear recycling non-reusable sack or a black and green recycling communal wheeled bin"
+		],
+		no: true,
+		nolist: [
+			"Plastic bottles containing chemicals (e.g. antifreeze)",
+			"Make-up packaging (learn more)",
+			"Plastic bags and film (learn more)"
+		]
+	});
+
+	useEffect(() => {
+		if (props.type === 1 || props.type === 2 || props.type === 5) {
+			setInfo({
+				title:"How to recycle",
+				steps: [
+					"Empty and rinse the container",
+					"Leave labels, lids, and tops on",
+					"Squash to save space",
+					"Recycle with a clear recycling non-reusable sack or a black and green recycling communal wheeled bin"
+				],
+				no: true,
+				nolist: [
+					"Plastic bottles containing chemicals (e.g. antifreeze)",
+					"Make-up packaging (learn more)",
+					"Plastic bags and film (learn more)"
+				]
+			})
+		} else if (props.type === 3) {
+			setInfo({
+				title:"What to do",
+				steps: [
+					"Put smaller items, like medicine blister packs in the bin",
+					"Larger things, like gutters and window sills can go to your local tip or reuse and recycling centre"
+				],
+				no: false,
+				nolist: [
+					
+				]
+			})
+		}	else if (props.type === 4) {
+			setInfo({
+				title:"What to do",
+				steps: [
+					"Check out TerraCycle for hard-to-recycle items",
+					"Things like plastic bags, bread bags, films and frozen veg bags can be recycled at supermarket plastic bag recycling points"
+				],
+				no: false,
+				nolist: [
+					
+				]
+			})
+		} else if (props.type === 6) {
+			setInfo({
+				title:"What to do",
+				steps: [
+					"Polystyrene can’t be recycled and should go in your rubbish bin. Avoid it if possible or try and reuse it",
+				],
+				no: false,
+				nolist: [
+					
+				]
+			})
+		} else if (props.type === 7) {
+			setInfo({
+				title:"What to do",
+				steps: [
+					"If you have things like DVDs and sunglasses you no longer need, donate them to a charity shop if they’re in good condition or share on platforms like eBay",
+					"Check out TerraCycle for hard-to-recycle items"
+				],
+				no: false,
+				nolist: [
+					
+				]
+			})
+		}
+	}, []); 
 	return (
 		<div className={styles.recycleinfo}>
 			<div className={styles.header}>
-				How to recycle
+				{info.title}
 			</div>
 			<div className={styles.subheader}>
 				From londonrecycles.co.uk
 			</div>
 			<div className={styles.steps}>
-				<div className={styles.step}>
-					<div className={styles.number}>
-						1
-					</div>
-					<div className={styles.text}>
-						Empty and rinse the container
-					</div>
+				{info.steps.map((item, i) => 
+					<div className={styles.step}>
+						<div className={styles.number}>
+							{i+1}
+						</div>
+						<div className={styles.text}>
+							{item}
+						</div>
 				</div>
-				<div className={styles.step}>
-					<div className={styles.number}>
-						2
-					</div>
-					<div className={styles.text}>
-						Leave labels, lids, and tops on
-					</div>
-				</div>
-				<div className={styles.step}>
-					<div className={styles.number}>
-						3
-					</div>
-					<div className={styles.text}>
-						Squash to save space
-					</div>
-				</div>
-				<div className={styles.step}>
-					<div className={styles.number}>
-						3
-					</div>
-					<div className={styles.text}>
-					Recycle with a clear recycling non-reusable sack or a black and green recycling communal wheeled bin
-					</div>
-				</div>
+				)}
 			</div>
+			{info.no &&
 			<div className={styles.last}>
 				<div className={styles.header}>
 					What can't be recycled?
 				</div>
 				<div className={styles.steps}>
-					<div className={styles.step}>
-						<div className={styles.cross}>
+					{info.nolist.map((item, i) => 
+						<div className={styles.step}>
+							<div className={styles.cross}>
 							<img src="cross.svg"/>
-						</div>
-						<div className={styles.text}>
-							Plastic bottles containing chemicals (e.g. antifreeze)
-						</div>
+							</div>
+							<div className={styles.text}>
+								{item}
+							</div>
 					</div>
-					<div className={styles.step}>
-						<div className={styles.cross}>
-							<img src="cross.svg"/>
-						</div>
-						<div className={styles.text}>
-							Make-up packaging (learn more)
-						</div>
-					</div>
-					<div className={styles.step}>
-						<div className={styles.cross}>
-							<img src="cross.svg"/>
-						</div>
-						<div className={styles.text}>
-							Plastic bags and film (learn more)
-						</div>
-					</div>
+					)}
 				</div>
 			</div>
+			}
 			<div className={styles.buttons}>
 				<div className={styles.more}>
 					Learn more
 				</div>
-				<div className={styles.scan}>
+				<div className={styles.scan} onClick={() => props.handleReturn(true)}>
 					<img src="scanmore.svg"/>
 					Scan more
 				</div>
