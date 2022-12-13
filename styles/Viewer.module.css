@@ -14,7 +14,7 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	opacity: 1;
+	opacity: 0;
 }
 .overlay {
 	background: linear-gradient(179.99deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.7) 83.17%), linear-gradient(179.95deg, rgba(0, 0, 0, 0.7) 0.04%, rgba(0, 0, 0, 0) 25.96%);
@@ -37,6 +37,10 @@
 	border: none;
 	width: min-content;
 }
+.takephoto:hover, .takephoto:active {
+	opacity: .6;
+	cursor: pointer;
+}
 .image {
 	position: absolute;
 	top: 0px;
@@ -54,6 +58,10 @@
 	background: none;
 	border: none;
 	width: min-content;
+}
+.switchcamera:hover, .switchcamera:active {
+	opacity: .6;
+	cursor: pointer;
 }
 .off {
 	opacity: 0!important;
@@ -177,7 +185,7 @@
 	}
 }
 .scanline {
-	z-index: 99999999999;
+	z-index: 999999;
 	height: 200px;
 	position: absolute;
 	top: 100px;
@@ -210,7 +218,7 @@
 	z-index: 9999999999;
 	margin: auto;
 }
-.scanrecyclable {
+.scanrecyclable, .scannotrecyclable {
 	position: absolute;
 	display: block;
 	width: 270px;
@@ -228,7 +236,10 @@
 	animation-fill-mode: forwards;
 	color: #61AF2B;
 }
-.scanrecyclable img {
+.scannotrecyclable {
+	color: #D2B416!important;
+}
+.scanrecyclable img, .scannotrecyclable img {
 	vertical-align: middle;
 	margin-right: 3px;
 	margin-top: -3px;
@@ -259,4 +270,44 @@
 	100% {
 		transform: scale(1);
 	}
+}
+
+/* close button */
+.goback {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 999999999999;
+	animation-name: fadein;
+	animation-delay: 2s;
+	animation-duration: .25s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.goback:hover, .goback:active {
+	opacity: .7;
+	cursor: pointer;
+}
+
+/* upload button */
+.upload {
+	position: absolute;
+	left: 20px;
+	bottom: 30px;
+	z-index: 9999999;
+	width: 48px;
+	height: 48px;
+}
+.upload:hover, .upload:active {
+	opacity: .7;
+	cursor: pointer;
+}
+
+/* preview image */
+.preview {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	object-fit: cover;
 }
