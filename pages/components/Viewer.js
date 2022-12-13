@@ -29,21 +29,25 @@ const Viewer = () => {
 			<img className={styles.scanarea} src="scanarea.svg"/>
     	<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment'  />
       <img src={image} alt='Image preview' className={styles.image} />
-      <button
-				className={styles.takephoto}
-        onClick={takePhoto}
-      >
-				<img src="cam.svg"/>
-			</button>
-      <button
-				className={styles.switchcamera}
-        hidden={numberOfCameras >= 5}
-        onClick={() => {
-          camera.current.switchCamera();
-        }}
-      >
-				<img src="rotate.svg"/>
-			</button>
+			{!scanning &&
+				<button
+					className={styles.takephoto}
+					onClick={takePhoto}
+				>
+					<img src="cam.svg"/>
+				</button>
+			}
+			{!scanning &&
+				<button
+					className={styles.switchcamera}
+					hidden={numberOfCameras >= 5}
+					onClick={() => {
+						camera.current.switchCamera();
+					}}
+				>
+					<img src="rotate.svg"/>
+				</button>
+			}
 			<div className={scanning ? styles.scanning : styles.off}>
 				{!recyclable &&
 				<span><img className={styles.rotate} src="scan.svg"/> Scanning...</span>
