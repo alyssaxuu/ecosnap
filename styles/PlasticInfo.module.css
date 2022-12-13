@@ -60,15 +60,22 @@
 		opacity: 1;
 	}
 }
+.last {
+	padding-bottom: 50px;
+}
 
 /* Buttons */
 .buttons {
 	width: 90%;
-	position: absolute;
-	bottom: 20px;
+	position: fixed;
+	bottom: 0px;
 	left: 0px;
 	right: 0px;
 	margin: auto;
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(5px);
+	height: 90px;
+  padding-top: 20px;
 }
 .more {
 	border: 1px solid #61AF2B;

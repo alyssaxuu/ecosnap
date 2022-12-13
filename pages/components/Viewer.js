@@ -9,6 +9,7 @@ const Viewer = () => {
   const [image, setImage] = useState(null);
 	const [scanning, setScanning] = useState(false);
 	const [recyclable, setRecyclable] = useState(false);
+	const [plastic, setPlastic] = useState(1);
 
 	const takePhoto = () => {
 		const photo = camera.current.takePhoto();
@@ -57,7 +58,7 @@ const Viewer = () => {
 					<span className={styles.scanrecyclable}><img src="smile.svg"/> Awesome, it's recyclable!</span>
 				}
 				{recyclable &&
-					<PlasticInfo />
+					<PlasticInfo type={plastic} />
 				}
 			</div>
 		</div>

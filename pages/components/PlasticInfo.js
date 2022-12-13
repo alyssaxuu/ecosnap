@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./../../styles/PlasticInfo.module.css"
 
-const PlasticInfo = () => {
+const PlasticInfo = (props) => {
 	return (
 		<div className={styles.recycleinfo}>
 			<div className={styles.header}>
@@ -44,32 +44,34 @@ const PlasticInfo = () => {
 					</div>
 				</div>
 			</div>
-			<div className={styles.header}>
-				What can't be recycled?
-			</div>
-			<div className={styles.steps}>
-				<div className={styles.step}>
-					<div className={styles.cross}>
-						<img src="cross.svg"/>
-					</div>
-					<div className={styles.text}>
-						Plastic bottles containing chemicals (e.g. antifreeze)
-					</div>
+			<div className={styles.last}>
+				<div className={styles.header}>
+					What can't be recycled?
 				</div>
-				<div className={styles.step}>
-					<div className={styles.cross}>
-						<img src="cross.svg"/>
+				<div className={styles.steps}>
+					<div className={styles.step}>
+						<div className={styles.cross}>
+							<img src="cross.svg"/>
+						</div>
+						<div className={styles.text}>
+							Plastic bottles containing chemicals (e.g. antifreeze)
+						</div>
 					</div>
-					<div className={styles.text}>
-						Make-up packaging (learn more)
+					<div className={styles.step}>
+						<div className={styles.cross}>
+							<img src="cross.svg"/>
+						</div>
+						<div className={styles.text}>
+							Make-up packaging (learn more)
+						</div>
 					</div>
-				</div>
-				<div className={styles.step}>
-					<div className={styles.cross}>
-						<img src="cross.svg"/>
-					</div>
-					<div className={styles.text}>
-						Plastic bags and film (learn more)
+					<div className={styles.step}>
+						<div className={styles.cross}>
+							<img src="cross.svg"/>
+						</div>
+						<div className={styles.text}>
+							Plastic bags and film (learn more)
+						</div>
 					</div>
 				</div>
 			</div>
