@@ -14,7 +14,7 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	opacity: 1;
+	opacity: 0;
 }
 .overlay {
 	background: linear-gradient(179.99deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.7) 83.17%), linear-gradient(179.95deg, rgba(0, 0, 0, 0.7) 0.04%, rgba(0, 0, 0, 0) 25.96%);
