@@ -14,7 +14,7 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	opacity: 1;
+	opacity: 0;
 }
 .overlay {
 	background: linear-gradient(179.99deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.7) 83.17%), linear-gradient(179.95deg, rgba(0, 0, 0, 0.7) 0.04%, rgba(0, 0, 0, 0) 25.96%);
@@ -98,12 +98,12 @@
 	animation-timing-function: ease-in-out;
 	animation-fill-mode: forwards;
 }
-.scanning img, .off img {
+.rotate {
 	display: inline-block;
 	vertical-align: middle;
 	margin-right: 10px;
 	animation-name: rotate;
-	animation-duration: .5s;
+	animation-duration: 1s;
 	animation-delay: .5s;
 	animation-iteration-count: infinite;
 	animation-timing-function: ease-in-out;
@@ -131,7 +131,7 @@
 		transform: rotate(0deg);
 	}
 	to {
-		transform: rotate(180deg);
+		transform: rotate(360deg);
 	}
 }
 .scanline {
@@ -167,4 +167,41 @@
 	right: 0px;
 	z-index: 9999999999;
 	margin: auto;
+}
+.scanrecyclable {
+	position: absolute;
+	display: block;
+	width: 270px;
+	text-align: center;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
+	animation-name: bounce;
+	animation-duration: .5s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.scanrecyclable img {
+	vertical-align: middle;
+	margin-right: 3px;
+	margin-top: -3px;
+	animation-name: rotate;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+}
+@keyframes bounce {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.25);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
