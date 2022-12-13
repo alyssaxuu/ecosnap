@@ -1,0 +1,100 @@
+
+/* Recycle info */
+.recycleinfo {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	opacity: 0;
+	animation-name: fadein;
+	animation-delay: 2s;
+	animation-duration: .25s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	margin-top: 60px;
+}
+.header {
+	font-size: 20px;
+	color: #333;
+	margin-top: 30px;
+}
+.subheader {
+	font-size: 14px;
+	color: #8C8C8C;
+	margin-top: 10px;
+}
+.steps {
+	margin-top: 25px;
+}
+.step {
+	margin-top: 20px;
+}
+.number, .cross {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border: 1px solid #D9D9D9;
+	color: #8C8C8C;
+	font-size: 14px;
+	line-height: 32px;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: -6px;
+}
+.cross {
+	border: none!important;
+}
+.text {
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 14px;
+	max-width: 85%;
+}
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* Buttons */
+.buttons {
+	width: 90%;
+	position: absolute;
+	bottom: 20px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+}
+.more {
+	border: 1px solid #61AF2B;
+	border-radius: 10px;
+	width: 43%;
+	height: 56px;
+	display: inline-block;
+	line-height: 56px;
+	text-align: center;
+	font-size: 14px;
+	color: #61AF2B;
+}
+.scan {
+	background: #61AF2B;
+	color: #FFF;
+	text-align: center;
+	font-size: 14px;
+	border-radius: 10px;
+	width: 50%;
+	height: 56px;
+	display: inline-block;
+	line-height: 56px;
+	float: right;
+}
+.scan img {
+	margin-right: 10px;
+	vertical-align: middle;
+	width: 20px;
+}
