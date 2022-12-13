@@ -7,13 +7,14 @@ const Viewer = () => {
 	const [numberOfCameras, setNumberOfCameras] = useState(0);
   const [image, setImage] = useState(null);
 	const [scanning, setScanning] = useState(false);
+	const [recyclable, setRecyclable] = useState(false);
 
 	const takePhoto = () => {
 		const photo = camera.current.takePhoto();
     setImage(photo);
 		setScanning(true);
 		setTimeout(() => {
-			setScanning(false);
+			setRecyclable(true);
 		}, 5000);
 	}
 
@@ -22,7 +23,7 @@ const Viewer = () => {
 			<div className={styles.title}>Scan</div>
 			<div className={styles.overlay}></div>
 			{
-				scanning &&
+				(scanning && !recyclable) &&
 				<div className={styles.scanline}></div>
 			}
 			<img className={styles.scanarea} src="scanarea.svg"/>
@@ -44,10 +45,11 @@ const Viewer = () => {
 				<img src="rotate.svg"/>
 			</button>
 			<div className={scanning ? styles.scanning : styles.off}>
-				<img src="scan.svg"/>
-				<span>Scanning...</span>
+				{!recyclable &&
+				<span><img className={styles.rotate} src="scan.svg"/> Scanning...</span>
+				}
 				{recyclable && 
-				<span><img src="smile.svg"/> Awesome, it's recyclable!</span>}
+				<span className={styles.scanrecyclable}><img src="smile.svg"/> Awesome, it's recyclable!</span>}
 			</div>
 		</div>
   )
