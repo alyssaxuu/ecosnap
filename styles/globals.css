@@ -6,9 +6,9 @@
 
 html,
 body {
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   margin: 0;
   font-family: "Mattone";
+	background-color: black;
 }
 
 a {
@@ -20,12 +20,9 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+@supports(padding:max(0px)) {
+	body, header, footer {
+			padding-left: min(0vmin, env(safe-area-inset-left));
+			padding-right: min(0vmin, env(safe-area-inset-right));
+	}
 }
