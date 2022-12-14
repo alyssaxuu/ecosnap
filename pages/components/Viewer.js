@@ -24,6 +24,32 @@ const Viewer = () => {
 		setNext(false);
 	}
 
+	useEffect(() => {
+		const fetchData = async () => {
+		const response = await fetch("/api/hello", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({test:"test", image:image})
+		});
+		const data = await response.json();
+		setPlastic(data.number);
+		console.log(data.number)
+		alert(data.number)
+		if (data.number === 1 || data.number === 2 || data.number === 5) {
+			setRecyclable(true);
+		} else {
+			setRecyclable(false);
+		}
+		scan()
+	}
+	if (image) {
+		fetchData();
+	}
+	}, [image])
+
 	const handleFileChange = (event) => {
     if (!event.target.files) {
       return;
