@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+*.jpg filter=lfs diff=lfs merge=lfs -text
+ml/seven_plastics/*.png filter=lfs diff=lfs merge=lfs -text
