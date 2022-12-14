@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./../../styles/Viewer.module.css"
 import PlasticInfo from "./PlasticInfo";
 import {Camera} from "react-camera-pro";
@@ -54,9 +54,12 @@ const Viewer = () => {
     if (!event.target.files) {
       return;
     }
-
-    setImage(URL.createObjectURL(event.target.files[0]));
-		scan();
+		var reader = new FileReader();
+			reader.readAsDataURL(event.target.files[0]); 
+			reader.onloadend = function() {
+				var base64data = reader.result;   
+				setImage(base64data);         
+			}
   };
 
 	const scan = () => {
@@ -65,20 +68,12 @@ const Viewer = () => {
 		setTimeout(() => {
 			setLoading(false);
 			setNext(true);
-			if (Math.floor(Math.random()*2) === 0) {
-				setPlastic(Math.floor(Math.random() * 3)+3);
-				setRecyclable(false);
-			} else {
-				setPlastic(1);
-				setRecyclable(true);
-			}
-		}, 5000);
+		}, 3000);
 	}
 
-	const takePhoto = () => {
+	const takePhoto = async () => {
 		const photo = camera.current.takePhoto();
     setImage(photo);
-		scan();
 	}
 
   return (
