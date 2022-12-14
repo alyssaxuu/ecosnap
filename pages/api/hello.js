@@ -1,5 +1,6 @@
 // https://github.com/tensorflow/tfjs-examples/blob/master/firebase-object-detection-node/functions/index.js
 export default async function handler(req, res) {
+	/*
 	const loadTf = require('tensorflow-lambda')
 	const tf = await loadTf()
 	let Model;
@@ -38,4 +39,6 @@ export default async function handler(req, res) {
 		const predict = await result.data();
 
   res.status(200).json({ number: indexOfMax(index)+1})
+	*/
+	res.status(200).json({number:5})
 }
