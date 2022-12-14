@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./../../styles/Viewer.module.css"
 import PlasticInfo from "./PlasticInfo";
 import {Camera} from "react-camera-pro";
@@ -24,13 +24,41 @@ const Viewer = () => {
 		setNext(false);
 	}
 
+	useEffect(() => {
+		const fetchData = async () => {
+		const response = await fetch("/api/hello", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({test:"test", image:image})
+		});
+		const data = await response.json();
+		setPlastic(data.number);
+		console.log(data.number)
+		if (data.number === 1 || data.number === 2 || data.number === 5) {
+			setRecyclable(true);
+		} else {
+			setRecyclable(false);
+		}
+		scan()
+	}
+	if (image) {
+		fetchData();
+	}
+	}, [image])
+
 	const handleFileChange = (event) => {
     if (!event.target.files) {
       return;
     }
-
-    setImage(URL.createObjectURL(event.target.files[0]));
-		scan();
+		var reader = new FileReader();
+			reader.readAsDataURL(event.target.files[0]); 
+			reader.onloadend = function() {
+				var base64data = reader.result;   
+				setImage(base64data);         
+			}
   };
 
 	const scan = () => {
@@ -39,20 +67,12 @@ const Viewer = () => {
 		setTimeout(() => {
 			setLoading(false);
 			setNext(true);
-			if (Math.floor(Math.random()*2) === 0) {
-				setPlastic(Math.floor(Math.random() * 3)+3);
-				setRecyclable(false);
-			} else {
-				setPlastic(1);
-				setRecyclable(true);
-			}
-		}, 5000);
+		}, 3000);
 	}
 
-	const takePhoto = () => {
+	const takePhoto = async () => {
 		const photo = camera.current.takePhoto();
     setImage(photo);
-		scan();
 	}
 
   return (
