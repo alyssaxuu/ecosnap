@@ -18,7 +18,5 @@
     "styled-components": "^5.3.6",
     "tensorflow-lambda": "^1.0.2"
   },
-  "devDependencies": {
-    "@tensorflow/tfjs-node": "^4.1.0"
-  }
+  "devDependencies": {}
 }

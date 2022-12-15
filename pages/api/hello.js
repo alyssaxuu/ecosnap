@@ -2,6 +2,7 @@
 export default async function handler(req, res) {
 	const loadTf = require('tensorflow-lambda')
 	const tf = await loadTf()
+
 	let Model;
 
 	function indexOfMax(arr) {
