@@ -1,6 +1,5 @@
 // https://github.com/tensorflow/tfjs-examples/blob/master/firebase-object-detection-node/functions/index.js
 export default async function handler(req, res) {
-	/*
 	const loadTf = require('tensorflow-lambda')
 	const tf = await loadTf()
 	let Model;
@@ -22,7 +21,7 @@ export default async function handler(req, res) {
 
     return maxIndex;
 }
-
+	/*
 	if (!Model) {
     // Load the TensorFlow SavedModel through tfjs-node API. You can find more
     // details in the API documentation:
