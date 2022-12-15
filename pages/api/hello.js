@@ -21,6 +21,7 @@ export default async function handler(req, res) {
 
     return maxIndex;
 }
+/*
 	
 	if (!Model) {
     // Load the TensorFlow SavedModel through tfjs-node API. You can find more
@@ -31,11 +32,15 @@ export default async function handler(req, res) {
   }
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
 	// get the tensor
-
+*/
 		const input = tf.node.decodeImage(b);
+		console.log(input);
+		/*
 		const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
 		const index = await result.data()
 		const predict = await result.data();
 
   res.status(200).json({ number: indexOfMax(index)+1})
+	*/
+	res.status(200).json({number:5});
 }
