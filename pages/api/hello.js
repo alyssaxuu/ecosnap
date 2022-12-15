@@ -1,7 +1,8 @@
 // https://github.com/tensorflow/tfjs-examples/blob/master/firebase-object-detection-node/functions/index.js
 export default async function handler(req, res) {
-	const loadTf = require('tensorflow-lambda')
-	const tf = await loadTf()
+	//const loadTf = require('tensorflow-lambda')
+		const tf = require('@tensorflow/tfjs-node')
+	//const tf = await loadTf()
 
 	let Model;
 
