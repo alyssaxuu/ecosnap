@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
     return maxIndex;
 }
-	/*
+	
 	if (!Model) {
     // Load the TensorFlow SavedModel through tfjs-node API. You can find more
     // details in the API documentation:
@@ -38,6 +38,4 @@ export default async function handler(req, res) {
 		const predict = await result.data();
 
   res.status(200).json({ number: indexOfMax(index)+1})
-	*/
-	res.status(200).json({number:5})
 }
