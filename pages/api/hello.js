@@ -30,9 +30,9 @@ export default async function handler(req, res) {
     Model = await tf.node.loadSavedModel(
       './ml/ecosnap/4', ['serve'], 'serving_default');
   }
+	*/
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
 	// get the tensor
-*/
 		const input = tf.node.decodeImage(b);
 		console.log(input);
 		/*
