@@ -16,7 +16,9 @@
     "react-camera-pro": "^1.2.1",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.6",
-    "tensorflow-lambda": "^1.0.2"
+    "tensorflow-lambda": "^1.0.2",
+    "tfjs-node-lambda": "^2.0.31",
+    "tfjs-node-lambda-helpers": "^1.1.7"
   },
   "devDependencies": {
     "@tensorflow/tfjs-node": "^4.1.0"
