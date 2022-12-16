@@ -92,7 +92,7 @@ const Viewer = () => {
 				<div className={styles.scanline}></div>
 			}
 			<img className={styles.scanarea} src="scanarea.svg"/>
-    	<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment'  />
+    	<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment' aspectRatio={1 / 1}  />
       <img src={image} alt='Image preview' className={styles.image} />
 			{!scanning &&
 				<button
