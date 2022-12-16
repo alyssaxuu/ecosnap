@@ -8,13 +8,16 @@
 	z-index: 9999999;
 	color: #FFF;
 }
+.canvas {
+	display: none;
+}
 .camera video {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	opacity: 0;
+	opacity: 1;
 }
 .overlay {
 	background: linear-gradient(179.99deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.7) 83.17%), linear-gradient(179.95deg, rgba(0, 0, 0, 0.7) 0.04%, rgba(0, 0, 0, 0) 25.96%);

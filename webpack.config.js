@@ -1,0 +1,3 @@
+experiments: {
+  topLevelAwait: true
+}

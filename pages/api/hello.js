@@ -1,7 +1,21 @@
+import loadTf from 'tfjs-node-lambda';
+import { Readable } from 'stream';
+import axios from 'axios';
+
+
 // https://github.com/tensorflow/tfjs-examples/blob/master/firebase-object-detection-node/functions/index.js
 export default async function handler(req, res) {
-	const loadTf = require('tensorflow-lambda')
-	const tf = await loadTf()
+	//const loadTf = require('tensorflow-lambda')
+	//const tf = require('@tensorflow/tfjs-node')
+	//const tf = await loadTf()
+
+	const response = await axios.get(
+		'https://github.com/jlarmstrongiv/tfjs-node-lambda/releases/download/v2.0.10/nodejs12.x-tf2.8.6.br',
+		{ responseType: 'arraybuffer' },
+	);
+	
+	const readStream = Readable.from(response.data);
+	const tf = await loadTf(readStream);
 	let Model;
 
 	function indexOfMax(arr) {
@@ -20,22 +34,25 @@ export default async function handler(req, res) {
     }
 
     return maxIndex;
-}
+	}
 
+	
 	if (!Model) {
     // Load the TensorFlow SavedModel through tfjs-node API. You can find more
     // details in the API documentation:
     // https://js.tensorflow.org/api_node/1.3.1/#node.loadSavedModel
-    Model = await tf.node.loadSavedModel(
-      './ml/ecosnap/4', ['serve'], 'serving_default');
-  }
-	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
-	// get the tensor
+    // Model = await tf.node.loadSavedModel(
+    //  'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
 
-		const input = tf.node.decodeImage(b);
-		const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
-		const index = await result.data()
-		const predict = await result.data();
+		Model = await tf.loadGraphModel('https://ecosnap2.vercel.app/model.json');
+  }
+	
+	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
+	const input = await tf.node.decodeImage(b);
+	const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
+	const index = await result.data()
+
+	console.log(index);
 
   res.status(200).json({ number: indexOfMax(index)+1})
 }

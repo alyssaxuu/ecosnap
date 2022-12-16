@@ -13,6 +13,8 @@ const Viewer = () => {
 	const [next, setNext] = useState(false);
 	const [plastic, setPlastic] = useState(1);
 	const inputRef = useRef(null);
+	const canvas = useRef(null);
+	const [backImage, setBackImage] = useState(null);
 
 	const handleUploadClick = () => {
     inputRef.current?.click();
@@ -36,18 +38,41 @@ const Viewer = () => {
 		});
 		const data = await response.json();
 		setPlastic(data.number);
-		console.log(data.number)
+		alert(data.number);
 		if (data.number === 1 || data.number === 2 || data.number === 5) {
 			setRecyclable(true);
 		} else {
 			setRecyclable(false);
 		}
-		scan()
+		setLoading(false);
+		setNext(true);
 	}
 	if (image) {
+		scan()
 		fetchData();
 	}
-	}, [image])
+	}, [image]);
+
+	function cropImage(img) {
+		setBackImage(img)
+    const originalImage = new Image();
+		originalImage.src = img;
+    const ctx = canvas.current.getContext("2d");
+ 
+    originalImage.addEventListener('load', function() {
+			const originalWidth = originalImage.naturalWidth;
+			const originalHeight = originalImage.naturalHeight;
+			const aspectRatio = originalWidth/originalHeight;
+			let newHeight = Math.floor(200/aspectRatio);
+			let y = (newHeight/2)-100;
+			
+			canvas.width = 200;
+			canvas.height = 200;
+			 
+			ctx.drawImage(originalImage, 0, -y, 200, newHeight);
+			setImage(canvas.current.toDataURL("image/jpeg"));
+    });
+}
 
 	const handleFileChange = (event) => {
     if (!event.target.files) {
@@ -57,7 +82,7 @@ const Viewer = () => {
 			reader.readAsDataURL(event.target.files[0]); 
 			reader.onloadend = function() {
 				var base64data = reader.result;   
-				setImage(base64data);         
+				cropImage(base64data);    
 			}
   };
 
@@ -72,16 +97,17 @@ const Viewer = () => {
 
 	const takePhoto = async () => {
 		const photo = camera.current.takePhoto();
-    setImage(photo);
+		cropImage(photo);
 	}
 
   return (
 		<div className={styles.camera}>
+			<canvas className={styles.canvas} width={200} height={200} ref={canvas}></canvas>
 			{!next &&
 				<div className={styles.title}>Scan</div>
 			}
 			{scanning &&
-				<img className={styles.preview} src={image}/>
+				<img className={styles.preview} src={backImage}/>
 			}
 			{next && 
 			<img className={styles.goback} src="close.svg" onClick={() => handleReturn(true)}/>
@@ -92,7 +118,9 @@ const Viewer = () => {
 				<div className={styles.scanline}></div>
 			}
 			<img className={styles.scanarea} src="scanarea.svg"/>
-    	<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment'  />
+			{!scanning &&
+    		<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment' />
+			}
       <img src={image} alt='Image preview' className={styles.image} />
 			{!scanning &&
 				<button
