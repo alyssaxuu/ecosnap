@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tensorflow/tfjs-node": "^4.1.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "next": "13.0.6",
@@ -19,5 +18,7 @@
     "styled-components": "^5.3.6",
     "tensorflow-lambda": "^1.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@tensorflow/tfjs-node": "^4.1.0"
+  }
 }

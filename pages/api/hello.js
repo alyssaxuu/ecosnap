@@ -31,13 +31,18 @@ export default async function handler(req, res) {
     // https://js.tensorflow.org/api_node/1.3.1/#node.loadSavedModel
     //Model = await tf.node.loadSavedModel(
     //  './ml/ecosnap/4', ['serve'], 'serving_default');
-		Model = await tf.loadLayersModel('./ml/ecosnap/4/predict');
+
+		Model = await tf.loadGraphModel('http://localhost:3000/model.json');
   }
 	
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
 	// get the tensor
 		const input = tf.node.decodeImage(b);
+
+		
 		console.log(input);
+		console.log("YO")
+
 
 		const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
 		const index = await result.data()
