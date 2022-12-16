@@ -2,7 +2,7 @@
 export default async function handler(req, res) {
 	const loadTf = require('tensorflow-lambda')
 	//const tf = require('@tensorflow/tfjs-node')
-	//const tf = await loadTf()
+	const tf = await loadTf()
 
 	let Model;
 
@@ -29,8 +29,9 @@ export default async function handler(req, res) {
     // Load the TensorFlow SavedModel through tfjs-node API. You can find more
     // details in the API documentation:
     // https://js.tensorflow.org/api_node/1.3.1/#node.loadSavedModel
-    Model = await tf.node.loadSavedModel(
-      './ml/ecosnap/4', ['serve'], 'serving_default');
+    //Model = await tf.node.loadSavedModel(
+    //  './ml/ecosnap/4', ['serve'], 'serving_default');
+		Model = await tf.loadLayersModel('./ml/ecosnap/4/predict');
   }
 	
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
@@ -43,5 +44,4 @@ export default async function handler(req, res) {
 		const predict = await result.data();
 
   res.status(200).json({ number: indexOfMax(index)+1})
-	//res.status(200).json({number:5});
 }
