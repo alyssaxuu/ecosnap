@@ -15,9 +15,7 @@ export default async function handler(req, res) {
 	);
 	
 	const readStream = Readable.from(response.data);
-	//const tf: typeof import('@tensorflow/tfjs') = await loadTf(readStream);
 	const tf = await loadTf(readStream);
-
 	let Model;
 
 	function indexOfMax(arr) {
@@ -36,31 +34,25 @@ export default async function handler(req, res) {
     }
 
     return maxIndex;
-}
+	}
 
 	
 	if (!Model) {
     // Load the TensorFlow SavedModel through tfjs-node API. You can find more
     // details in the API documentation:
     // https://js.tensorflow.org/api_node/1.3.1/#node.loadSavedModel
-    //Model = await tf.node.loadSavedModel(
+    // Model = await tf.node.loadSavedModel(
     //  'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
 
 		Model = await tf.loadGraphModel('https://ecosnap2.vercel.app/model.json');
   }
 	
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
-	// get the tensor
-		const input = await tf.node.decodeImage(b);
+	const input = await tf.node.decodeImage(b);
+	const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
+	const index = await result.data()
 
-		
-		console.log(input);
-		console.log("YO")
-
-
-		const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
-		const index = await result.data()
-		const predict = await result.data();
+	console.log(index);
 
   res.status(200).json({ number: indexOfMax(index)+1})
 }
