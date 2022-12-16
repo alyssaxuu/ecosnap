@@ -32,12 +32,12 @@ export default async function handler(req, res) {
     //Model = await tf.node.loadSavedModel(
     //  './ml/ecosnap/4', ['serve'], 'serving_default');
 
-		Model = await tf.loadGraphModel('http://localhost:3000/model.json');
+		Model = await tf.loadGraphModel('https://ecosnap2.vercel.app/model.json');
   }
 	
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
 	// get the tensor
-		const input = tf.node.decodeImage(b);
+		const input = await tf.node.decodeImage(b);
 
 		
 		console.log(input);
