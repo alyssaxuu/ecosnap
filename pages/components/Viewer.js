@@ -38,7 +38,7 @@ const Viewer = () => {
 		});
 		const data = await response.json();
 		setPlastic(data.number);
-		console.log(data.number);
+		alert(data.number);
 		if (data.number === 1 || data.number === 2 || data.number === 5) {
 			setRecyclable(true);
 		} else {
