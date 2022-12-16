@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     // details in the API documentation:
     // https://js.tensorflow.org/api_node/1.3.1/#node.loadSavedModel
     Model = await tf.node.loadSavedModel(
-      './ml/ecosnap/4', ['serve'], 'serving_default');
+      'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
 
 		//Model = await tf.loadGraphModel('https://ecosnap2.vercel.app/model.json');
   }
