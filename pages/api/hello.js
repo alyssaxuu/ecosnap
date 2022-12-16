@@ -43,10 +43,10 @@ export default async function handler(req, res) {
     // Load the TensorFlow SavedModel through tfjs-node API. You can find more
     // details in the API documentation:
     // https://js.tensorflow.org/api_node/1.3.1/#node.loadSavedModel
-    Model = await tf.node.loadSavedModel(
-      'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
+    //Model = await tf.node.loadSavedModel(
+    //  'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
 
-		//Model = await tf.loadGraphModel('https://ecosnap2.vercel.app/model.json');
+		Model = await tf.loadGraphModel('https://ecosnap2.vercel.app/model.json');
   }
 	
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
