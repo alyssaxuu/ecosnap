@@ -5,11 +5,15 @@ import Onboarding from "./Onboarding";
 
 const Splash = () => {
 	const [getStarted, setGetStarted] = useState(false);
+	const [done, setDone] = useState(false);
 
 	return (
 		<div className={styles.container}>
-			{getStarted &&
+			{done &&
 				<Viewer />
+			}
+			{getStarted && !done &&
+				<Onboarding setDone={setDone} />
 			}
 			{!getStarted &&
 			<div className={styles.splash}>

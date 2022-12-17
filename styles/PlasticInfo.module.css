@@ -68,6 +68,7 @@
 .buttons {
 	width: 90%;
 	position: fixed;
+	max-width: 540px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
