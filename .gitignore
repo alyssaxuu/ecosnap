@@ -43,3 +43,6 @@ ecosnap2
 
 venv
 .idea
+
+ml/ecosnap/*
+efficient_net

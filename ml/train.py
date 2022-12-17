@@ -4,7 +4,7 @@ import tensorflow as tf
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 import os
-
+import tensorflowjs
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 data_directory = "ml/seven_plastics/"
 
@@ -23,8 +23,7 @@ class_names = train_dataset.class_names
 print(class_names)
 train_dataset = train_dataset.prefetch(buffer_size=tf.data.AUTOTUNE)
 
-resize_and_rescale = tf.keras.Sequential([
-    tf.keras.layers.Resizing(IMG_SIZE, IMG_SIZE),
+rescale = tf.keras.Sequential([
     tf.keras.layers.Rescaling(1. / 255)
 ])
 
@@ -36,7 +35,7 @@ data_augmentation = tf.keras.Sequential([
     tf.keras.layers.experimental.preprocessing.RandomHeight(0.2),
 ])
 
-base_model_name ='xception'
+base_model_name ='inception'
 
 def base_model(model_type, img_shape):
     if model_type == 'mobile_net':
@@ -87,7 +86,8 @@ prediction_layer = tf.keras.layers.Dense(len(class_names),
                                          )
 
 inputs = tf.keras.Input(shape=IMG_SHAPE)
-x = data_augmentation(inputs)
+x = rescale(inputs)
+x = data_augmentation(x)
 x = base_model_init(x, training=False)
 x = global_average_layer(x)
 x = tf.keras.layers.Dropout(0.2)(x)
@@ -104,7 +104,7 @@ model.summary()
 epochs = 100
 weights_path = fr"C:\Users\leo__\PycharmProjects\thesis_new\ecosnap2\ml\ecosnap\weights_{base_model_name}.hdf5"
 early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=30, verbose=1, mode='auto', restore_best_weights=True)
-reduce_lr = ReduceLROnPlateau(monitor='loss', factor=0.1, patience=3, min_lr=0.000001, verbose=1, mode='min')
+reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=3, min_lr=0.000001, verbose=1, mode='min')
 checkpoint = ModelCheckpoint(weights_path, monitor='val_loss', verbose=1, save_best_only=True,
                              save_weights_only=True)
 history = model.fit(train_dataset,
@@ -116,23 +116,6 @@ history = model.fit(train_dataset,
                         checkpoint,
                     ],
                     )
-
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-plt.figure(figsize=(8, 8))
-plt.plot(acc, label='Training Accuracy')
-plt.plot(val_acc, label='Validation Accuracy')
-plt.legend(loc='lower right')
-plt.ylabel('Accuracy')
-plt.ylim([min(plt.ylim()), 1])
-plt.title('Training and Validation Accuracy')
-plt.xlabel('epoch')
-plt.show()
-
 # Fine Tuning
 
 base_model_init.trainable = True
@@ -148,12 +131,17 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-5),
 model.summary()
 
 history_fine = model.fit(train_dataset,
-                         epochs=10,
-                         validation_data=validation_dataset
+                         epochs=20,
+                         validation_data=validation_dataset,
+                                             callbacks=[
+                        early_stopping,
+                        reduce_lr,
+                        checkpoint,
+                    ],
                          )
 
 
-
+model.load_weights(checkpoint_filepath)
 ecosnap_save_path = os.path.join('ml', "ecosnap/5/")
 tf.saved_model.save(model, ecosnap_save_path)
 model.save(fr'ml/models/{base_model_name}.h5')
