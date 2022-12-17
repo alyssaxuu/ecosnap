@@ -4,6 +4,7 @@ import styles from "./../../styles/PlasticInfo.module.css"
 const PlasticInfo = (props) => {
 	const [info, setInfo] = useState({
 		title:"How to recycle",
+		subtitle:"From londonrecycles.co.uk",
 		steps: [
 			"Empty and rinse the container",
 			"Leave labels, lids, and tops on",
@@ -22,6 +23,7 @@ const PlasticInfo = (props) => {
 		if (props.type === 1 || props.type === 2 || props.type === 5) {
 			setInfo({
 				title:"How to recycle",
+				subtitle:"From londonrecycles.co.uk",
 				steps: [
 					"Empty and rinse the container",
 					"Leave labels, lids, and tops on",
@@ -38,6 +40,7 @@ const PlasticInfo = (props) => {
 		} else if (props.type === 3) {
 			setInfo({
 				title:"What to do",
+				subtitle:"From londonrecycles.co.uk",
 				steps: [
 					"Put smaller items, like medicine blister packs in the bin",
 					"Larger things, like gutters and window sills can go to your local tip or reuse and recycling centre"
@@ -50,6 +53,7 @@ const PlasticInfo = (props) => {
 		}	else if (props.type === 4) {
 			setInfo({
 				title:"What to do",
+				subtitle:"From londonrecycles.co.uk",
 				steps: [
 					"Check out TerraCycle for hard-to-recycle items",
 					"Things like plastic bags, bread bags, films and frozen veg bags can be recycled at supermarket plastic bag recycling points"
@@ -62,6 +66,7 @@ const PlasticInfo = (props) => {
 		} else if (props.type === 6) {
 			setInfo({
 				title:"What to do",
+				subtitle:"From londonrecycles.co.uk",
 				steps: [
 					"Polystyrene can’t be recycled and should go in your rubbish bin. Avoid it if possible or try and reuse it",
 				],
@@ -73,9 +78,23 @@ const PlasticInfo = (props) => {
 		} else if (props.type === 7) {
 			setInfo({
 				title:"What to do",
+				subtitle:"From londonrecycles.co.uk",
 				steps: [
 					"If you have things like DVDs and sunglasses you no longer need, donate them to a charity shop if they’re in good condition or share on platforms like eBay",
-					"Check out TerraCycle for hard-to-recycle items"
+					"Check out TerraCycle for hard-to-recycle items."
+				],
+				no: false,
+				nolist: [
+					
+				]
+			})
+		} else if (props.type === 8) {
+			setInfo({
+				title:"What to do",
+				subtitle:"Resolve the issue",
+				steps: [
+					"Find the plastic resin code on your item. It should have a triangle shape with arrows and a number within",
+					"Make sure to keep the code in the center of your picture and as focused as possible"
 				],
 				no: false,
 				nolist: [
@@ -90,7 +109,7 @@ const PlasticInfo = (props) => {
 				{info.title}
 			</div>
 			<div className={styles.subheader}>
-				From londonrecycles.co.uk
+				{info.subtitle}
 			</div>
 			<div className={styles.steps}>
 				{info.steps.map((item, i) => 
@@ -124,9 +143,15 @@ const PlasticInfo = (props) => {
 			</div>
 			}
 			<div className={styles.buttons}>
-				<div className={styles.more}>
+				{props.type === 8 ?
+				<a href="mailto:hi@alyssax.com" target="_blank" className={styles.more}>
+					Support
+				</a>
+				:
+				<a href="https://londonrecycles.co.uk/recycling-101/seven-types-of-plastic/" target="_blank" className={styles.more}>
 					Learn more
-				</div>
+				</a>
+				}
 				<div className={styles.scan} onClick={() => props.handleReturn(true)}>
 					<img src="scanmore.svg"/>
 					Scan more

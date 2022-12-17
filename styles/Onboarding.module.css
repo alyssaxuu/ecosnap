@@ -1,0 +1,276 @@
+.onboarding {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+.skip {
+	position: absolute;
+	right: 25px;
+	top: 25px;
+	font-size: 14px;
+	z-index: 999;
+}
+.skip:hover, .skip:active {
+	opacity: .6;
+	cursor: pointer;
+}
+.image {
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+.handright {
+	position: absolute;
+	right: -150px;
+	bottom: 250px;
+	z-index: 2;
+	animation-name: righthand;
+	animation-duration: .8s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	pointer-events: none;
+}
+.handleft {
+	transform: translateX(-170px) rotate(-15deg);
+	position: absolute;
+	left: -150px;
+	top: -40px;
+	animation-name: lefthand;
+	animation-duration: .8s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	pointer-events: none;
+}
+.robot {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	bottom: 430px;
+	width: 150px;
+	z-index: 4;
+	animation-name: robot, pulse;
+	animation-duration: .5s, 3s;
+	animation-delay: 0s, .7s;
+	animation-iteration-count: 1, infinite;
+	animation-timing-function: ease-in-out, ease-in-out;
+	animation-direction: normal, alternate;
+	animation-fill-mode: forwards, forwards;
+	pointer-events: none;
+}
+.smoke {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	bottom: 370px;
+	width: 220px;
+	transform: translateX(4px);
+	transform-origin: center bottom;
+	animation-name: smoke;
+	animation-duration: .4s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	pointer-events: none;
+}
+.question {
+	position: absolute;
+	right: 100px;
+	top: 50px;
+	width: 100px;
+	animation-name: question;
+	animation-duration: .4s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.trash {
+	position: absolute;
+	z-index: 99999;
+	left: 80px;
+	bottom: 350px;
+	width: 200px;
+	animation-name: trash;
+	animation-duration: .8s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.trees {
+	position: absolute;
+	top: -100px;
+	right: 0px;
+	width: 350px;
+	animation-name: trees;
+	animation-duration: .8s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.next {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background: #7DC322;
+	text-align: center;
+	line-height: 50px;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	bottom: 50px;
+	z-index: 9999999;
+}
+.next img {
+	margin-top: 25px;
+}
+.text {
+	z-index: 4;
+	font-size: 22px;
+	text-align: center;
+	position: absolute;
+	bottom: 200px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	width: 380px;
+	line-height: 40px;
+}
+.progress {
+	z-index: 3;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 300px;
+	margin: auto;
+	width: fit-content;
+}
+.active {
+	height: 7px;
+	border-radius: 30px;
+	background: #000;
+	width: 29px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 5px;
+	margin-right: 5px;
+	transition: all .3s cubic-bezier(.05,.03,.35,1);
+}
+.inactive {
+	height: 7px;
+	width: 15px;
+	border-radius: 30px;
+	background: #D1D1D1;
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+	vertical-align: middle;
+	transition: all .3s cubic-bezier(.05,.03,.35,1);
+}
+.active:hover, .inactive:hover, .active:active, .inactive:active {
+	opacity: .6;
+	cursor: pointer;
+}
+.button {
+	background: #7DC322;
+	color: #FFF;
+	font-size: 16px;
+	height: 50px;
+	border-radius: 10px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+	bottom: 20px;
+	left: 0px;
+	right: 0px;
+	text-align: center;
+	line-height: 50px;
+}
+.button:hover, .button:active {
+	opacity: .6;
+	cursor: pointer;
+}
+
+/* Fun animations */
+@keyframes righthand {
+	from {
+		transform: translateX(100px) rotate(20deg);
+	}
+	to {
+		transform: translateX(0px) rotate(0deg);
+	}
+}
+@keyframes lefthand {
+	from {
+		transform: translateX(-170px) rotate(-15deg);
+	}
+	to {
+		transform: translateX(0px) rotate(0deg);
+	}
+}
+@keyframes robot {
+	from {
+		transform: translateY(50px) scale(.95);
+	}
+	to {
+		transform: translateY(-10px) scale(1);
+	}
+}
+@keyframes pulse {
+	from {
+		transform: translateY(-10px);
+	}
+	to {
+		transform: translateY(5px);
+	}
+}
+@keyframes smoke {
+	from {
+		opacity: 0;
+		transform: translateX(4px) scale(.7);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(4px) scale(1);
+	}
+}
+@keyframes question {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes trash {
+	from {
+		transform: translateX(-100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+@keyframes trees {
+	from {
+		transform: translateX(100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.trash {
+		width: 170px;
+		left: 50px;
+	}
+	.trees {
+		width: 300px;
+		top: -50px;
+	}
+}

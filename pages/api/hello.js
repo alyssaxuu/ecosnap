@@ -16,6 +16,7 @@ export default async function handler(req, res) {
 	
 	const readStream = Readable.from(response.data);
 	const tf = await loadTf(readStream);
+
 	let Model;
 
 	function indexOfMax(arr) {
@@ -51,8 +52,6 @@ export default async function handler(req, res) {
 	const input = await tf.node.decodeImage(b);
 	const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
 	const index = await result.data()
-
-	console.log(index);
 
   res.status(200).json({ number: indexOfMax(index)+1})
 }

@@ -11,13 +11,20 @@
 .canvas {
 	display: none;
 }
+.camera {
+	width: 100%;
+	height: 100%;
+}
+.camera {
+	background: #000;
+}
 .camera video {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	opacity: 1;
+	opacity: 0;
 }
 .overlay {
 	background: linear-gradient(179.99deg, rgba(0, 0, 0, 0) 0.01%, rgba(0, 0, 0, 0.7) 83.17%), linear-gradient(179.95deg, rgba(0, 0, 0, 0.7) 0.04%, rgba(0, 0, 0, 0) 25.96%);
@@ -28,6 +35,7 @@
 	left: 0px;
 	z-index: 9;
 	opacity: .75;
+	pointer-events: none;
 }
 .takephoto {
 	z-index: 99999;
@@ -65,111 +73,6 @@
 .switchcamera:hover, .switchcamera:active {
 	opacity: .6;
 	cursor: pointer;
-}
-.off {
-	opacity: 0!important;
-	animation: none!important;
-	display: none;
-}
-@keyframes full {
-	from {
-		width: 90%;
-		height: 100px;
-		bottom: 20px;
-		line-height: 100%;
-		border-radius: 15px 15px 15px 15px;
-		overflow-y: auto;
-		box-shadow: none;
-	}
-	to {
-		width: 100%;
-		height: 85%;
-		bottom: 0px;
-		line-height: normal;
-		border-radius: 26px 26px 0px 0px;
-		overflow-y: overlay;
-		box-shadow: 0px -6px 16px rgba(0, 0, 0, 0.15);
-	}
-}
-.full {
-	background-color: #FFF;
-	line-height: 100px;
-	height: 100px;
-	width: 90%;
-	animation-name: full;
-	animation-delay: 2s;
-	animation-duration: .5s;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in-out;
-	animation-fill-mode: forwards;
-	font-size: 14px;
-	border-radius: 15px;
-	left: 0px;
-	right: 0px;
-	margin: auto;
-	position: absolute;
-	bottom: 20px;
-	color: #000;
-	text-align: center;
-	z-index: 9999999999999;
-}
-.scanning, .off {
-	height: 100px;
-	width: 90%;
-	font-size: 14px;
-	line-height: 100px;
-	border-radius: 15px;
-	left: 0px;
-	right: 0px;
-	margin: auto;
-	bottom: 20px;
-	position: absolute;
-	color: #000;
-	text-align: center;
-	z-index: 999999999;
-	animation-name: fadein;
-	animation-duration: .25s;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in-out;
-	animation-fill-mode: forwards;
-}
-.scanning:before, .off:before {
-	display: block;
-	content: "";
-	width: 100%;
-	height: 100%;
-	background: #FFF;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	border-radius: 15px;
-	z-index: -1;
-	transform: scale(0);
-	animation-name: scanning;
-	animation-duration: .5s;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in-out;
-	animation-fill-mode: forwards;
-}
-.rotate {
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 10px;
-	animation-name: rotate;
-	animation-duration: 1s;
-	animation-delay: .5s;
-	animation-iteration-count: infinite;
-	animation-timing-function: ease-in-out;
-	animation-fill-mode: forwards;
-	margin-top: -5px;
-}
-@keyframes scanning {
-  from {
-		transform: scale(0);
-	}
-  to {
-		transform: scale(1);
-	}
 }
 @keyframes fadein {
 	from {
@@ -221,65 +124,12 @@
 	z-index: 9999999999;
 	margin: auto;
 }
-.scanrecyclable, .scannotrecyclable {
-	position: absolute;
-	display: block;
-	width: 270px;
-	text-align: center;
-	left: 0px;
-	right: 0px;
-	top: 0px;
-	bottom: 0px;
-	margin: auto;
-	animation-name: bounce, place;
-	animation-duration: .5s;
-	animation-delay: 0s, 2s;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in-out;
-	animation-fill-mode: forwards;
-	color: #61AF2B;
-}
-.scannotrecyclable {
-	color: #D2B416!important;
-}
-.scanrecyclable img, .scannotrecyclable img {
-	vertical-align: middle;
-	margin-right: 3px;
-	margin-top: -3px;
-	animation-name: rotate;
-	animation-duration: 1.5s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
-	animation-fill-mode: forwards;
-}
-@keyframes place {
-	from {
-		right: 0px;
-		margin: auto;
-	}
-	to {
-		margin-left: 0px;
-		margin-top: 20px;
-		right: unset;
-	}
-}
-@keyframes bounce {
-	0% {
-		transform: scale(1);
-	}
-	50% {
-		transform: scale(1.25);
-	}
-	100% {
-		transform: scale(1);
-	}
-}
 
 /* close button */
 .goback {
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: 15px;
+	right: 15px;
 	z-index: 999999999999;
 	animation-name: fadein;
 	animation-delay: 2s;
