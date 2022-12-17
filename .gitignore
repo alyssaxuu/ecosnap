@@ -40,3 +40,9 @@ jspm_packages
 ecosnap2
 .virtual_documents
 .vercel
+
+venv
+.idea
+
+ml/ecosnap/*
+efficient_net
