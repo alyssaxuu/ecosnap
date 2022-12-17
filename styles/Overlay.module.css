@@ -122,10 +122,9 @@
 		transform: scale(1);
 	}
 }
-.scanrecyclable, .scannotrecyclable {
+.scanrecyclable, .scannotrecyclable, .notfound {
 	position: absolute;
 	display: block;
-	width: 270px;
 	text-align: center;
 	left: 0px;
 	right: 0px;
@@ -143,6 +142,14 @@
 .scannotrecyclable {
 	color: #D2B416!important;
 }
+.notfound {
+	color: #AF2B4B;
+}
+.notfound img {
+	vertical-align: middle;
+	margin-right: 3px;
+	margin-top: -3px;
+}
 .scanrecyclable img, .scannotrecyclable img {
 	vertical-align: middle;
 	margin-right: 3px;
@@ -157,9 +164,10 @@
 	from {
 		right: 0px;
 		margin: auto;
+		margin-left: 0px;
 	}
 	to {
-		margin-left: 0px;
+		margin-left: 20px;
 		margin-top: 20px;
 		right: unset;
 	}

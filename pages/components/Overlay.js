@@ -5,8 +5,15 @@ import PlasticInfo from "./PlasticInfo";
 const Overlay = (props) => {
 	const [feedback, setFeedback] = useState(false);
 	const [wrong, setWrong] = useState(false);
+	const [noPlastic, setNoPlastic] = useState(false);
 	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "Error"];
 
+	useEffect(() => {
+		if (props.plastic === 8) {
+			handleNone();
+		}
+	}, [props.plastic])
+	
 	const handleCorrect = () => {
 		setFeedback(true);
 	}
@@ -24,6 +31,13 @@ const Overlay = (props) => {
 		}
 		setWrong(false);
 		setFeedback(true);
+	}
+
+	const handleNone = () => {
+		setNoPlastic(true);
+		setWrong(false);
+		setFeedback(true);
+		props.setPlastic(8);
 	}
 
 	useEffect(() => {
@@ -62,15 +76,19 @@ const Overlay = (props) => {
 					<div className={styles.button} onClick={() => newNumber(6)}>6</div>
 					<div className={styles.button} onClick={() => newNumber(7)}>7</div>
 				</div>
-				<span className={styles.other}>None of these</span>
+				<span className={styles.other} onClick={() => handleNone()}>None of these</span>
 			</div>
 		}
-		{feedback && !wrong && props.recyclable && props.ready && 
+		{feedback && !wrong && !noPlastic && props.recyclable && props.ready && 
 			<span className={styles.scanrecyclable}><img src="smile.svg"/> Awesome, it's recyclable!</span>
 		}
 		{
-		!props.recyclable && !wrong && props.ready && feedback &&
+		!props.recyclable && !wrong && !noPlastic && props.ready && feedback &&
 			<span className={styles.scannotrecyclable}><img src="frown.svg"/> Oh no, it’s not recyclable</span>
+		}
+		{
+		!wrong && noPlastic && props.ready && feedback &&
+			<span className={styles.notfound}><img src="notfound.svg"/> We can’t find the resin number</span>
 		}
 		{props.ready && !wrong && feedback &&
 			<PlasticInfo type={props.plastic} handleReturn={props.handleReturn} />
