@@ -4,25 +4,35 @@ import tensorflow as tf
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 import os
-import tensorflowjs
+
+import tensorflowjs as tfjs
+
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 data_directory = "ml/seven_plastics/"
 
 IMG_SIZE = (224, 224)
 IMG_SHAPE = IMG_SIZE + (3,)
 BATCH_SIZE = 12
-train_dataset, validation_dataset = image_dataset_from_directory(
+train_dataset = image_dataset_from_directory(
     data_directory,
     validation_split=0.2,
-    subset="both",
+    subset="training",
     seed=123,
     image_size=IMG_SIZE,
     batch_size=BATCH_SIZE)
 
+validation_dataset = image_dataset_from_directory(
+    data_directory,
+    validation_split=0.2,
+    subset="validation",
+    seed=123,
+    image_size=IMG_SIZE,
+    batch_size=BATCH_SIZE)   
+
 class_names = train_dataset.class_names
 print(class_names)
 train_dataset = train_dataset.prefetch(buffer_size=tf.data.AUTOTUNE)
-
+validation_dataset = validation_dataset.prefetch(buffer_size=tf.data.AUTOTUNE)
 rescale = tf.keras.Sequential([
     tf.keras.layers.Rescaling(1. / 255)
 ])
@@ -35,9 +45,10 @@ data_augmentation = tf.keras.Sequential([
     tf.keras.layers.experimental.preprocessing.RandomHeight(0.2),
 ])
 
-base_model_name ='inception'
+base_model_name ='efficient_net'
 
 def base_model(model_type, img_shape):
+    inputs = tf.keras.Input(shape=IMG_SHAPE)
     if model_type == 'mobile_net':
         model_init = tf.keras.applications.MobileNetV3Large(
             input_shape=img_shape,
@@ -50,11 +61,16 @@ def base_model(model_type, img_shape):
             classifier_activation='softmax',
             include_preprocessing=True
         )
+        x = data_augmentation(inputs)
+
     elif model_type == 'xception':
         model_init = tf.keras.applications.Xception(
             weights='imagenet',
             input_shape=img_shape,
             include_top=False)
+
+        x = rescale(inputs)
+        x = data_augmentation(x)
 
     elif model_type == 'inception':
         model_init = tf.keras.applications.InceptionV3(
@@ -62,15 +78,22 @@ def base_model(model_type, img_shape):
             input_shape=img_shape,
             include_top=False)
 
+        x = rescale(inputs)
+        x = data_augmentation(x)
+
     elif model_type == 'efficient_net':
-        model_init = tf.keras.applications.EfficientNetV2S(
+        model_init = tf.keras.applications.EfficientNetV2B0(
             weights='imagenet',
             input_shape=img_shape,
             include_top=False)
-    return model_init
+
+        # x = rescale(inputs)
+        x = data_augmentation(inputs)
+
+    return model_init, inputs, x
 
 
-base_model_init = base_model(base_model_name, IMG_SHAPE)
+base_model_init, inputs, x = base_model(base_model_name, IMG_SHAPE)
 
 base_model_init.trainable = False
 
@@ -85,9 +108,7 @@ prediction_layer = tf.keras.layers.Dense(len(class_names),
                                          activation="softmax"
                                          )
 
-inputs = tf.keras.Input(shape=IMG_SHAPE)
-x = rescale(inputs)
-x = data_augmentation(x)
+
 x = base_model_init(x, training=False)
 x = global_average_layer(x)
 x = tf.keras.layers.Dropout(0.2)(x)
@@ -140,24 +161,21 @@ history_fine = model.fit(train_dataset,
                     ],
                          )
 
+model.load_weights(weights_path)
 
-model.load_weights(checkpoint_filepath)
-ecosnap_save_path = os.path.join('ml', "ecosnap/5/")
+ecosnap_save_path = os.path.join('ml', f"{base_model_name}/7/")
 tf.saved_model.save(model, ecosnap_save_path)
 model.save(fr'ml/models/{base_model_name}.h5')
 
 
-# import tensorflowjs as tfjs
-# tfjs.converters.save_keras_model(model, 'ml/models/')
+tfjs.converters.save_keras_model(model, 'ml/models/converted')
 
-# loaded = tf.saved_model.load("ml/ecosnap/4/saved_model.pb")
+loaded = tf.saved_model.load("ml/ecosnap/7/")
 # # predictions
 
 # # Retrieve a batch of images from the test set
 # image_batch, label_batch = validation_dataset.as_numpy_iterator().next()
 # predictions = loaded.predict_on_batch(image_batch).flatten()
-# # Apply a sigmoid since our model returns logits
-# predictions = tf.nn.softmax(predictions)
 
 
 def prep_image(image_url):
@@ -175,7 +193,7 @@ img_array_1 = prep_image(
 
 img_array_5 = prep_image('ml/test/pp-plastic_5.jpeg')
 
-predictions = model.predict(img_array_1)
+predictions = loaded.predict(img_array_1)
 predictions
 
 print(
