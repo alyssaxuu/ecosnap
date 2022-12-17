@@ -45,4 +45,5 @@ venv
 .idea
 
 ml/ecosnap/*
-efficient_net
+ml/mobile_net
+ml/inception
