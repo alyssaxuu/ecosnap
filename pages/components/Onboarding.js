@@ -41,9 +41,9 @@ const Onboarding = (props) => {
 				<div onClick={() => setStep(3)} className={step === 3 ? styles.active : styles.inactive}></div>
 			</div>
 			{ step === 1 &&
-			<div className={styles.text}>
-				Snap a picture of a plastic resin code
-			</div>
+				<div className={styles.text}>
+					Snap a picture of a plastic resin code
+				</div>
 			}
 			{ step === 2 &&
 			<div className={styles.text}>
