@@ -1,0 +1,91 @@
+.onboarding {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+.skip {
+	position: absolute;
+	right: 25px;
+	top: 25px;
+	font-size: 14px;
+}
+.image {
+	width: 100%;
+	height: 100%;
+}
+.handright {
+	position: absolute;
+	right: -150px;
+	bottom: 250px;
+	z-index: 2;
+}
+.handleft {
+	position: absolute;
+	left: -150px;
+	top: -40px;
+}
+.robot {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	top: 100px;
+}
+.next {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background: #7DC322;
+	text-align: center;
+	line-height: 50px;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	bottom: 50px;
+}
+.next img {
+	margin-top: 25px;
+}
+.text {
+	z-index: 4;
+	font-size: 22px;
+	text-align: center;
+	position: absolute;
+	bottom: 200px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	width: 290px;
+	line-height: 40px;
+}
+.progress {
+	z-index: 3;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 300px;
+	margin: auto;
+	width: fit-content;
+}
+.active {
+	height: 7px;
+	border-radius: 30px;
+	background: #000;
+	width: 29px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.inactive {
+	height: 7px;
+	width: 15px;
+	border-radius: 30px;
+	background: #000;
+	opacity: .3;
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
+}

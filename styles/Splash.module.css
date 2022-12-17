@@ -1,0 +1,152 @@
+.container {
+	width: 100%;
+	height: 100%;
+	background: #FFF;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0px;
+	right: 0px;
+}
+.splash {
+	height: 100%;
+	width: 100%;
+}
+.logo {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	font-size: 16px;
+	margin-top: 15px;
+	color: #000;
+}
+.logo img {
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+/* Responsive illustration */
+.illustration {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	width: 90%;
+	height: 50%;
+	overflow: hidden;
+	background: #CBE1F6;
+	border-radius: 15px;
+	position: relative;
+}
+.ground {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	min-width: 430px;
+	margin: auto;
+}
+.trees {
+	position: absolute;
+	right: -40px;
+	bottom: 80px;
+	z-index: 1;
+}
+.trash {
+	position: absolute;
+	right: 0px;
+	left: 0px;
+	bottom: 9%;
+	z-index: 2;
+	margin: auto;
+	transform: translateX(80px);
+}
+.person {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	bottom: 4%;
+	z-index: 3;
+	width: 200px;
+	transform: translateX(-20px);
+}
+.flower {
+	left: 5%;
+	bottom: 10%;
+	position: absolute;
+	z-index: 4;
+}
+.title {
+	font-size: 20px;
+	text-align: center;
+	width: 90%;
+	margin-top: 20px;
+	line-height: 35px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.subtitle {
+	font-size: 14px;
+	text-align: center;
+	color: #8C8C8C;
+	width: 80%;
+	line-height: 25px;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.button {
+	position: absolute;
+	bottom: 15px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	height: 50px;
+	line-height: 50px;
+	background: #74AD42;
+	text-align: center;
+	border-radius: 10px;
+	font-size: 14px;
+	color: #FFF;
+	width: 90%;
+}
+.button:hover, .button:active {
+	cursor: pointer;
+	opacity: .6;
+}
+@media only screen and (max-width: 650px) {
+	.trees {
+		bottom: 50px;
+	}
+}
+@media only screen and (max-width: 490px) {
+  .trees {
+		width: 250px;
+		bottom: 30px;
+  }
+}
+@media only screen and (max-width: 400px) {
+	.trees {
+		width: 200px;
+		right: -10%;
+	}
+	.ground {
+		left: -50px
+	}
+}
+@media only screen and (max-height: 715px) {
+	.person {
+		width: 150px;
+	}
+	.trash {
+		width: 70px;
+	}
+	.flower {
+		width: 50px;
+	}
+}

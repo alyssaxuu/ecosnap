@@ -24,7 +24,7 @@ const Overlay = (props) => {
 
 	const newNumber = (number) => {
 		props.setPlastic(number)
-		if (props.plastic === 1 || props.plastic === 2 || props.plastic === 5) {
+		if (number === 1 || number === 2 || number === 5) {
 			props.setRecyclable(true);
 		} else {
 			props.setRecyclable(false);
