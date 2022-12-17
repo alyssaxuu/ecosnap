@@ -16,6 +16,7 @@ export default async function handler(req, res) {
 	
 	const readStream = Readable.from(response.data);
 	const tf = await loadTf(readStream);
+
 	let Model;
 
 	function indexOfMax(arr) {
@@ -44,7 +45,7 @@ export default async function handler(req, res) {
     // Model = await tf.node.loadSavedModel(
     //  'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
 
-		Model = await tf.loadGraphModel('https://ecosnap2.vercel.app/model.json');
+		Model = await tf.loadLayersModel('https://ecosnap2.vercel.app/model.json');
   }
 	
 	const b = Buffer.from(req.body.image.replace(/^data:image\/(png|jpeg);base64,/,""), 'base64')
