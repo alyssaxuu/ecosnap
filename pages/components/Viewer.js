@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./../../styles/Viewer.module.css"
-import PlasticInfo from "./PlasticInfo";
+import Overlay from "./Overlay";
 import {Camera} from "react-camera-pro";
 
 const Viewer = () => {
@@ -26,31 +26,39 @@ const Viewer = () => {
 		setNext(false);
 	}
 
-	useEffect(() => {
-		const fetchData = async () => {
-		const response = await fetch("/api/hello", {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({test:"test", image:image})
-		});
-		const data = await response.json();
-		setPlastic(data.number);
-		alert(data.number);
-		if (data.number === 1 || data.number === 2 || data.number === 5) {
-			setRecyclable(true);
-		} else {
-			setRecyclable(false);
+	const fetchData = async() => {
+		try {
+			const res = await fetch("/api/hello", {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({image:image})
+			});
+			const data = await res.json();
+			return data;
+		} catch (err) {
+			console.log(err);
 		}
-		setLoading(false);
-		setNext(true);
 	}
-	if (image) {
-		scan()
-		fetchData();
-	}
+
+	useEffect(() => {
+		const run = async() => {
+			const data = await fetchData();
+			setPlastic(data.number);
+			if (plastic === 1 || plastic === 2 || plastic === 5) {
+				setRecyclable(true);
+			} else {
+				setRecyclable(false);
+			}
+			setLoading(false);
+			setNext(true);
+		}
+		if (image) {
+			scan()
+			run();
+		}
 	}, [image]);
 
 	function cropImage(img) {
@@ -89,10 +97,6 @@ const Viewer = () => {
 	const scan = () => {
 		setScanning(true);
 		setLoading(true);
-		setTimeout(() => {
-			setLoading(false);
-			setNext(true);
-		}, 3000);
 	}
 
 	const takePhoto = async () => {
@@ -144,27 +148,13 @@ const Viewer = () => {
 			{!scanning &&
 				<img src="upload.svg" className={styles.upload} onClick={handleUploadClick}/>
 			}
+			<Overlay loading={loading} setPlastic={setPlastic} setRecyclable={setRecyclable} scanning={scanning} ready={next} plastic={plastic} recyclable={recyclable} handleReturn={handleReturn} />
 			<input
         type="file"
         ref={inputRef}
         onChange={handleFileChange}
         style={{ display: 'none' }}
       />
-			<div className={next ? styles.full : loading ? styles.scanning : styles.off}>
-				{loading &&
-					<span><img className={styles.rotate} src="scan.svg"/> Scanning...</span>
-				}
-				{recyclable && next && 
-					<span className={styles.scanrecyclable}><img src="smile.svg"/> Awesome, it's recyclable!</span>
-				}
-				{
-				!recyclable && next &&
-					<span className={styles.scannotrecyclable}><img src="frown.svg"/> Oh no, it’s not recyclable</span>
-				}
-				{next &&
-					<PlasticInfo type={plastic} handleReturn={handleReturn} />
-				}
-			</div>
 		</div>
   )
 }

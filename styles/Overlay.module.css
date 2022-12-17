@@ -1,0 +1,278 @@
+.off {
+	opacity: 0!important;
+	animation: none!important;
+	display: none;
+}
+@keyframes full {
+	from {
+		width: 90%;
+		height: 100px;
+		bottom: 20px;
+		line-height: 100%;
+		border-radius: 15px 15px 15px 15px;
+		overflow-y: auto;
+		box-shadow: none;
+	}
+	to {
+		width: 100%;
+		height: 85%;
+		bottom: 0px;
+		line-height: normal;
+		border-radius: 26px 26px 0px 0px;
+		overflow-y: overlay;
+		box-shadow: 0px -6px 16px rgba(0, 0, 0, 0.15);
+	}
+}
+.mid {
+	height: 135px!important;
+}
+.full {
+	background-color: #FFF;
+	line-height: 100px;
+	height: 100px;
+	width: 90%;
+	animation-name: full;
+	animation-delay: 2s;
+	animation-duration: .5s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	font-size: 14px;
+	border-radius: 15px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	position: absolute;
+	bottom: 20px;
+	color: #000;
+	text-align: center;
+	z-index: 9999999999999;
+}
+.scanning, .off, .mid {
+	height: 100px;
+	width: 90%;
+	font-size: 14px;
+	line-height: 100px;
+	border-radius: 15px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+	bottom: 20px;
+	position: absolute;
+	color: #000;
+	text-align: center;
+	z-index: 999999999;
+	animation-name: fadein;
+	animation-duration: .25s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+.scanning:before, .off:before, .mid:before {
+	display: block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: #FFF;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border-radius: 15px;
+	z-index: -1;
+	transform: scale(0);
+	animation-name: scanning;
+	animation-duration: .5s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.rotate {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+	animation-name: rotate;
+	animation-duration: 1s;
+	animation-delay: .5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	margin-top: -5px;
+}
+@keyframes scanning {
+  from {
+		transform: scale(0);
+	}
+  to {
+		transform: scale(1);
+	}
+}
+.scanrecyclable, .scannotrecyclable {
+	position: absolute;
+	display: block;
+	width: 270px;
+	text-align: center;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
+	animation-name: bounce, place;
+	animation-duration: .5s;
+	animation-delay: 0s, 2s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	color: #61AF2B;
+}
+.scannotrecyclable {
+	color: #D2B416!important;
+}
+.scanrecyclable img, .scannotrecyclable img {
+	vertical-align: middle;
+	margin-right: 3px;
+	margin-top: -3px;
+	animation-name: rotate;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+}
+@keyframes place {
+	from {
+		right: 0px;
+		margin: auto;
+	}
+	to {
+		margin-left: 0px;
+		margin-top: 20px;
+		right: unset;
+	}
+}
+@keyframes bounce {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.25);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+/* Feedback loop */
+.feedback {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	text-align: left;
+	animation-name: fadein;
+	animation-duration: .25s;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+}
+.plastic {
+	border-radius: 10px;
+	display: inline-block;
+	margin-left: 15px;
+	vertical-align: middle;
+	width: 60px;
+}
+.feedinfo {
+	vertical-align: top;
+	display: inline-block;
+	margin-left: 15px;
+	margin-top: -13px;
+}
+.feedtitle {
+	font-size: 16px;
+	color: #000;
+	margin-top: -12px;
+}
+.feeddesc {
+	font-size: 14px;
+	color: #9B9B9B;
+	display: block;
+	margin-top: -72px;
+}
+.buttons {
+	float: right;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+.check, .cross {
+	display: inline-block;
+	vertical-align: middle;
+}
+.cross {
+	margin-left: 15px;
+}
+.check:hover, .cross:hover, .check:active, .cross:active {
+	cursor: pointer;
+	opacity: .6;
+}
+.wrong {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin-top: -25px;
+}
+.question {
+	text-align: center;
+	margin-top: -25px;
+	font-size: 14px;
+	line-height: normal;
+}
+.numbers {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -60px;
+}
+.button {
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+	text-align: center;
+	line-height: 35px;
+	background: #F1F1F1;
+	border-radius: 5px;
+	margin-right: 5px;
+	vertical-align: middle;
+	font-size: 14px;
+}
+.button:hover, .button:active {
+	opacity: .6;
+	cursor: pointer;
+}
+.other {
+	font-size: 14px;
+	color: #9B9B9B;
+	display: block;
+	margin-top: -15px;
+	line-height: normal;
+}
+.other:hover, .other:active {
+	opacity: .6;
+	cursor: pointer;
+}
