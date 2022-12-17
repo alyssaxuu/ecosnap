@@ -63,7 +63,7 @@ def prepare(ds,rescale =False, shuffle=False, augment=False):
   # Resize and rescale all datasets.
 
   if rescale:
-    ds = ds.map(lambda x, y: (rescale(x), y),
+    ds = ds.map(lambda x, y: (rescale(x, training=True), y),
                 num_parallel_calls=AUTOTUNE)
 
   if shuffle:
@@ -81,7 +81,7 @@ def prepare(ds,rescale =False, shuffle=False, augment=False):
 train_dataset = prepare(train_dataset, shuffle=True, augment=True)
 validation_dataset = prepare(validation_dataset)
 
-base_model_name_list = ['mobile_net', 'efficient_net', 'xception', 'inception']
+base_model_name_list = ['efficient_net', 'xception', 'inception']
 
 def base_model(model_type, img_shape, train_dataset, validation_dataset):
 
@@ -107,7 +107,7 @@ def base_model(model_type, img_shape, train_dataset, validation_dataset):
             input_shape=img_shape,
             include_top=False)
 
-        train_dataset = prepare(train_dataset,rescale=True, shuffle=True, augment=True)
+        train_dataset = prepare(train_dataset, shuffle=True, augment=True)
         validation_dataset = prepare(validation_dataset)
 
     elif model_type == 'inception':
@@ -116,7 +116,7 @@ def base_model(model_type, img_shape, train_dataset, validation_dataset):
             input_shape=img_shape,
             include_top=False)
 
-        train_dataset = prepare(train_dataset,rescale=True, shuffle=True, augment=True)
+        train_dataset = prepare(train_dataset, shuffle=True, augment=True)
         validation_dataset = prepare(validation_dataset)
 
     elif model_type == 'efficient_net':
@@ -125,7 +125,7 @@ def base_model(model_type, img_shape, train_dataset, validation_dataset):
             input_shape=img_shape,
             include_top=False)
 
-        train_dataset = prepare(train_dataset,rescale=True, shuffle=True, augment=True)
+        train_dataset = prepare(train_dataset, shuffle=True, augment=True)
         validation_dataset = prepare(validation_dataset)
 
 
