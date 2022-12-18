@@ -330,4 +330,10 @@
 	.next {
 		bottom: 20px;
 	}
+	.top {
+		height: 40%;
+	}
+	.bottom {
+		height: 55%;
+	}
 }
