@@ -43,5 +43,5 @@ ecosnap2
 
 venv
 .idea
-
+.vscode
 ml/ecosnap/*
