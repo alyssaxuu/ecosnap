@@ -18,7 +18,6 @@ export default function Home() {
 
 			if (localStorage.getItem("region") != null) {
 				setRegion(parseInt(localStorage.getItem("region")));
-				console.log(parseInt(localStorage.getItem("region")))
 			}
 			if (localStorage.getItem("onboarding") != null) {
 				setOnboarding(localStorage.getItem("onboarding"))

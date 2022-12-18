@@ -29,10 +29,14 @@
 	position: absolute;
 	z-index: 99999;
 }
+.nav img:hover, .nav img:active {
+	cursor: pointer;
+	opacity: .6;
+}
 
 /* Settings */
 .all {
-	margin-top: 60px;
+	margin-top: 80px;
 	background: #EEEEEE;
 	height: calc(100% - 60px)
 }
