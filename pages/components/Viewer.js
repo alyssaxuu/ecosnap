@@ -71,13 +71,13 @@ const Viewer = () => {
 			const originalWidth = originalImage.naturalWidth;
 			const originalHeight = originalImage.naturalHeight;
 			const aspectRatio = originalWidth/originalHeight;
-			let newHeight = Math.floor(200/aspectRatio);
-			let y = (newHeight/2)-100;
+			let newHeight = Math.floor(224/aspectRatio);
+			let y = (newHeight/2)-112;
 			
-			canvas.width = 200;
-			canvas.height = 200;
+			canvas.width = 224;
+			canvas.height = 224;
 			 
-			ctx.drawImage(originalImage, 0, -y, 200, newHeight);
+			ctx.drawImage(originalImage, 0, -y, 224, newHeight);
 			setImage(canvas.current.toDataURL("image/jpeg"));
     });
 }
@@ -106,7 +106,7 @@ const Viewer = () => {
 
   return (
 		<div className={styles.camera}>
-			<canvas className={styles.canvas} width={200} height={200} ref={canvas}></canvas>
+			<canvas className={styles.canvas} width={224} height={224} ref={canvas}></canvas>
 			{!next &&
 				<div className={styles.title}>Scan</div>
 			}
