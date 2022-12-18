@@ -41,6 +41,10 @@
 	margin-bottom: 20px;
 	position: relative;
 }
+.option:hover, .option:active {
+	cursor: pointer;
+	background-color: #F5F5F5;
+}
 .optioncheck {
 	border: 1.5px solid #61AF2C;
 }
@@ -73,6 +77,10 @@
 	font-size: 14px;
 	color: #FFF;
 	width: calc(100% - 40px);
+}
+.button:hover, .button:active {
+	cursor: pointer;
+	opacity: .6;
 }
 .disabled {
 	opacity: .6;
