@@ -1,7 +1,7 @@
 
 /* Recycle info */
 .recycleinfo {
-	width: 90%;
+	width: calc(100% - 40px);
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
@@ -66,9 +66,9 @@
 
 /* Buttons */
 .buttons {
-	width: 90%;
+	width: calc(100% - 40px);
 	position: fixed;
-	max-width: 540px;
+	max-width: 560px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;

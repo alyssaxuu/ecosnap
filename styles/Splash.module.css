@@ -5,7 +5,7 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	max-width: 600px;
+	max-width: 550px;
 	margin-left: auto;
 	margin-right: auto;
 	left: 0px;
@@ -34,7 +34,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
-	width: 90%;
+	width: calc(100% - 40px);
 	height: 50%;
 	overflow: hidden;
 	background: #CBE1F6;
@@ -84,7 +84,7 @@
 .title {
 	font-size: 20px;
 	text-align: center;
-	width: 90%;
+	width: calc(100% - 40px);
 	margin-top: 20px;
 	line-height: 35px;
 	margin-left: auto;
@@ -113,7 +113,7 @@
 	border-radius: 10px;
 	font-size: 14px;
 	color: #FFF;
-	width: 90%;
+	width: calc(100% - 40px);
 }
 .button:hover, .button:active {
 	cursor: pointer;
@@ -148,5 +148,14 @@
 	}
 	.flower {
 		width: 50px;
+	}
+}
+@media only screen and (min-width: 550px) {
+	.container {
+		padding-top: 50px!important;
+		transform: scale(.85);
+		box-shadow: 0px 60px 140px rgba(31, 31, 31, 0.1);
+		border-radius: 30px;
+		overflow: hidden;
 	}
 }

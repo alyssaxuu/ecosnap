@@ -9,7 +9,7 @@ const Dashboard = (props) => {
 				<div className={styles.header}>Dashboard</div>
 				<div className={styles.right}>
 					<img src="settings.svg" onClick={() => props.setSettings(true)} className={styles.settings}/>
-					<img src="help.svg" className={styles.help}/>
+					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><img src="help.svg" className={styles.help}/></a>
 				</div>
 			</div>
 			{props.num > 0 ?

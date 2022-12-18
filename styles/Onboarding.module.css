@@ -221,7 +221,7 @@
 	font-size: 16px;
 	height: 50px;
 	border-radius: 10px;
-	width: 90%;
+	width: calc(100% - 40px);
 	margin-left: auto;
 	margin-right: auto;
 	position: absolute;

@@ -29,7 +29,7 @@
 	margin-top: 30px;
 }
 .option, .optioncheck {
-	width: 90%;
+	width: calc(100% - 40px);
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 10px;
@@ -72,7 +72,7 @@
 	border-radius: 10px;
 	font-size: 14px;
 	color: #FFF;
-	width: 90%;
+	width: calc(100% - 40px);
 }
 .disabled {
 	opacity: .6;
