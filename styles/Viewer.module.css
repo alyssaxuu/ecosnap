@@ -24,6 +24,8 @@
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	bottom: 0px;
+	right: 0px;
 	opacity: 1;
 }
 .overlay {
@@ -163,4 +165,14 @@
 	height: 100%;
 	position: absolute;
 	object-fit: cover;
+}
+
+.example {
+	position: absolute;
+	z-index: 9999999;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
 }

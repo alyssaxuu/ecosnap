@@ -1,0 +1,65 @@
+.settings {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+/* Navigation */
+.nav {
+	width: 100%;
+	margin-top: 30px;
+}
+.header {
+	font-size: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: block;
+	position: absolute;
+	left: 0px;
+	right: 0px;
+}
+.nav img {
+	float: left;
+	margin-left: 20px;
+	position: absolute;
+	z-index: 99999;
+}
+
+/* Settings */
+.all {
+	margin-top: 60px;
+	background: #EEEEEE;
+	height: calc(100% - 60px)
+}
+.item {
+	background: #FFF;
+	height: 60px;
+	line-height: 60px;
+	border-bottom: 1px solid #EEEEEE;
+	width: 100%;
+	font-family: "DM Sans";
+	font-weight: 500;
+	font-size: 16px;
+	display: block;
+	text-decoration: none!important;
+}
+.item:hover, .item:active {
+	background: #EEEEEE;
+}
+.item span {
+	margin-left: 20px;
+}
+.item img {
+	float: right;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+.space {
+	height: 40px;
+	width: 100%;
+}

@@ -21,73 +21,151 @@ const PlasticInfo = (props) => {
 
 	useEffect(() => {
 		if (props.type === 1 || props.type === 2 || props.type === 5) {
-			setInfo({
-				title:"How to recycle",
-				subtitle:"From londonrecycles.co.uk",
-				steps: [
-					"Empty and rinse the container",
-					"Leave labels, lids, and tops on",
-					"Squash to save space",
-					"Recycle with a clear recycling non-reusable sack or a black and green recycling communal wheeled bin"
-				],
-				no: true,
-				nolist: [
-					"Plastic bottles containing chemicals (e.g. antifreeze)",
-					"Make-up packaging (learn more)",
-					"Plastic bags and film (learn more)"
-				]
-			})
+			if (props.region === 1) {
+				setInfo({
+					title:"How to recycle",
+					subtitle:"From londonrecycles.co.uk",
+					steps: [
+						"Empty and rinse the container",
+						"Leave labels, lids, and tops on",
+						"Squash to save space",
+						"Recycle with a clear recycling non-reusable sack or a black and green recycling communal wheeled bin"
+					],
+					no: true,
+					nolist: [
+						"Plastic bottles containing chemicals (e.g. antifreeze)",
+						"Make-up packaging (learn more)",
+						"Plastic bags and film (learn more)"
+					]
+				})
+			} else {
+				setInfo({
+					title:"How to recycle",
+					subtitle:"From recyclenow.com",
+					steps: [
+						"Empty and rinse the container",
+						"Leave labels, lids, and tops on",
+						"Squash to save space",
+						"Recycle according to your council’s guidance"
+					],
+					no: true,
+					nolist: [
+						"Plastic bottles containing chemicals (e.g. antifreeze)",
+						"Make-up packaging (learn more)",
+						"Plastic bags and film (learn more)"
+					]
+				})
+			}
 		} else if (props.type === 3) {
-			setInfo({
-				title:"What to do",
-				subtitle:"From londonrecycles.co.uk",
-				steps: [
-					"Put smaller items, like medicine blister packs in the bin",
-					"Larger things, like gutters and window sills can go to your local tip or reuse and recycling centre"
-				],
-				no: false,
-				nolist: [
-					
-				]
-			})
+			if (props.region === 3) {
+				setInfo({
+					title:"What to do",
+					subtitle:"From londonrecycles.co.uk",
+					steps: [
+						"Put smaller items, like medicine blister packs in the bin",
+						"Larger things, like gutters and window sills can go to your local tip or reuse and recycling centre"
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			} else {
+				setInfo({
+					title:"What to do",
+					subtitle:"From recyclenow.com",
+					steps: [
+						"Put smaller items, like medicine blister packs in the bin",
+						"Larger things, like gutters and window sills can go to your local tip or reuse and recycling centre"
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			}
 		}	else if (props.type === 4) {
-			setInfo({
-				title:"What to do",
-				subtitle:"From londonrecycles.co.uk",
-				steps: [
-					"Check out TerraCycle for hard-to-recycle items",
-					"Things like plastic bags, bread bags, films and frozen veg bags can be recycled at supermarket plastic bag recycling points"
-				],
-				no: false,
-				nolist: [
-					
-				]
-			})
+			if (props.region === 1) {
+				setInfo({
+					title:"What to do",
+					subtitle:"From londonrecycles.co.uk",
+					steps: [
+						"Check out TerraCycle for hard-to-recycle items",
+						"Things like plastic bags, bread bags, films and frozen veg bags can be recycled at supermarket plastic bag recycling points"
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			} else {
+				setInfo({
+					title:"What to do",
+					subtitle:"From recyclenow.com",
+					steps: [
+						"Check out TerraCycle for hard-to-recycle items",
+						"Things like plastic bags, bread bags, films and frozen veg bags can be recycled at supermarket plastic bag recycling points"
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			}
 		} else if (props.type === 6) {
-			setInfo({
-				title:"What to do",
-				subtitle:"From londonrecycles.co.uk",
-				steps: [
-					"Polystyrene can’t be recycled and should go in your rubbish bin. Avoid it if possible or try and reuse it",
-				],
-				no: false,
-				nolist: [
-					
-				]
-			})
+			if (props.region === 6) {
+				setInfo({
+					title:"What to do",
+					subtitle:"From londonrecycles.co.uk",
+					steps: [
+						"Polystyrene can’t be recycled and should go in your rubbish bin. Avoid it if possible or try and reuse it",
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			} else {
+				setInfo({
+					title:"What to do",
+					subtitle:"From recyclenow.com",
+					steps: [
+						"Polystyrene can’t be recycled and should go in your rubbish bin. Avoid it if possible or try and reuse it",
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			}
 		} else if (props.type === 7) {
-			setInfo({
-				title:"What to do",
-				subtitle:"From londonrecycles.co.uk",
-				steps: [
-					"If you have things like DVDs and sunglasses you no longer need, donate them to a charity shop if they’re in good condition or share on platforms like eBay",
-					"Check out TerraCycle for hard-to-recycle items."
-				],
-				no: false,
-				nolist: [
-					
-				]
-			})
+			if (props.region === 7) {
+				setInfo({
+					title:"What to do",
+					subtitle:"From londonrecycles.co.uk",
+					steps: [
+						"If you have things like DVDs and sunglasses you no longer need, donate them to a charity shop if they’re in good condition or share on platforms like eBay",
+						"Check out TerraCycle for hard-to-recycle items."
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			} else {
+				setInfo({
+					title:"What to do",
+					subtitle:"From recyclenow.com",
+					steps: [
+						"If you have things like DVDs and sunglasses you no longer need, donate them to a charity shop if they’re in good condition or share on platforms like eBay",
+						"Check out TerraCycle for hard-to-recycle items."
+					],
+					no: false,
+					nolist: [
+						
+					]
+				})
+			}
 		} else if (props.type === 8) {
 			setInfo({
 				title:"What to do",
@@ -148,7 +226,7 @@ const PlasticInfo = (props) => {
 					Support
 				</a>
 				:
-				<a href="https://londonrecycles.co.uk/recycling-101/seven-types-of-plastic/" target="_blank" className={styles.more}>
+				<a href={props.region === 1 ? "https://londonrecycles.co.uk/recycling-101/seven-types-of-plastic/" : "https://www.recyclenow.com/recycling-locator"} target="_blank" className={styles.more}>
 					Learn more
 				</a>
 				}

@@ -3,7 +3,7 @@ import styles from "./../../styles/Viewer.module.css"
 import Overlay from "./Overlay";
 import {Camera} from "react-camera-pro";
 
-const Viewer = () => {
+const Viewer = (props) => {
   const camera = useRef(null);
 	const [numberOfCameras, setNumberOfCameras] = useState(0);
   const [image, setImage] = useState(null);
@@ -108,14 +108,15 @@ const Viewer = () => {
 		<div className={styles.camera}>
 			<canvas className={styles.canvas} width={224} height={224} ref={canvas}></canvas>
 			{!next &&
+			<img src="example.svg" className={styles.example}/>
+			}
+			{!next &&
 				<div className={styles.title}>Scan</div>
 			}
 			{scanning &&
 				<img className={styles.preview} src={backImage}/>
 			}
-			{next && 
-			<img className={styles.goback} src="close.svg" onClick={() => handleReturn(true)}/>
-			}
+			<img className={styles.goback} src="close.svg" onClick={() => props.setView(false)}/>
 			<div className={styles.overlay}></div>
 			{
 				loading &&
@@ -148,7 +149,7 @@ const Viewer = () => {
 			{!scanning &&
 				<img src="upload.svg" className={styles.upload} onClick={handleUploadClick}/>
 			}
-			<Overlay loading={loading} setPlastic={setPlastic} setRecyclable={setRecyclable} scanning={scanning} ready={next} plastic={plastic} recyclable={recyclable} handleReturn={handleReturn} />
+			<Overlay setNum={props.setNum} num={props.num} loading={loading} region={props.region} setPlastic={setPlastic} setRecyclable={setRecyclable} scanning={scanning} ready={next} plastic={plastic} recyclable={recyclable} handleReturn={handleReturn} />
 			<input
         type="file"
         ref={inputRef}

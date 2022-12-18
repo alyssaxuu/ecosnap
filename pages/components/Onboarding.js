@@ -13,7 +13,10 @@ const Onboarding = (props) => {
 
 	return (
 		<div className={styles.onboarding}>
-			<div className={styles.skip} onClick={() => props.setDone(true)}>
+			<div className={styles.skip} onClick={() =>{
+				props.setDone(true);
+				props.setOn(false)
+			}}>
 				Skip
 			</div>
 			{ step === 1 &&
@@ -77,7 +80,10 @@ const Onboarding = (props) => {
 			</div>
 			}
 			{step === 3 &&
-			<div className={styles.button} onClick={() => props.setDone(true)}>
+			<div className={styles.button} onClick={() =>{
+				props.setDone(true);
+				props.setOn(false)
+			}}>
 				Start recycling
 			</div>
 			}
