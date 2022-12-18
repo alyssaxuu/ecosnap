@@ -11,7 +11,7 @@
 	right: 25px;
 	top: 25px;
 	font-size: 14px;
-	z-index: 999;
+	z-index: 999999999;
 }
 .skip:hover, .skip:active {
 	opacity: .6;
@@ -19,13 +19,20 @@
 }
 .image {
 	width: 100%;
-	height: 100%;
-	z-index: -1;
+	height: 45%;
+	z-index: 999;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 }
 .handright {
 	position: absolute;
-	right: -150px;
-	bottom: 250px;
+	bottom: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	width: 300px;
+	margin: auto;
 	z-index: 2;
 	animation-name: righthand;
 	animation-duration: .8s;
@@ -36,8 +43,12 @@
 .handleft {
 	transform: translateX(-170px) rotate(-15deg);
 	position: absolute;
-	left: -150px;
-	top: -40px;
+	width: 300px;
+	left: 0px;
+	bottom: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
 	animation-name: lefthand;
 	animation-duration: .8s;
 	animation-timing-function: ease-in-out;
@@ -48,9 +59,10 @@
 	position: absolute;
 	left: 0px;
 	right: 0px;
+	top: 0px;
+	bottom: 0px;
 	margin: auto;
-	bottom: 430px;
-	width: 150px;
+	width: 120px;
 	z-index: 4;
 	animation-name: robot, pulse;
 	animation-duration: .5s, 3s;
@@ -65,10 +77,10 @@
 	position: absolute;
 	left: 0px;
 	right: 0px;
+	top: 0px;
+	bottom: 0px;
 	margin: auto;
-	bottom: 370px;
-	width: 220px;
-	transform: translateX(4px);
+	width: 180px;
 	transform-origin: center bottom;
 	animation-name: smoke;
 	animation-duration: .4s;
@@ -78,9 +90,13 @@
 }
 .question {
 	position: absolute;
-	right: 100px;
-	top: 50px;
-	width: 100px;
+	margin: auto;
+	transform: translateX(80px) translateY(-100px);
+	right: 0px;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	width: 80px;
 	animation-name: question;
 	animation-duration: .4s;
 	animation-timing-function: ease-in-out;
@@ -90,8 +106,10 @@
 	position: absolute;
 	z-index: 99999;
 	left: 80px;
-	bottom: 350px;
-	width: 200px;
+	bottom: 0px;
+	top: 0px;
+	margin: auto;
+	width: 150px;
 	animation-name: trash;
 	animation-duration: .8s;
 	animation-timing-function: ease-in-out;
@@ -99,9 +117,11 @@
 }
 .trees {
 	position: absolute;
-	top: -100px;
+	margin: auto;
+	top: 0px;
 	right: 0px;
-	width: 350px;
+	bottom: 0px;
+	width: 280px;
 	animation-name: trees;
 	animation-duration: .8s;
 	animation-timing-function: ease-in-out;
@@ -124,24 +144,46 @@
 .next img {
 	margin-top: 25px;
 }
+.next:hover, .next:active {
+	opacity: .6;
+	cursor: pointer;
+}
+.bottom {
+	height: 50%;
+	bottom: 0px;
+	width: 100%;
+	position: absolute;
+}
 .text {
 	z-index: 4;
 	font-size: 22px;
 	text-align: center;
 	position: absolute;
-	bottom: 200px;
+	top: 60px;
 	left: 0px;
 	right: 0px;
 	margin: auto;
 	width: 380px;
 	line-height: 40px;
 }
+.subtitle {
+	position: absolute;
+	top: 160px;
+	font-size: 16px;
+	color: #8C8C8C;
+	width: 80%;
+	left: 0px;
+	line-height: 25px;
+	right: 0px;
+	margin: auto;
+	text-align: center;
+}
 .progress {
 	z-index: 3;
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	bottom: 300px;
+	top: 20px;
 	margin: auto;
 	width: fit-content;
 }
@@ -195,18 +237,18 @@
 /* Fun animations */
 @keyframes righthand {
 	from {
-		transform: translateX(100px) rotate(20deg);
+		transform: translateX(170px) rotate(20deg) translateY(110px);
 	}
 	to {
-		transform: translateX(0px) rotate(0deg);
+		transform: translateX(70px) rotate(0deg) translateY(110px);
 	}
 }
 @keyframes lefthand {
 	from {
-		transform: translateX(-170px) rotate(-15deg);
+		transform: translateX(-120px) rotate(-15deg) translateY(-50px);
 	}
 	to {
-		transform: translateX(0px) rotate(0deg);
+		transform: translateX(-40px) rotate(0deg) translateY(-50px);
 	}
 }
 @keyframes robot {
@@ -228,11 +270,11 @@
 @keyframes smoke {
 	from {
 		opacity: 0;
-		transform: translateX(4px) scale(.7);
+		transform: translateX(4px) scale(.7) translateY(100px);
 	}
 	to {
 		opacity: 1;
-		transform: translateX(4px) scale(1);
+		transform: translateX(4px) scale(1) translateY(100px);
 	}
 }
 @keyframes question {
@@ -245,32 +287,47 @@
 }
 @keyframes trash {
 	from {
-		transform: translateX(-100px);
+		transform: translateX(-100px) translateY(80px);
 		opacity: 0;
 	}
 	to {
-		transform: translateX(0px);
+		transform: translateX(0px) translateY(80px);
 		opacity: 1;
 	}
 }
 @keyframes trees {
 	from {
-		transform: translateX(100px);
+		transform: translateX(100px) translateY(-20px);
 		opacity: 0;
 	}
 	to {
-		transform: translateX(0px);
+		transform: translateX(0px) translateY(-20px);
 		opacity: 1;
 	}
 }
-
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 500px) {
 	.trash {
-		width: 170px;
-		left: 50px;
+		width: 120px;
 	}
 	.trees {
-		width: 300px;
-		top: -50px;
+		width: 230px;
+	}
+}
+@media only screen and (max-width: 445px) {
+	.handright {
+		width: 250px;
+	}
+	.handleft {
+		width: 250px;
+	}
+}
+@media only screen and (max-width: 390px) {
+	.text {
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 740px) {
+	.next {
+		bottom: 20px;
 	}
 }

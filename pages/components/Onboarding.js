@@ -35,24 +35,40 @@ const Onboarding = (props) => {
 					<img src="3trees.svg" className={styles.trees}/>
 				</div>
 			}
+			<div className={styles.bottom}>
 			<div className={styles.progress}>
 				<div onClick={() => setStep(1)} className={step === 1 ? styles.active : styles.inactive}></div>
 				<div onClick={() => setStep(2)} className={step === 2 ? styles.active : styles.inactive}></div>
 				<div onClick={() => setStep(3)} className={step === 3 ? styles.active : styles.inactive}></div>
 			</div>
 			{ step === 1 &&
+			<div>
 				<div className={styles.text}>
 					Snap a picture of a plastic resin code
 				</div>
+				<div className={styles.subtitle}>
+				Look for a triangle encircling a number from 1 to 7. Make sure to keep it in the center of the camera frame.
+				</div>
+			</div>
 			}
 			{ step === 2 &&
-			<div className={styles.text}>
-			Check to see if the AI recognized the correct code
+			<div>
+				<div className={styles.text}>
+					Check to see if the AI recognized the correct code
+				</div>
+				<div className={styles.subtitle}>
+				After taking a picture, a modal will appear with the symbol the AI recognized. If it’s not right you can correct it.
+				</div>
 			</div>
 			}
 			{ step === 3 &&
-			<div className={styles.text}>
-			Learn how to recycle your plastic item
+			<div>
+				<div className={styles.text}>
+				Learn how to recycle your plastic item
+				</div>
+				<div className={styles.subtitle}>
+				You’ll learn whether the item is recyclable or not, and how you should dispose of it. Note that the advice is specific to London.
+				</div>
 			</div>
 			}
 			{step < 3 &&
@@ -65,6 +81,7 @@ const Onboarding = (props) => {
 				Start recycling
 			</div>
 			}
+			</div>
 		</div>
 	)
 }
