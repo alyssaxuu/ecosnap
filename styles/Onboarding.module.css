@@ -150,7 +150,7 @@
 	cursor: pointer;
 }
 .bottom {
-	height: 50%;
+	height: 45%;
 	bottom: 0px;
 	width: 100%;
 	position: absolute;
@@ -180,7 +180,7 @@
 	text-align: center;
 }
 .progress {
-	z-index: 3;
+	z-index: 99999999999;
 	position: absolute;
 	left: 0px;
 	right: 0px;
@@ -239,10 +239,10 @@
 /* Fun animations */
 @keyframes righthand {
 	from {
-		transform: translateX(170px) rotate(20deg) translateY(110px);
+		transform: translateX(170px) rotate(20deg) translateY(80px);
 	}
 	to {
-		transform: translateX(70px) rotate(0deg) translateY(110px);
+		transform: translateX(70px) rotate(0deg) translateY(80px);
 	}
 }
 @keyframes lefthand {
@@ -336,7 +336,7 @@
 		height: 40%;
 	}
 	.bottom {
-		height: 55%;
+		height: 50%;
 	}
 }
 @media only screen and (max-width: 378px) {
@@ -345,5 +345,58 @@
 	}
 	.trash {
 		left: 30px;
+	}
+}
+@media only screen and (max-width: 360px) {
+	.handleft {
+		left: -40px;
+	}
+	.handright {
+		right: -20px;
+	}
+	.subtitle {
+		font-size: 14px;
+	}
+	.robot {
+		width: 100px!important;
+	}
+	.smoke {
+		width: 130px;
+		bottom: 50px;
+	}
+	.bottom {
+		height: 60%!important;
+	}
+}
+@media only screen and (max-height: 700px) {
+	.bottom {
+		height: 55%!important;
+	}
+	.subtitle {
+		width: 90%;
+	}
+}
+@media only screen and (max-width: 300px) {
+	.bottom {
+		height: 62%!important;
+	}
+	.question {
+		width: 50px;
+		top: 50px;
+		right: 50px;
+	}
+	.trash {
+		bottom: 130px;
+	}
+	.trees {
+		bottom: 100px;
+	}
+	.handright {
+		width: 200px!important;
+		bottom: 100px;
+	}
+	.handleft {
+		width: 200px!important;
+		left: -20px;
 	}
 }

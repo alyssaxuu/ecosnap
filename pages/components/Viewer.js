@@ -122,7 +122,9 @@ const Viewer = (props) => {
 				loading &&
 				<div className={styles.scanline}></div>
 			}
-			<img className={styles.scanarea} src="scanarea.svg"/>
+			{!next &&
+				<img className={styles.scanarea} src="scanarea.svg"/>
+			}
 			{!scanning &&
     		<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment' />
 			}

@@ -165,11 +165,33 @@
 		width: 50px;
 	}
 }
+@media only screen and (max-height: 688px) {
+	.illustration {
+		height: 42%;
+	}
+	.about {
+		bottom: 15px;
+	}
+	.button {
+		bottom: 40px;
+	}
+}
 @media only screen and (min-width: 550px) {
 	.container {
 		transform: scale(.85);
 		box-shadow: 0px 60px 140px rgba(31, 31, 31, 0.1);
 		border-radius: 30px;
 		overflow: hidden;
+	}
+}
+@media only screen and (max-width: 380px) {
+	.illustration {
+		height: 42%;
+	}
+	.about {
+		bottom: 15px;
+	}
+	.button {
+		bottom: 40px;
 	}
 }

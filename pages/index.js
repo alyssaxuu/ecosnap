@@ -8,7 +8,7 @@ export default function Home() {
 	const [region, setRegion] = useState(0);
 	const [onboarding, setOnboarding] = useState(false);
 	const [check, setCheck] = useState(false);
-	const [num, setNum] = useState(2);
+	const [num, setNum] = useState(0);
 
 	// Saved preferences
 	useEffect(() => {

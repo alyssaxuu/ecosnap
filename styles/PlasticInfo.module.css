@@ -110,3 +110,9 @@
 	opacity: .7;
 	cursor: pointer;
 }
+
+@media only screen and (max-width: 322px) {
+	.text {
+		width: 75%;
+	}
+}
