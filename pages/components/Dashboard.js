@@ -4,9 +4,8 @@ import HowTo from "./HowTo";
 
 const Dashboard = (props) => {
 
-	const handleShare = e => {
+	const handleShare = () => {
 		if (navigator.share) {
-			e.preventDefault();
 			navigator.share({
 				url: "https://ecosnap.vercel.app",
 				text: "Learn how to recycle plastic with Ecosnap",
@@ -18,6 +17,8 @@ const Dashboard = (props) => {
 			.catch(function(error) {
 				window.open("http://twitter.com/share?text=Check%20out%20EcoSnap%20to%20learn%20how%20to%20recycle%20plastics%20using%20AI&url=http://ecosnap.vercel.app", "_blank");
 			});
+		} else {
+			window.open("http://twitter.com/share?text=Check%20out%20EcoSnap%20to%20learn%20how%20to%20recycle%20plastics%20using%20AI&url=http://ecosnap.vercel.app", "_blank");
 		}
 	}
 
@@ -27,7 +28,7 @@ const Dashboard = (props) => {
 				<div className={styles.header}>Dashboard</div>
 				<div className={styles.right}>
 					<img src="settings.svg" onClick={() => props.setSettings(true)} className={styles.settings}/>
-					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><a href="http://twitter.com/share?text=Check%20out%20EcoSnap%20to%20learn%20how%20to%20recycle%20plastics%20using%20AI&url=http://ecosnap.vercel.app" onClick={e => handleShare()} target="_blank" className={styles.help}><img src="share.svg"/></a></a>
+					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><img onClick={() => handleShare()} className={styles.help} src="share.svg"/></a>
 				</div>
 			</div>
 			{props.num > 0 ?
