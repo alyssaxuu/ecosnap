@@ -29,7 +29,7 @@ img_array_3 = prep_image("ml/test/v-plastic-recycling-symbol-pvc-v-3_fa88284651_
 img_array_4 = prep_image("ml/test/pe-ld-low-density-polyethylene-4.jpg")
 img_array_5 = prep_image("ml/test/pp-plastic_5.jpeg")
 img_array_6 = prep_image("ml/test/2fc8a970-8215-4627-b17a-7ca71d2eb73f_6.jpg")
-img_array_7 = prep_image("ml/test/images_7.jpg")
+img_array_7 = prep_image("ml/test/WRAQ6784.jpg")
 
 train_dataset = image_dataset_from_directory(
     data_directory,
@@ -57,9 +57,8 @@ rescale = tf.keras.Sequential([tf.keras.layers.Rescaling(1.0 / 255.0)])
 
 data_augmentation = tf.keras.Sequential(
     [
-        tf.keras.layers.experimental.preprocessing.RandomFlip("horizontal"),
         tf.keras.layers.experimental.preprocessing.RandomRotation(0.1),
-        tf.keras.layers.experimental.preprocessing.RandomContrast(0.2),
+        tf.keras.layers.experimental.preprocessing.RandomContrast(0.1),
         tf.keras.layers.experimental.preprocessing.RandomZoom(0.1),
     ]
 )
@@ -166,7 +165,7 @@ for base_model_name in base_model_name_list:
 
         # x = tf.keras.layers.Dropout(0.3)(x)
         x = global_average_layer(x)
-        x = tf.keras.layers.Dropout(0.3)(x)
+        x = tf.keras.layers.Dropout(0.4)(x)
         outputs = prediction_layer(x)
         model = tf.keras.Model(inputs, outputs)
 
@@ -244,7 +243,7 @@ for base_model_name in base_model_name_list:
         if not augment:
             ecosnap_save_path = os.path.join("ml", f"{base_model_name}_no_aug")
         tf.keras.models.save_model(model, rf"{ecosnap_save_path}/keras")
-        tf.saved_model.save(model, rf"{ecosnap_save_path}/9")
+        tf.saved_model.save(model, rf"{ecosnap_save_path}/10")
         model.save(rf"ml/models/{ecosnap_save_path}")
         # tfjs.converters.save_keras_model(model, f'ml/models/converted/{base_model_name}')
 
@@ -294,8 +293,6 @@ for base_model_name in base_model_name_list:
         ] = "{} with a {:.2f} percent confidence.".format(
             class_names[np.argmax(predictions_7)], 100 * np.max(predictions_7)
         )
-
-
 
 
 print(predictions_dict)
