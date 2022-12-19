@@ -27,7 +27,7 @@ const Dashboard = (props) => {
 				<div className={styles.header}>Dashboard</div>
 				<div className={styles.right}>
 					<img src="settings.svg" onClick={() => props.setSettings(true)} className={styles.settings}/>
-					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><a href="http://twitter.com/share?text=Check%20out%20EcoSnap%20to%20learn%20how%20to%20recycle%20plastics%20using%20AI&url=http://ecosnap.vercel.app" onClick={() => handleShare()} target="_blank" className={styles.help}><img src="share.svg"/></a></a>
+					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><a href="http://twitter.com/share?text=Check%20out%20EcoSnap%20to%20learn%20how%20to%20recycle%20plastics%20using%20AI&url=http://ecosnap.vercel.app" onClick={e => handleShare()} target="_blank" className={styles.help}><img src="share.svg"/></a></a>
 				</div>
 			</div>
 			{props.num > 0 ?
