@@ -6,7 +6,7 @@ const Overlay = (props) => {
 	const [feedback, setFeedback] = useState(false);
 	const [wrong, setWrong] = useState(false);
 	const [noPlastic, setNoPlastic] = useState(false);
-	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "Error"];
+	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "error"];
 
 	useEffect(() => {
 		if (props.plastic === 8) {
@@ -86,7 +86,7 @@ const Overlay = (props) => {
 		}
 		{
 		!props.recyclable && !wrong && !noPlastic && props.ready && feedback &&
-			<span className={styles.scannotrecyclable}><img src="frown.svg"/> Oh no, it’s not recyclable</span>
+			<span className={styles.scannotrecyclable}><img src="frown.svg"/> Oh no, it’s not easily recyclable</span>
 		}
 		{
 		!wrong && noPlastic && props.ready && feedback &&

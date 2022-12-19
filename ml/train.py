@@ -53,7 +53,7 @@ validation_dataset = image_dataset_from_directory(
 class_names = train_dataset.class_names
 print(class_names)
 
-rescale = tf.keras.Sequential([tf.keras.layers.Rescaling(1.0 / 255)])
+rescale = tf.keras.Sequential([tf.keras.layers.Rescaling(1.0 / 255.0)])
 
 data_augmentation = tf.keras.Sequential(
     [
