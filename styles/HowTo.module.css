@@ -2,7 +2,7 @@
 	margin-top: 20px;
 	margin-left: 20px;
 	overflow: hidden;
-	height: 70%;
+	height: -webkit-fill-available;
 }
 .input {
 	margin-top: 15px;
@@ -56,7 +56,7 @@
 	display: block;
 	text-decoration: none;
 }
-.result:hover, .result:active {
+.result:hover {
 	opacity: .6;
 	cursor: pointer;
 }

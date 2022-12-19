@@ -14,7 +14,13 @@ const Overlay = (props) => {
 			handleNone();
 		} else {
 			setNoPlastic(false);
-			setFeedback(true);
+			if (props.plastic === 1 || props.plastic === 2 || props.plastic === 5) {
+				props.setRecyclable(true);
+				localStorage.setItem("num", props.num + 1);
+				props.setNum(props.num + 1);
+			} else {
+				props.setRecyclable(false);
+			}
 		}
 		saveImage(props.tensor, props.pred, props.plastic);
 	}

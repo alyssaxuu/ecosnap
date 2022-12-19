@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./../../styles/Dashboard.module.css";
 import HowTo from "./HowTo";
 
 const Dashboard = (props) => {
+	const [support, setSupport] = useState(true);
 
 	const handleShare = () => {
 		if (navigator.share) {
@@ -22,8 +23,37 @@ const Dashboard = (props) => {
 		}
 	}
 
+	useEffect(() => {
+
+		localStorage.removeItem("support")
+			if (typeof window !== 'undefined') {
+				if (localStorage.getItem("support") != null) {
+					setSupport(false);
+				}
+			}
+			
+	}, []);
+
+	const handleSupport = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+  	e.nativeEvent.stopImmediatePropagation();
+		setSupport(false);
+		localStorage.setItem("support", false);
+	}
+
 	return (
 		<div className={styles.dashboard}>
+			{support &&
+			<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.support}>
+				<img src="closesupport.svg" className={styles.closesupport} onClick={handleSupport}/>
+				<img src="support.svg" className={styles.supportimg}/>
+				<div className={styles.supportinfo}>
+					<div className={styles.supporttitle}>Support EcoSnap</div>
+					<div className={styles.supportdesc}>We built this product in a week for Ben’s Bites AI Hackathon, we’d love your support!</div>
+				</div>
+			</a>
+			}
 			<div className={styles.nav}>
 				<div className={styles.header}>Dashboard</div>
 				<div className={styles.right}>

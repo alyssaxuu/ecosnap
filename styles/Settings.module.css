@@ -29,7 +29,7 @@
 	position: absolute;
 	z-index: 99999;
 }
-.nav img:hover, .nav img:active {
+.nav img:hover {
 	cursor: pointer;
 	opacity: .6;
 }
@@ -52,7 +52,7 @@
 	display: block;
 	text-decoration: none!important;
 }
-.item:hover, .item:active {
+.item:hover {
 	background: #EEEEEE;
 }
 .item span {

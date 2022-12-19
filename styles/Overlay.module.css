@@ -236,7 +236,7 @@
 .cross {
 	margin-left: 15px;
 }
-.check:hover, .cross:hover, .check:active, .cross:active {
+.check:hover, .cross:hover {
 	cursor: pointer;
 	opacity: .6;
 }
@@ -278,7 +278,7 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-.button:hover, .button:active {
+.button:hover {
 	opacity: .6;
 	cursor: pointer;
 }
@@ -289,7 +289,7 @@
 	margin-top: -15px;
 	line-height: normal;
 }
-.other:hover, .other:active {
+.other:hover {
 	opacity: .6;
 	cursor: pointer;
 }
