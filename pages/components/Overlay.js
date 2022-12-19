@@ -7,17 +7,15 @@ const Overlay = (props) => {
 	const [feedback, setFeedback] = useState(false);
 	const [wrong, setWrong] = useState(false);
 	const [noPlastic, setNoPlastic] = useState(false);
-	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "error"];
-
-	useEffect(() => {
-		if (props.plastic === 8) {
-			handleNone();
-		}
-	}, [props.plastic])
+	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "No number"];
 	
 	const handleCorrect = () => {
-		saveImage(props.tensor, props.pred, props.pred);
-		setFeedback(true);
+		if (props.plastic == 8) {
+			handleNone();
+		} else {
+			setFeedback(true);
+		}
+		saveImage(props.tensor, props.pred, props.plastic);
 	}
 
 	const handleFalse = () => {
