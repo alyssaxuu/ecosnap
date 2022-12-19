@@ -28,7 +28,7 @@ const Dashboard = (props) => {
 				<div className={styles.header}>Dashboard</div>
 				<div className={styles.right}>
 					<img src="settings.svg" onClick={() => props.setSettings(true)} className={styles.settings}/>
-					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><img onClick={() => handleShare()} className={styles.help} src="share.svg"/></a>
+					 <img onClick={() => handleShare()} className={styles.help} src="share.svg"/>
 				</div>
 			</div>
 			{props.num > 0 ?
