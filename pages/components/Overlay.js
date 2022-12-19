@@ -26,8 +26,8 @@ const Overlay = (props) => {
 		props.setPlastic(number)
 		if (number === 1 || number === 2 || number === 5) {
 			props.setRecyclable(true);
-			localStorage.setItem("num", num + 1);
-			props.setNum(num + 1);
+			localStorage.setItem("num", props.num + 1);
+			props.setNum(props.num + 1);
 		} else {
 			props.setRecyclable(false);
 		}

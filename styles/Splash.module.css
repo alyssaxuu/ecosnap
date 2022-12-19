@@ -176,6 +176,28 @@
 		bottom: 40px;
 	}
 }
+@media only screen and (max-height: 640px) {
+	.illustration {
+		height: 35%!important;
+	}
+	.person {
+		width: 100px;
+	}
+	.trash {
+		width: 40px;
+		right: 50px;
+	}
+	.flower {
+		width: 30px;
+	}
+	.trees {
+		width: 150px;
+		bottom: 50px;
+	}
+	.clouds {
+		width: 170px;
+	}
+}
 @media only screen and (min-width: 550px) {
 	.container {
 		transform: scale(.85);
@@ -192,6 +214,9 @@
 		bottom: 15px;
 	}
 	.button {
-		bottom: 40px;
+		bottom: 50px;
+	}
+	.clouds {
+		width: 150px;
 	}
 }
