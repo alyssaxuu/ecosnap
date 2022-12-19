@@ -7,17 +7,16 @@ const Overlay = (props) => {
 	const [feedback, setFeedback] = useState(false);
 	const [wrong, setWrong] = useState(false);
 	const [noPlastic, setNoPlastic] = useState(false);
-	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "error"];
-
-	useEffect(() => {
-		if (props.plastic === 8) {
-			handleNone();
-		}
-	}, [props.plastic])
+	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "No number"];
 	
 	const handleCorrect = () => {
-		saveImage(props.tensor, props.pred, props.pred);
-		setFeedback(true);
+		if (props.plastic == 8) {
+			handleNone();
+		} else {
+			setNoPlastic(false);
+			setFeedback(true);
+		}
+		saveImage(props.tensor, props.pred, props.plastic);
 	}
 
 	const handleFalse = () => {
@@ -25,7 +24,7 @@ const Overlay = (props) => {
 	}
 
 	const newNumber = (number) => {
-		props.setPlastic(number)
+		props.setPlastic(number);
 		if (number === 1 || number === 2 || number === 5) {
 			props.setRecyclable(true);
 			localStorage.setItem("num", props.num + 1);
@@ -33,6 +32,7 @@ const Overlay = (props) => {
 		} else {
 			props.setRecyclable(false);
 		}
+		setNoPlastic(false);
 		saveImage(props.tensor, props.pred, number);
 		setWrong(false);
 		setFeedback(true);
