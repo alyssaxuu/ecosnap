@@ -13,6 +13,7 @@ const Overlay = (props) => {
 		if (props.plastic == 8) {
 			handleNone();
 		} else {
+			setNoPlastic(false);
 			setFeedback(true);
 		}
 		saveImage(props.tensor, props.pred, props.plastic);
@@ -24,18 +25,17 @@ const Overlay = (props) => {
 
 	const newNumber = (number) => {
 		props.setPlastic(number);
-		window.setTimeout(() => {
-			if (number === 1 || number === 2 || number === 5) {
-				props.setRecyclable(true);
-				localStorage.setItem("num", props.num + 1);
-				props.setNum(props.num + 1);
-			} else {
-				props.setRecyclable(false);
-			}
-			saveImage(props.tensor, props.pred, number);
-			setWrong(false);
-			setFeedback(true);
-		}, 500);
+		if (number === 1 || number === 2 || number === 5) {
+			props.setRecyclable(true);
+			localStorage.setItem("num", props.num + 1);
+			props.setNum(props.num + 1);
+		} else {
+			props.setRecyclable(false);
+		}
+		setNoPlastic(false);
+		saveImage(props.tensor, props.pred, number);
+		setWrong(false);
+		setFeedback(true);
 	}
 
 	const handleNone = () => {
