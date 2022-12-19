@@ -165,8 +165,10 @@
 		right: 0px;
 		margin: auto;
 		margin-left: 0px;
+		text-align: center;
 	}
 	to {
+		text-align: left;
 		margin-left: 20px;
 		margin-top: 20px;
 		right: unset;
@@ -268,6 +270,13 @@
 	margin-right: 5px;
 	vertical-align: middle;
 	font-size: 14px;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 .button:hover, .button:active {
 	opacity: .6;
@@ -283,4 +292,32 @@
 .other:hover, .other:active {
 	opacity: .6;
 	cursor: pointer;
+}
+
+
+@media only screen and (max-width: 382px) {
+	.feedtitle {
+		font-size: 14px;
+	}
+	.feeddesc {
+		font-size: 12px;
+	}
+	.plastic {
+		width: 50px;
+	}
+	.check, .cross {
+		width: 40px;
+	}
+}
+
+@media only screen and (max-width: 382px) {
+	.check, .cross {
+		width: 30px;
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	.feedtitle, .feeddesc {
+		display: none;
+	}
 }

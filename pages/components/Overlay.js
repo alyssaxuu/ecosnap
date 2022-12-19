@@ -26,6 +26,8 @@ const Overlay = (props) => {
 		props.setPlastic(number)
 		if (number === 1 || number === 2 || number === 5) {
 			props.setRecyclable(true);
+			localStorage.setItem("num", props.num + 1);
+			props.setNum(props.num + 1);
 		} else {
 			props.setRecyclable(false);
 		}
@@ -91,7 +93,7 @@ const Overlay = (props) => {
 			<span className={styles.notfound}><img src="notfound.svg"/> We can’t find the resin number</span>
 		}
 		{props.ready && !wrong && feedback &&
-			<PlasticInfo type={props.plastic} handleReturn={props.handleReturn} />
+			<PlasticInfo region={props.region} type={props.plastic} handleReturn={props.handleReturn} />
 		}
 
 	</div>

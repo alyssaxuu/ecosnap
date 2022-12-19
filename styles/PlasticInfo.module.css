@@ -1,7 +1,7 @@
 
 /* Recycle info */
 .recycleinfo {
-	width: 90%;
+	width: calc(100% - 40px);
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
@@ -13,6 +13,7 @@
 	animation-timing-function: ease-in-out;
 	animation-fill-mode: forwards;
 	margin-top: 60px;
+	padding-bottom: 100px;
 }
 .header {
 	font-size: 20px;
@@ -66,9 +67,9 @@
 
 /* Buttons */
 .buttons {
-	width: 90%;
+	width: calc(100% - 40px);
 	position: fixed;
-	max-width: 540px;
+	max-width: 560px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
@@ -109,4 +110,10 @@
 .scan:hover, .scan:active {
 	opacity: .7;
 	cursor: pointer;
+}
+
+@media only screen and (max-width: 322px) {
+	.text {
+		width: 75%;
+	}
 }

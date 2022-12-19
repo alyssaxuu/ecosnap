@@ -3,7 +3,7 @@ import styles from "./../../styles/Viewer.module.css"
 import Overlay from "./Overlay";
 import {Camera} from "react-camera-pro";
 
-const Viewer = () => {
+const Viewer = (props) => {
   const camera = useRef(null);
 	const [numberOfCameras, setNumberOfCameras] = useState(0);
   const [image, setImage] = useState(null);
@@ -71,13 +71,13 @@ const Viewer = () => {
 			const originalWidth = originalImage.naturalWidth;
 			const originalHeight = originalImage.naturalHeight;
 			const aspectRatio = originalWidth/originalHeight;
-			let newHeight = Math.floor(200/aspectRatio);
-			let y = (newHeight/2)-100;
+			let newHeight = Math.floor(224/aspectRatio);
+			let y = (newHeight/2)-112;
 			
-			canvas.width = 200;
-			canvas.height = 200;
+			canvas.width = 224;
+			canvas.height = 224;
 			 
-			ctx.drawImage(originalImage, 0, -y, 200, newHeight);
+			ctx.drawImage(originalImage, 0, -y, 224, newHeight);
 			setImage(canvas.current.toDataURL("image/jpeg"));
     });
 }
@@ -106,22 +106,25 @@ const Viewer = () => {
 
   return (
 		<div className={styles.camera}>
-			<canvas className={styles.canvas} width={200} height={200} ref={canvas}></canvas>
+			<canvas className={styles.canvas} width={224} height={224} ref={canvas}></canvas>
+			{!next &&
+			<img src="example.svg" className={styles.example}/>
+			}
 			{!next &&
 				<div className={styles.title}>Scan</div>
 			}
 			{scanning &&
 				<img className={styles.preview} src={backImage}/>
 			}
-			{next && 
-			<img className={styles.goback} src="close.svg" onClick={() => handleReturn(true)}/>
-			}
+			<img className={styles.goback} src="close.svg" onClick={() => props.setView(false)}/>
 			<div className={styles.overlay}></div>
 			{
 				loading &&
 				<div className={styles.scanline}></div>
 			}
-			<img className={styles.scanarea} src="scanarea.svg"/>
+			{!next &&
+				<img className={styles.scanarea} src="scanarea.svg"/>
+			}
 			{!scanning &&
     		<Camera ref={camera} numberOfCamerasCallback={setNumberOfCameras} facingMode='environment' />
 			}
@@ -148,7 +151,7 @@ const Viewer = () => {
 			{!scanning &&
 				<img src="upload.svg" className={styles.upload} onClick={handleUploadClick}/>
 			}
-			<Overlay loading={loading} setPlastic={setPlastic} setRecyclable={setRecyclable} scanning={scanning} ready={next} plastic={plastic} recyclable={recyclable} handleReturn={handleReturn} />
+			<Overlay setNum={props.setNum} num={props.num} loading={loading} region={props.region} setPlastic={setPlastic} setRecyclable={setRecyclable} scanning={scanning} ready={next} plastic={plastic} recyclable={recyclable} handleReturn={handleReturn} />
 			<input
         type="file"
         ref={inputRef}
