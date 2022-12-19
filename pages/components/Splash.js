@@ -45,7 +45,7 @@ const Splash = (props) => {
 	return (
 		<div className={styles.container}>
 			{view &&
-				<Viewer setView={setView} setNum={props.setNum} num={props.num} region={props.region}/>
+				<Viewer pred={props.pred} setPred={props.setPred} tensor={props.tensor} setTensor={props.setTensor} setView={setView} setNum={props.setNum} num={props.num} region={props.region}/>
 			}
 			{settings && !reset && !on &&
 				<Settings setSettings={setSettings} setReset={setReset} setOn={setOn} />

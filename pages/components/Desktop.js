@@ -6,7 +6,7 @@ const Desktop = (props) => {
 	return (
 		<div className={styles.desktop}>
 			{props.check &&
-        	<Splash region={props.region} setNum={props.setNum} num={props.num} onboarding={props.onboarding} setRegion={props.setRegion} />
+        	<Splash region={props.region} pred={props.pred} setPred={props.setPred} tensor={props.tensor} setTensor={props.setTensor} setNum={props.setNum} num={props.num} onboarding={props.onboarding} setRegion={props.setRegion} />
 				}
 		</div>
 	)

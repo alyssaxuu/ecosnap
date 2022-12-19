@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./../../styles/Overlay.module.css"
 import PlasticInfo from "./PlasticInfo";
+import saveImage from "./Firebase";
 
 const Overlay = (props) => {
 	const [feedback, setFeedback] = useState(false);
@@ -15,6 +16,7 @@ const Overlay = (props) => {
 	}, [props.plastic])
 	
 	const handleCorrect = () => {
+		saveImage(props.tensor, props.pred, props.pred);
 		setFeedback(true);
 	}
 
@@ -31,6 +33,7 @@ const Overlay = (props) => {
 		} else {
 			props.setRecyclable(false);
 		}
+		saveImage(props.tensor, props.pred, number);
 		setWrong(false);
 		setFeedback(true);
 	}

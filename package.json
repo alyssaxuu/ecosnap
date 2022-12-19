@@ -13,6 +13,7 @@
     "@tensorflow/tfjs-node": "^4.1.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "firebase": "^9.15.0",
     "next": "^13.0.7",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",

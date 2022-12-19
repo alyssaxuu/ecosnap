@@ -9,6 +9,8 @@ export default function Home() {
 	const [onboarding, setOnboarding] = useState(false);
 	const [check, setCheck] = useState(false);
 	const [num, setNum] = useState(0);
+	const [tensor, setTensor] = useState("");
+	const [pred, setPred] = useState(0);
 
 	// Saved preferences
 	useEffect(() => {
@@ -43,7 +45,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-				<Desktop region={region} setNum={setNum} num={num} onboarding={onboarding} setRegion={setRegion} check={check}/>
+				<Desktop pred={pred} setPred={setPred} tensor={tensor} setTensor={setTensor} region={region} setNum={setNum} num={num} onboarding={onboarding} setRegion={setRegion} check={check}/>
       </main>
 
       <footer className={styles.footer}>
