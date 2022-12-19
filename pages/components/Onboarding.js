@@ -47,30 +47,30 @@ const Onboarding = (props) => {
 			{ step === 1 &&
 			<div>
 				<div className={styles.text}>
-					Snap a picture of a plastic resin code
+					Snap a picture of a plastic code
 				</div>
 				<div className={styles.subtitle}>
-				Look for a triangle encircling a number from 1 to 7. Make sure to keep it in the center of the camera frame.
+				Look for a tiny triangle with a number inside it from 1 to 7. Keep it in the center of the camera for best results.
 				</div>
 			</div>
 			}
 			{ step === 2 &&
 			<div>
 				<div className={styles.text}>
-					Check to see if the AI recognized the correct code
+					Did the AI get it right?
 				</div>
 				<div className={styles.subtitle}>
-				After taking a picture, a modal will appear with the symbol the AI recognized. If it’s not right you can correct it.
+				After taking a picture, we will ask you if the AI recognised your code. If it’s not right, you can teach the AI.
 				</div>
 			</div>
 			}
 			{ step === 3 &&
 			<div>
 				<div className={styles.text}>
-				Learn how to recycle your plastic item
+					Learn how to recycle your plastic item
 				</div>
 				<div className={styles.subtitle}>
-				You’ll learn whether the item is recyclable or not, and how you should dispose of it. Note that the advice is specific to London.
+				You’ll learn if the item is recyclable or not, and how you should dispose of it.
 				</div>
 			</div>
 			}
