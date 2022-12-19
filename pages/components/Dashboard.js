@@ -18,7 +18,6 @@ const Dashboard = (props) => {
 			.catch(function(error) {
 				window.open("http://twitter.com/share?text=Check%20out%20EcoSnap%20to%20learn%20how%20to%20recycle%20plastics%20using%20AI&url=http://ecosnap.vercel.app", "_blank");
 			});
-}
 		}
 	}
 
