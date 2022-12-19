@@ -22,6 +22,15 @@ def prep_image(image_url):
     return img_array
 
 
+img_array_1 = prep_image(
+    "ml/test/31c34d7a-f53c-40a5-bb84-bdee7554471b_1.jpg")
+img_array_2 = prep_image("ml/test/10cf4367-184f-4a61-bfcd-77a75b2b95d0_2.jpg")
+img_array_3 = prep_image("ml/test/v-plastic-recycling-symbol-pvc-v-3_fa88284651_3.jpg")
+img_array_4 = prep_image("ml/test/pe-ld-low-density-polyethylene-4.jpg")
+img_array_5 = prep_image("ml/test/pp-plastic_5.jpeg")
+img_array_6 = prep_image("ml/test/2fc8a970-8215-4627-b17a-7ca71d2eb73f_6.jpg")
+img_array_7 = prep_image("ml/test/images_7.jpg")
+
 train_dataset = image_dataset_from_directory(
     data_directory,
     validation_split=0.2,
@@ -79,7 +88,9 @@ def prepare(ds, rescale=False, augment=False):
     return ds.prefetch(buffer_size=AUTOTUNE)
 
 
-base_model_name_list = ["efficient_net", "mobile_net", "xception", "inception"]
+base_model_name_list = ["efficient_net", "mobile_net", 
+# "xception", "inception"
+]
 predictions_dict = {}
 
 
@@ -153,7 +164,7 @@ for base_model_name in base_model_name_list:
         else:
             x = base_model_init(inputs, training=False)
 
-        x = tf.keras.layers.Dropout(0.3)(x)
+        # x = tf.keras.layers.Dropout(0.3)(x)
         x = global_average_layer(x)
         x = tf.keras.layers.Dropout(0.3)(x)
         outputs = prediction_layer(x)
@@ -167,7 +178,10 @@ for base_model_name in base_model_name_list:
 
         model.summary()
         epochs = 100
+
         weights_path = rf"C:\Users\leo__\PycharmProjects\thesis_new\ecosnap2\ml\ecosnap\weights_{base_model_name}.hdf5"
+        if not augment:
+            weights_path = rf"C:\Users\leo__\PycharmProjects\thesis_new\ecosnap2\ml\ecosnap\weights_{base_model_name}_no_aug.hdf5"
         early_stopping = EarlyStopping(
             monitor="val_loss",
             min_delta=0,
@@ -232,27 +246,56 @@ for base_model_name in base_model_name_list:
         tf.keras.models.save_model(model, rf"{ecosnap_save_path}/keras")
         tf.saved_model.save(model, rf"{ecosnap_save_path}/9")
         model.save(rf"ml/models/{ecosnap_save_path}")
-
         # tfjs.converters.save_keras_model(model, f'ml/models/converted/{base_model_name}')
-        img_array_1 = prep_image(
-            "ml/test/plastic-recycling-code-pete-recycle-symbol-isolated-icon-pete-polyethylene-recycling-code-plastic-recycle-symbol-triangle-159234010.jpg"
-        )
 
-        img_array_5 = prep_image("ml/test/pp-plastic_5.jpeg")
-
-        predictions_5 = model.predict(img_array_5)
         predictions_1 = model.predict(img_array_1)
+        predictions_2 = model.predict(img_array_2)
+        predictions_3 = model.predict(img_array_3)
+        predictions_4 = model.predict(img_array_4)
+        predictions_5 = model.predict(img_array_5)
+        predictions_6 = model.predict(img_array_6)
+        predictions_7 = model.predict(img_array_7)
 
         predictions_dict[
-            f"{ecosnap_save_path}"
-        ] = "5: {} with a {:.2f} percent confidence.".format(
-            class_names[np.argmax(predictions_5)], 100 * np.max(predictions_5)
-        )
-        predictions_dict[
-            f"{ecosnap_save_path}"
-        ] = "1: {} with a {:.2f} percent confidence.".format(
+            f"{ecosnap_save_path}_1"
+        ] = "{} with a {:.2f} percent confidence.".format(
             class_names[np.argmax(predictions_1)], 100 * np.max(predictions_1)
         )
+        predictions_dict[
+            f"{ecosnap_save_path}_2"
+        ] = "{} with a {:.2f} percent confidence.".format(
+            class_names[np.argmax(predictions_2)], 100 * np.max(predictions_2)
+        )
+        predictions_dict[
+            f"{ecosnap_save_path}_3"
+        ] = "{} with a {:.2f} percent confidence.".format(
+            class_names[np.argmax(predictions_3)], 100 * np.max(predictions_3)
+        )
+        predictions_dict[
+            f"{ecosnap_save_path}_4"
+        ] = "{} with a {:.2f} percent confidence.".format(
+            class_names[np.argmax(predictions_4)], 100 * np.max(predictions_4)
+        )
+
+        predictions_dict[
+            f"{ecosnap_save_path}_5"
+        ] = "{} with a {:.2f} percent confidence.".format(
+            class_names[np.argmax(predictions_5)], 100 * np.max(predictions_5)
+        )
+
+        predictions_dict[
+            f"{ecosnap_save_path}_6"
+        ] = "{} with a {:.2f} percent confidence.".format(
+            class_names[np.argmax(predictions_6)], 100 * np.max(predictions_6)
+        )
+
+        predictions_dict[
+            f"{ecosnap_save_path}_7"
+        ] = "{} with a {:.2f} percent confidence.".format(
+            class_names[np.argmax(predictions_7)], 100 * np.max(predictions_7)
+        )
+
+
 
 
 print(predictions_dict)
