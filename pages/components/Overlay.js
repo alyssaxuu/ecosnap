@@ -23,17 +23,19 @@ const Overlay = (props) => {
 	}
 
 	const newNumber = (number) => {
-		props.setPlastic(number)
-		if (number === 1 || number === 2 || number === 5) {
-			props.setRecyclable(true);
-			localStorage.setItem("num", props.num + 1);
-			props.setNum(props.num + 1);
-		} else {
-			props.setRecyclable(false);
-		}
-		saveImage(props.tensor, props.pred, number);
-		setWrong(false);
-		setFeedback(true);
+		props.setPlastic(number);
+		window.setTimeout(() => {
+			if (number === 1 || number === 2 || number === 5) {
+				props.setRecyclable(true);
+				localStorage.setItem("num", props.num + 1);
+				props.setNum(props.num + 1);
+			} else {
+				props.setRecyclable(false);
+			}
+			saveImage(props.tensor, props.pred, number);
+			setWrong(false);
+			setFeedback(true);
+		}, 500);
 	}
 
 	const handleNone = () => {
