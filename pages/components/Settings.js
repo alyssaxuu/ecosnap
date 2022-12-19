@@ -19,6 +19,7 @@ const Settings = (props) => {
 				<a href="https://recyclenow.com" target="_blank" className={styles.item}><span>Recycle Now</span> <img src="enter.svg"/></a>
 				<div className={styles.space}></div>
 				<a href="mailto:hi@alyssax.com" target="_blank" className={styles.item}><span>Contact us</span> <img src="enter.svg"/></a>
+				<div className={styles.credit}>Made by <a href="https://www.linkedin.com/in/leonorfurtado" target="_blank">Leo</a> & <a href="https://twitter.com/alyssaxuu" target="_blank">Alyssa X</a></div>
 			</div>
 		</div>
 	)

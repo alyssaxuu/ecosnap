@@ -67,3 +67,11 @@
 	height: 40px;
 	width: 100%;
 }
+.credit {
+	color: #979797;
+	font-size: 14px;
+	margin-top: 20px;
+	font-family: "DM Sans";
+	font-weight: 500;
+	margin-left: 20px;
+}
