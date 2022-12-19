@@ -13,6 +13,7 @@
 	animation-timing-function: ease-in-out;
 	animation-fill-mode: forwards;
 	margin-top: 60px;
+	padding-bottom: 100px;
 }
 .header {
 	font-size: 20px;
