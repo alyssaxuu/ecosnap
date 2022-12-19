@@ -3,13 +3,22 @@ import styles from "./../../styles/Dashboard.module.css";
 import HowTo from "./HowTo";
 
 const Dashboard = (props) => {
+
+	const handleShare = () => {
+		navigator.share({
+			url: "https://ecosnap.vercel.app",
+			text: "Learn how to recycle plastic with Ecosnap",
+			title: "Ecosnap"
+		})
+	}
+
 	return (
 		<div className={styles.dashboard}>
 			<div className={styles.nav}>
 				<div className={styles.header}>Dashboard</div>
 				<div className={styles.right}>
 					<img src="settings.svg" onClick={() => props.setSettings(true)} className={styles.settings}/>
-					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><img src="help.svg" className={styles.help}/></a>
+					<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.help}><img src="share.svg" onClick={() => handleShare()} className={styles.help}/></a>
 				</div>
 			</div>
 			{props.num > 0 ?
