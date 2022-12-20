@@ -15,7 +15,7 @@ EcoSnap is an Artificial Intelligence powered app that helps you recycle your pl
 
 > You can support this project (and many others) through [GitHub Sponsors](https://github.com/sponsors/alyssaxuu)! ❤️
 
-Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.com/in/leonorfurtado/)
+Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.com/in/leonorfurtado/) for Ben's Bites Hackathon. [Vote for us](https://bens-bites.upvoty.com/b/hackathon/ecosnap-recycle-your-plastic-better-with-artificial-intelligence)!
 
 ## Table of contents
 
