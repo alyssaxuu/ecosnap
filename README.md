@@ -23,10 +23,13 @@ Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.c
 	- [Prediction](#prediction)
     - [The feedback loop](#feedback)
 - [Libraries used](#libraries-used)
+- [What's Next](whats-next)
 
 ## Features
 
 🗄 Snap a picture of a plastic code<br>  🔍 Search for specific item<br>  🔮 Learn how to recycle effectively <br> 🧩 Keep track of how many plastic items you've recycled<br>⚙️ Change your location for specific advice<br> 🌙...and much more to come - all for free & no sign in needed!
+
+
 
 ## The AI Model
 
@@ -62,6 +65,13 @@ Feel free to suggest improvements by [making an issue](https://github.com/alyssa
 
 - [Tensorflow](https://www.tensorflow.org/) - for anything model related, the AI
 
-#
+## What's next?
 
-Feel free to reach out to me through us at hi@alyssax.com or to [Alyssa](https://twitter.com/alyssaxuu) or [Leo](https://www.linkedin.com/in/leonorfurtado/) directly if you have any questions or feedback! Hope you find this useful 💜
+We want to implement a few more ideas after the Hackathon:
+1. A map that shows you where your nearest recycling point is
+2. Top Tips on how to recycle
+3. Articals and research about plastic
+4. Get the user's permission to use their images for retraining the model
+
+
+Feel free to reach out to us at hi@alyssax.com, to [Alyssa](https://twitter.com/alyssaxuu) or [Leo](https://www.linkedin.com/in/leonorfurtado/) directly if you have any questions or feedback! Hope you find this useful 💜
