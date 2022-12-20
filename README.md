@@ -6,16 +6,15 @@ https://user-images.githubusercontent.com/7581348/208559445-a449cef6-0ae1-4c08-b
 
 Recycle your plastic better with Artificial Intelligence ♻️
 
-EcoSnap tells you what, how and where to recycle your items from a simple picture.
-EcoSnap is an Artificial Intelligence powered app that helps you recycle your plastic effectively.
+EcoSnap tells you what, how, and where to recycle your items from a simple picture using Artificial Intelligence. You just take a picture of a plastic resin code, and it tells you how and where to recycle the item based on your location. We built this product in a week for Ben's Bites Hackathon. [Vote for us](https://bens-bites.upvoty.com/b/hackathon/ecosnap-recycle-your-plastic-better-with-artificial-intelligence)!
+
+👉 [Try it now - it's free with no sign in needed](ecosnap.vercel.app)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world)
 
-👉 [Try it now](ecosnap.vercel.app)
-
 > You can support this project (and many others) through [GitHub Sponsors](https://github.com/sponsors/alyssaxuu)! ❤️
 
-Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.com/in/leonorfurtado/) for Ben's Bites Hackathon. [Vote for us](https://bens-bites.upvoty.com/b/hackathon/ecosnap-recycle-your-plastic-better-with-artificial-intelligence)!
+Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.com/in/leonorfurtado/)
 
 ## Table of contents
 
