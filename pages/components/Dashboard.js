@@ -43,7 +43,7 @@ const Dashboard = (props) => {
 	return (
 		<div className={styles.dashboard}>
 			{support &&
-			<a href="https://github.com/alyssaxuu/ecosnap" target="_blank" className={styles.support}>
+			<a href="https://bens-bites.upvoty.com/b/hackathon/ecosnap-recycle-your-plastic-better-with-artificial-intelligence" target="_blank" className={styles.support}>
 				<img src="closesupport.svg" className={styles.closesupport} onClick={handleSupport}/>
 				<img src="support.svg" className={styles.supportimg}/>
 				<div className={styles.supportinfo}>
