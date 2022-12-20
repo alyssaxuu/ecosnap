@@ -1,34 +1,37 @@
 # EcoSnap
 
-![Preview](preview.gif)
-<br>
-<br>
-Recycle your plastic better with Artificial Intelligence 🔥
+
+https://user-images.githubusercontent.com/7581348/208559445-a449cef6-0ae1-4c08-b9a5-c591062c3a3e.mp4
+
+
+Recycle your plastic better with Artificial Intelligence ♻️
 
 EcoSnap tells you what, how and where to recycle your items from a simple picture.
 EcoSnap is an Artificial Intelligence powered app that helps you recycle your plastic effectively.
 
-👉 Get it now [EcoSnap](ecosnap.vercel.app)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world)
+
+👉 [Try it now](ecosnap.vercel.app)
 
 > You can support this project (and many others) through [GitHub Sponsors](https://github.com/sponsors/alyssaxuu)! ❤️
 
-Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.com/in/leonorfurtado/)
+Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.com/in/leonorfurtado/) for Ben's Bites Hackathon. [Vote for us](https://bens-bites.upvoty.com/b/hackathon/ecosnap-recycle-your-plastic-better-with-artificial-intelligence)!
 
 ## Table of contents
 
 - [Features](#features)
 - [The AI model](#the-ai-model)
-	- [Dataset](#dataset)
+	- [Dataset](#data)
 	- [Training your own model](#training)
 	- [Prediction](#prediction)
-    - [The feedback loop](#feedback)
+    	- [The feedback loop](#feedback)
+- [Credit](#credit)
 - [Libraries used](#libraries-used)
 - [What's Next](whats-next)
 
 ## Features
 
-🗄 Snap a picture of a plastic code<br>  🔍 Search for specific item<br>  🔮 Learn how to recycle effectively <br> 🧩 Keep track of how many plastic items you've recycled<br>⚙️ Change your location for specific advice<br> 🌙...and much more to come - all for free & no sign in needed!
-
+📸 Snap a picture of a plastic code<br>  🔍 Search for specific item<br>  ♻️ Learn how to recycle effectively using AI <br> 🥤 Keep track of how many plastic items you've recycled<br>🌍 Change your location for specific advice<br> ✨...and much more to come - all for free & no sign in needed!
 
 
 ## The AI Model
@@ -47,7 +50,7 @@ To predict the plastic resin code, the model had to be integrated with the front
 
 The app passes the image Tensor onto the model that then gives a probability for each of the plastic resin codes, the one with the highest probability gets shown to the user, *along with bespoke advice*!
 
-### The feedback loop
+### Feedback
 
 Training a specific model is hard, the model always gets things wrong. So if it does, we give the user an opportunity to tell us what the right code was! This benefits in several ways:
 
@@ -55,15 +58,17 @@ Training a specific model is hard, the model always gets things wrong. So if it 
 2. We can see how the model is performing in production
 3. We get new data ( if the user lets us) to train the model with and improve it for everyone
 
-## Aknowlegments
+## Credit
 
-
-Feel free to suggest improvements by [making an issue](https://github.com/alyssaxuu/econap/issues/new).
-
+- [Kaggle Dataset](https://www.kaggle.com/datasets/piaoya/plastic-recycling-codes) - for the plastic codes
+- [Collletttivo](http://collletttivo.it/) - for the Mattone font
+- [Unsplash](https://unsplash.com/) - for the images
 
 ## Libraries used
-
 - [Tensorflow](https://www.tensorflow.org/) - for anything model related, the AI
+- [React Camera Pro](https://github.com/purple-technology/react-camera-pro) - for the camera
+- [Next.js](https://nextjs.org/) - for the frontend
+
 
 ## What's next?
 
