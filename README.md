@@ -3,9 +3,10 @@
 ![Preview](preview.gif)
 <br>
 <br>
-Recycle better with Artificial Inteligence 🔥
+Recycle your plastic better with Artificial Intelligence 🔥
 
 EcoSnap tells you what, how and where to recycle your items from a simple picture.
+EcoSnap is an Artificial Intelligence powered app that helps you recycle your plastic effectively.
 
 👉 Get it now [EcoSnap](ecosnap.vercel.app)
 
