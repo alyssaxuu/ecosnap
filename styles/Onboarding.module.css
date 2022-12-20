@@ -14,7 +14,6 @@
 	z-index: 999999999;
 }
 .skip:hover {
-	opacity: .6;
 	cursor: pointer;
 }
 .image {
@@ -146,7 +145,6 @@
 	margin-top: 25px;
 }
 .next:hover {
-	opacity: .6;
 	cursor: pointer;
 }
 .bottom {

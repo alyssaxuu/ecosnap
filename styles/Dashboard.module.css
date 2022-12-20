@@ -125,7 +125,6 @@
 }
 .button:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 .button img {
 	margin-right: 8px;

@@ -10,7 +10,7 @@ const Overlay = (props) => {
 	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "No number"];
 	
 	const handleCorrect = () => {
-		if (props.plastic == 8) {
+		if (props.plastic === 8) {
 			handleNone();
 		} else {
 			setNoPlastic(false);
@@ -21,8 +21,9 @@ const Overlay = (props) => {
 			} else {
 				props.setRecyclable(false);
 			}
+			setFeedback(true);
 		}
-		saveImage(props.tensor, props.pred, props.plastic);
+		//saveImage(props.tensor, props.pred, props.plastic);
 	}
 
 	const handleFalse = () => {
@@ -39,7 +40,7 @@ const Overlay = (props) => {
 			props.setRecyclable(false);
 		}
 		setNoPlastic(false);
-		saveImage(props.tensor, props.pred, number);
+		//saveImage(props.tensor, props.pred, number);
 		setWrong(false);
 		setFeedback(true);
 	}
