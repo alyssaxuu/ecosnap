@@ -53,5 +53,5 @@ export default async function handler(req, res) {
 	const result = await Model.predict(tf.expandDims(input.cast('float32'), 0));
 	const index = await result.data()
 
-  res.status(200).json({ number: indexOfMax(index)+1})
+  res.status(200).json({ number: indexOfMax(index)+1, tensor: JSON.stringify(input.arraySync())})
 }

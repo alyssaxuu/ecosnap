@@ -45,7 +45,7 @@ const Splash = (props) => {
 	return (
 		<div className={styles.container}>
 			{view &&
-				<Viewer setView={setView} setNum={props.setNum} num={props.num} region={props.region}/>
+				<Viewer pred={props.pred} setPred={props.setPred} tensor={props.tensor} setTensor={props.setTensor} setView={setView} setNum={props.setNum} num={props.num} region={props.region}/>
 			}
 			{settings && !reset && !on &&
 				<Settings setSettings={setSettings} setReset={setReset} setOn={setOn} />
@@ -79,8 +79,8 @@ const Splash = (props) => {
 					<img className={styles.trash} src="trash.svg"/>
 					<img className={styles.ground} src="ground.svg"/>
 				</div>
-				<div className={styles.title}>Recycle plastics better with Artificial Intelligence</div>
-				<div className={styles.subtitle}>Take a picture of a plastic resin code and learn how to recycle the item.</div>
+				<div className={styles.title}>Recycle your plastic better with Artificial Intelligence</div>
+				<div className={styles.subtitle}>Take a picture of a plastic code and learn how to recycle effectively.</div>
 				<div className={styles.button} onClick={() => setGetStarted(true)}>Get started</div>
 				<a className={styles.about} href="https://github.com/alyssaxuu/ecosnap" target="_blank">About</a>
 			</div>

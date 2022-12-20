@@ -41,7 +41,7 @@
 	margin-bottom: 20px;
 	position: relative;
 }
-.option:hover, .option:active {
+.option:hover {
 	cursor: pointer;
 	background-color: #F5F5F5;
 }
@@ -78,9 +78,8 @@
 	color: #FFF;
 	width: calc(100% - 40px);
 }
-.button:hover, .button:active {
+.button:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 .disabled {
 	opacity: .6;

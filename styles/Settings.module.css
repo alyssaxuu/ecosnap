@@ -29,9 +29,8 @@
 	position: absolute;
 	z-index: 99999;
 }
-.nav img:hover, .nav img:active {
+.nav img:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 
 /* Settings */
@@ -52,7 +51,7 @@
 	display: block;
 	text-decoration: none!important;
 }
-.item:hover, .item:active {
+.item:hover {
 	background: #EEEEEE;
 }
 .item span {
@@ -66,4 +65,12 @@
 .space {
 	height: 40px;
 	width: 100%;
+}
+.credit {
+	color: #979797;
+	font-size: 14px;
+	margin-top: 20px;
+	font-family: "DM Sans";
+	font-weight: 500;
+	margin-left: 20px;
 }

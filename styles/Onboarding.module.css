@@ -13,8 +13,7 @@
 	font-size: 14px;
 	z-index: 999999999;
 }
-.skip:hover, .skip:active {
-	opacity: .6;
+.skip:hover {
 	cursor: pointer;
 }
 .image {
@@ -145,8 +144,7 @@
 .next img {
 	margin-top: 25px;
 }
-.next:hover, .next:active {
-	opacity: .6;
+.next:hover {
 	cursor: pointer;
 }
 .bottom {
@@ -210,8 +208,7 @@
 	vertical-align: middle;
 	transition: all .3s cubic-bezier(.05,.03,.35,1);
 }
-.active:hover, .inactive:hover, .active:active, .inactive:active {
-	opacity: .6;
+.active:hover, .inactive:hover {
 	cursor: pointer;
 }
 .button {
@@ -231,8 +228,7 @@
 	text-align: center;
 	line-height: 50px;
 }
-.button:hover, .button:active {
-	opacity: .6;
+.button:hover {
 	cursor: pointer;
 }
 

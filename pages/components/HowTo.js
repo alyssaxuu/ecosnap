@@ -125,10 +125,16 @@ const HowTo = (props) => {
 			image: "https://images.unsplash.com/photo-1603847734787-9e8a3f3e9d60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cGxhc3RpY3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
 		},
 		{
-			name: "Crisp packets",
-			description: "Recyclable out of home",
-			url: "https://www.recyclenow.com/recycle-an-item/crisp-packets",
-			image: ""
+			name: "Kitchen towel",
+			description: "Not recyclable",
+			url: "https://www.recyclenow.com/recycle-an-item/kitchen-towel",
+			image: "https://images.unsplash.com/photo-1550963295-019d8a8a61c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
+		},
+		{
+			name: "Tissues",
+			description: "Not recyclable",
+			url: "https://www.recyclenow.com/recycle-an-item/tissues",
+			image: "https://images.unsplash.com/photo-1607516531499-9e57ef94a9d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3386&q=80"
 		},
 		{
 			name: "Plastic straws",

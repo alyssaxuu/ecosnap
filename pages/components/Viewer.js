@@ -28,7 +28,7 @@ const Viewer = (props) => {
 
 	const fetchData = async() => {
 		try {
-			const res = await fetch("/api/hello", {
+			const res = await fetch("/api/ml", {
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
@@ -46,6 +46,8 @@ const Viewer = (props) => {
 	useEffect(() => {
 		const run = async() => {
 			const data = await fetchData();
+			props.setTensor(data.tensor);
+			props.setPred(parseInt(data.number))
 			setPlastic(data.number);
 			if (plastic === 1 || plastic === 2 || plastic === 5) {
 				setRecyclable(true);
@@ -151,7 +153,7 @@ const Viewer = (props) => {
 			{!scanning &&
 				<img src="upload.svg" className={styles.upload} onClick={handleUploadClick}/>
 			}
-			<Overlay setNum={props.setNum} num={props.num} loading={loading} region={props.region} setPlastic={setPlastic} setRecyclable={setRecyclable} scanning={scanning} ready={next} plastic={plastic} recyclable={recyclable} handleReturn={handleReturn} />
+			<Overlay pred={props.pred} setPred={props.setPred} tensor={props.tensor} setTensor={props.setTensor} setNum={props.setNum} num={props.num} loading={loading} region={props.region} setPlastic={setPlastic} setRecyclable={setRecyclable} scanning={scanning} ready={next} plastic={plastic} recyclable={recyclable} handleReturn={handleReturn} />
 			<input
         type="file"
         ref={inputRef}

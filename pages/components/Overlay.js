@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
 import styles from "./../../styles/Overlay.module.css"
 import PlasticInfo from "./PlasticInfo";
+import saveImage from "./Firebase";
 
 const Overlay = (props) => {
 	const [feedback, setFeedback] = useState(false);
 	const [wrong, setWrong] = useState(false);
 	const [noPlastic, setNoPlastic] = useState(false);
-	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "error"];
-
-	useEffect(() => {
-		if (props.plastic === 8) {
-			handleNone();
-		}
-	}, [props.plastic])
+	const plasticTypes = ["PET/PETE", "HDPE", "PVC or V", "LDPE", "PP", "PS", "Misc.", "No number"];
 	
 	const handleCorrect = () => {
-		setFeedback(true);
+		if (props.plastic === 8) {
+			handleNone();
+		} else {
+			setNoPlastic(false);
+			if (props.plastic === 1 || props.plastic === 2 || props.plastic === 5) {
+				props.setRecyclable(true);
+				localStorage.setItem("num", props.num + 1);
+				props.setNum(props.num + 1);
+			} else {
+				props.setRecyclable(false);
+			}
+			setFeedback(true);
+		}
+		//saveImage(props.tensor, props.pred, props.plastic);
 	}
 
 	const handleFalse = () => {
@@ -23,7 +31,7 @@ const Overlay = (props) => {
 	}
 
 	const newNumber = (number) => {
-		props.setPlastic(number)
+		props.setPlastic(number);
 		if (number === 1 || number === 2 || number === 5) {
 			props.setRecyclable(true);
 			localStorage.setItem("num", props.num + 1);
@@ -31,6 +39,8 @@ const Overlay = (props) => {
 		} else {
 			props.setRecyclable(false);
 		}
+		setNoPlastic(false);
+		//saveImage(props.tensor, props.pred, number);
 		setWrong(false);
 		setFeedback(true);
 	}

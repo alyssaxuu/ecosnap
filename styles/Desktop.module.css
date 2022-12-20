@@ -4,3 +4,50 @@
 	position: absolute;
 	background: #FFF;
 }
+.credit {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	font-size: 16px;
+	font-weight: 500;
+	font-family: "DM Sans";
+}
+.credit a {
+	text-decoration: none;
+}
+.share {
+	position: absolute;
+	right: 200px;
+	bottom: 20px;
+	font-weight: 500;
+	font-size: 16px;
+	font-family: "DM Sans";
+}
+.share img {
+	vertical-align: middle;
+	width: 18px;
+	margin-right: 3px;
+	margin-top: -3px;
+}
+.share:hover, .github:hover, .credit a:hover {
+	opacity: .6;
+	cursor: pointer;
+}
+.github {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	font-size: 16px;
+	font-weight: 500;
+	font-family: "DM Sans";
+}
+.github img {
+	vertical-align: middle;
+	margin-top: -3px;
+	margin-right: 3px;
+}
+@media only screen and (max-width: 550px) {
+	.credit, .github, .share {
+		display: none;
+	}
+}
