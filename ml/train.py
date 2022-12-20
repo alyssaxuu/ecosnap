@@ -5,31 +5,29 @@ from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLRO
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 import os
 
-# import tensorflowjs as tfjs
-
-print("Num GPUs Available: ", len(tf.config.list_physical_devices("GPU")))
 data_directory = "ml/seven_plastics/"
 
 IMG_SIZE = (224, 224)
 IMG_SHAPE = IMG_SIZE + (3,)
 BATCH_SIZE = 12
-
+AUTOTUNE = tf.data.AUTOTUNE
 
 def prep_image(image_url):
+
     img = tf.keras.utils.load_img(image_url, target_size=IMG_SHAPE)
     img_array = tf.keras.utils.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)  # Create a batch
+
     return img_array
 
 
-img_array_1 = prep_image(
-    "ml/test/31c34d7a-f53c-40a5-bb84-bdee7554471b_1.jpg")
+img_array_1 = prep_image("ml/test/31c34d7a-f53c-40a5-bb84-bdee7554471b_1.jpg")
 img_array_2 = prep_image("ml/test/10cf4367-184f-4a61-bfcd-77a75b2b95d0_2.jpg")
 img_array_3 = prep_image("ml/test/v-plastic-recycling-symbol-pvc-v-3_fa88284651_3.jpg")
 img_array_4 = prep_image("ml/test/pe-ld-low-density-polyethylene-4.jpg")
 img_array_5 = prep_image("ml/test/pp-plastic_5.jpeg")
 img_array_6 = prep_image("ml/test/2fc8a970-8215-4627-b17a-7ca71d2eb73f_6.jpg")
-img_array_7 = prep_image("ml/test/images_7.jpg")
+img_array_7 = prep_image("ml/test/WRAQ6784.jpg")
 
 train_dataset = image_dataset_from_directory(
     data_directory,
@@ -51,20 +49,16 @@ validation_dataset = image_dataset_from_directory(
 
 
 class_names = train_dataset.class_names
-print(class_names)
 
 rescale = tf.keras.Sequential([tf.keras.layers.Rescaling(1.0 / 255.0)])
 
 data_augmentation = tf.keras.Sequential(
     [
-        tf.keras.layers.experimental.preprocessing.RandomFlip("horizontal"),
         tf.keras.layers.experimental.preprocessing.RandomRotation(0.1),
-        tf.keras.layers.experimental.preprocessing.RandomContrast(0.2),
+        tf.keras.layers.experimental.preprocessing.RandomContrast(0.1),
         tf.keras.layers.experimental.preprocessing.RandomZoom(0.1),
     ]
 )
-
-AUTOTUNE = tf.data.AUTOTUNE
 
 
 def prepare(ds, rescale=False, augment=False):
@@ -88,9 +82,7 @@ def prepare(ds, rescale=False, augment=False):
     return ds.prefetch(buffer_size=AUTOTUNE)
 
 
-base_model_name_list = ["efficient_net", "mobile_net", 
-# "xception", "inception"
-]
+base_model_name_list = ["efficient_net", "mobile_net", "xception", "inception"]
 predictions_dict = {}
 
 
@@ -163,8 +155,6 @@ for base_model_name in base_model_name_list:
             x = base_model_init(x, training=False)
         else:
             x = base_model_init(inputs, training=False)
-
-        # x = tf.keras.layers.Dropout(0.3)(x)
         x = global_average_layer(x)
         x = tf.keras.layers.Dropout(0.3)(x)
         outputs = prediction_layer(x)
@@ -179,9 +169,9 @@ for base_model_name in base_model_name_list:
         model.summary()
         epochs = 100
 
-        weights_path = rf"C:\Users\leo__\PycharmProjects\thesis_new\ecosnap2\ml\ecosnap\weights_{base_model_name}.hdf5"
+        weights_path = rf"ml/models/weights/weights_{base_model_name}.hdf5"
         if not augment:
-            weights_path = rf"C:\Users\leo__\PycharmProjects\thesis_new\ecosnap2\ml\ecosnap\weights_{base_model_name}_no_aug.hdf5"
+            weights_path = rf"ml/models/weights/weights_{base_model_name}_no_aug.hdf5"
         early_stopping = EarlyStopping(
             monitor="val_loss",
             min_delta=0,
@@ -216,6 +206,7 @@ for base_model_name in base_model_name_list:
                 checkpoint,
             ],
         )
+
         # Fine Tuning
 
         base_model_init.trainable = True
@@ -240,13 +231,12 @@ for base_model_name in base_model_name_list:
 
         model.load_weights(weights_path)
 
-        ecosnap_save_path = os.path.join("ml", f"{base_model_name}")
+        ecosnap_save_path = os.path.join("ml/models", f"{base_model_name}")
         if not augment:
-            ecosnap_save_path = os.path.join("ml", f"{base_model_name}_no_aug")
+            ecosnap_save_path = os.path.join("ml/models", f"{base_model_name}_no_aug")
         tf.keras.models.save_model(model, rf"{ecosnap_save_path}/keras")
-        tf.saved_model.save(model, rf"{ecosnap_save_path}/9")
+        tf.saved_model.save(model, rf"{ecosnap_save_path}/10")
         model.save(rf"ml/models/{ecosnap_save_path}")
-        # tfjs.converters.save_keras_model(model, f'ml/models/converted/{base_model_name}')
 
         predictions_1 = model.predict(img_array_1)
         predictions_2 = model.predict(img_array_2)
@@ -295,7 +285,3 @@ for base_model_name in base_model_name_list:
             class_names[np.argmax(predictions_7)], 100 * np.max(predictions_7)
         )
 
-
-
-
-print(predictions_dict)

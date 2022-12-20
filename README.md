@@ -1,34 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EcoSnap
 
-## Getting Started
+![Preview](preview.gif)
+<br>
+<br>
+Recycle your plastic better with Artificial Intelligence 🔥
 
-First, run the development server:
+EcoSnap tells you what, how and where to recycle your items from a simple picture.
+EcoSnap is an Artificial Intelligence powered app that helps you recycle your plastic effectively.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+👉 Get it now [EcoSnap](ecosnap.vercel.app)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> You can support this project (and many others) through [GitHub Sponsors](https://github.com/sponsors/alyssaxuu)! ❤️
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.com/in/leonorfurtado/)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Table of contents
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [Features](#features)
+- [The AI model](#the-ai-model)
+	- [Dataset](#dataset)
+	- [Training your own model](#training)
+	- [Prediction](#prediction)
+    - [The feedback loop](#feedback)
+- [Libraries used](#libraries-used)
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+🗄 Snap a picture of a plastic code<br>  🔍 Search for specific item<br>  🔮 Learn how to recycle effectively <br> 🧩 Keep track of how many plastic items you've recycled<br>⚙️ Change your location for specific advice<br> 🌙...and much more to come - all for free & no sign in needed!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## The AI Model
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Data
 
-## Deploy on Vercel
+The model was trained on image examples of the 7 different resin codes, the data for this can be found in `ml/seven_plastics`. It is a combination of the following [Kaggle Dataset](https://www.kaggle.com/datasets/piaoya/plastic-recycling-codes) and images collected by the authors and contributors.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Training
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The final model was trained using [TensorFlow's EfficientNet](https://www.tensorflow.org/api_docs/python/tf/keras/applications/efficientnet_v2/EfficientNetV2B0) implementation, the model weights were frozen for transfer learning, so the model could learn the resin codes faster! The model was trained in `Python` on a GPU-powered machine, for faster training! You can find the training script in `ml/train.py` and try it for yourself, there you will see that different meta architectures and parameters were experimented with before arriving at the final model.
+
+### Prediction
+
+To predict the plastic resin code, the model had to be integrated with the front end app for real-time results, to do this we had to convert the model in a way that was compatible with `Node.js`, this is when [TensorFlow.js](https://www.tensorflow.org/js) came to the rescue.
+
+The app passes the image Tensor onto the model that then gives a probability for each of the plastic resin codes, the one with the highest probability gets shown to the user, *along with bespoke advice*!
+
+### The feedback loop
+
+Training a specific model is hard, the model always gets things wrong. So if it does, we give the user an opportunity to tell us what the right code was! This benefits in several ways:
+
+1. The user gets the information they need on how to recycle their item
+2. We can see how the model is performing in production
+3. We get new data ( if the user lets us) to train the model with and improve it for everyone
+
+## Aknowlegments
+
+
+Feel free to suggest improvements by [making an issue](https://github.com/alyssaxuu/econap/issues/new).
+
+
+## Libraries used
+
+- [Tensorflow](https://www.tensorflow.org/) - for anything model related, the AI
+
+#
+
+Feel free to reach out to me through us at hi@alyssax.com or to [Alyssa](https://twitter.com/alyssaxuu) or [Leo](https://www.linkedin.com/in/leonorfurtado/) directly if you have any questions or feedback! Hope you find this useful 💜
