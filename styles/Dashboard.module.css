@@ -4,12 +4,53 @@
 	left: 0px;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
+/* Support */
+.support {
+	position: relative;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background: #000;
+	color: #FFF;
+	display: block;
+	width: 100%;
+}
+.supportimg {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+.supportinfo {
+	vertical-align: middle;
+	margin-left: 20px;
+	display: inline-block;
+	width: 70%;
+}
+.supporttitle {
+	font-size: 16px;
+	font-family: "DM Sans";
+	font-weight: 500;
+}
+.supportdesc {
+	font-size: 14px;
+	margin-top: 5px;
+	font-family: "DM Sans";
+}
+.closesupport {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+.closesupport:hover {
+	cursor: pointer;
+}
+
 
 /* Navigation */
 .nav {
 	width: 100%;
-	margin-top: 30px;
+	margin-top: 20px;
 }
 .header {
 	font-size: 20px;
@@ -26,11 +67,9 @@
 .settings, .help {
 	vertical-align: middle;
 }
-.settings:hover, .help:hover, .settings:active, .help:active {
-	opacity: .6;
+.settings:hover, .help:hover {
 	cursor: pointer;
 }
-
 /* Callout */
 .callout {
 	width: calc(100% - 40px);
@@ -44,9 +83,8 @@
 	height: 138px;
 	position: relative;
 }
-.callout:hover, .callout:active {
+.callout:hover{
 	cursor: pointer;
-	opacity: .6;
 }
 .callout img {
 	height: 100%;
@@ -86,9 +124,8 @@
 	color: #FFF;
 	width: calc(100% - 40px);
 }
-.button:hover, .button:active {
+.button:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 .button img {
 	margin-right: 8px;

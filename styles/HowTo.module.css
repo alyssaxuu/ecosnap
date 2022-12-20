@@ -2,7 +2,7 @@
 	margin-top: 20px;
 	margin-left: 20px;
 	overflow: hidden;
-	height: 70%;
+	height: 80%;
 }
 .input {
 	margin-top: 15px;
@@ -39,7 +39,7 @@
 	margin-top: 20px;
 	overflow: overlay;
 	height: 80%;
-	padding-bottom: 50px;
+	padding-bottom: 80px;
 }
 .results:after {
 	display: block;
@@ -56,8 +56,7 @@
 	display: block;
 	text-decoration: none;
 }
-.result:hover, .result:active {
-	opacity: .6;
+.result:hover {
 	cursor: pointer;
 }
 .image {

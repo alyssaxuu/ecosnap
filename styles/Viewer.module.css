@@ -53,8 +53,7 @@
 	border: none;
 	width: min-content;
 }
-.takephoto:hover, .takephoto:active {
-	opacity: .6;
+.takephoto:hover {
 	cursor: pointer;
 }
 .image {
@@ -75,8 +74,7 @@
 	border: none;
 	width: min-content;
 }
-.switchcamera:hover, .switchcamera:active {
-	opacity: .6;
+.switchcamera:hover {
 	cursor: pointer;
 }
 @keyframes fadein {
@@ -143,7 +141,7 @@
 	animation-timing-function: ease-in-out;
 	animation-fill-mode: forwards;
 }
-.goback:hover, .goback:active {
+.goback:hover {
 	opacity: .7;
 	cursor: pointer;
 }
@@ -157,7 +155,7 @@
 	width: 48px;
 	height: 48px;
 }
-.upload:hover, .upload:active {
+.upload:hover {
 	opacity: .7;
 	cursor: pointer;
 }
@@ -178,7 +176,7 @@
 	top: 0px;
 	bottom: 0px;
 	margin: auto;
-	opacity: .5;
+	opacity: .3;
 }
 
 @media only screen and (max-width: 360px) {

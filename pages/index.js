@@ -9,12 +9,14 @@ export default function Home() {
 	const [onboarding, setOnboarding] = useState(false);
 	const [check, setCheck] = useState(false);
 	const [num, setNum] = useState(0);
+	const [tensor, setTensor] = useState("");
+	const [pred, setPred] = useState(0);
 
 	// Saved preferences
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			//localStorage.removeItem("region");
-			//localStorage.removeItem("onboarding");
+			 //localStorage.removeItem("region");
+			 //localStorage.removeItem("onboarding");
 
 			if (localStorage.getItem("region") != null) {
 				setRegion(parseInt(localStorage.getItem("region")));
@@ -33,8 +35,19 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>EcoSnap</title>
-        <meta name="description" content="Recycle your plastic with the help of AI" />
+				<title>EcoSnap - Recycle your plastic better with Artificial Intelligence</title>
+				<meta name="title" content="EcoSnap - Recycle your plastic better with Artificial Intelligence"/>
+				<meta name="description" content="EcoSnap is an Artificial Intelligence powered app that helps you recycle your plastic effectively. It tells you what, how and where to recycle from a picture."/>
+				<meta property="og:type" content="website"/>
+				<meta property="og:url" content="https://getcarden.com/"/>
+				<meta property="og:title" content="EcoSnap - Recycle your plastic better with Artificial Intelligence"/>
+				<meta property="og:description" content="EcoSnap is an Artificial Intelligence powered app that helps you recycle your plastic effectively. It tells you what, how and where to recycle from a picture."/>
+				<meta property="og:image" content="https://getcarden.com/metaimage.png"/>
+				<meta property="twitter:card" content="summary_large_image"/>
+				<meta property="twitter:url" content="https://getcarden.com/"/>
+				<meta property="twitter:title" content="EcoSnap - Recycle your plastic better with Artificial Intelligence"/>
+				<meta property="twitter:description" content="EcoSnap is an Artificial Intelligence powered app that helps you recycle your plastic effectively. It tells you what, how and where to recycle from a picture."/>
+				<meta property="twitter:image" content="https://getcarden.com/metaimage.png"/>
         <link rel="icon" href="/favicon.ico" />
 				<link rel="preconnect" href="https://fonts.googleapis.com"/>
 				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -43,7 +56,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-				<Desktop region={region} setNum={setNum} num={num} onboarding={onboarding} setRegion={setRegion} check={check}/>
+				<Desktop pred={pred} setPred={setPred} tensor={tensor} setTensor={setTensor} region={region} setNum={setNum} num={num} onboarding={onboarding} setRegion={setRegion} check={check}/>
       </main>
 
       <footer className={styles.footer}>
