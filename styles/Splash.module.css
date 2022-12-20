@@ -112,7 +112,7 @@
 	right: 0px;
 }
 .about:hover {
-	opacity: .6;
+	cursor: pointer;
 }
 .button {
 	position: absolute;
@@ -132,7 +132,6 @@
 }
 .button:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 @media only screen and (max-width: 650px) {
 	.trees {
@@ -170,10 +169,10 @@
 		height: 42%;
 	}
 	.about {
-		bottom: 15px;
+		bottom: 20px;
 	}
 	.button {
-		bottom: 40px;
+		bottom: 50px;
 	}
 }
 @media only screen and (max-height: 640px) {

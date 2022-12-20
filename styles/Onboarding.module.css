@@ -211,7 +211,6 @@
 	transition: all .3s cubic-bezier(.05,.03,.35,1);
 }
 .active:hover, .inactive:hover {
-	opacity: .6;
 	cursor: pointer;
 }
 .button {
@@ -232,7 +231,6 @@
 	line-height: 50px;
 }
 .button:hover {
-	opacity: .6;
 	cursor: pointer;
 }
 

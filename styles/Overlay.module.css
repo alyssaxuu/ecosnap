@@ -238,7 +238,6 @@
 }
 .check:hover, .cross:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 .wrong {
 	width: 100%;
@@ -279,7 +278,6 @@
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 .button:hover {
-	opacity: .6;
 	cursor: pointer;
 }
 .other {
@@ -290,7 +288,6 @@
 	line-height: normal;
 }
 .other:hover {
-	opacity: .6;
 	cursor: pointer;
 }
 

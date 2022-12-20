@@ -80,7 +80,6 @@
 }
 .button:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 .disabled {
 	opacity: .6;

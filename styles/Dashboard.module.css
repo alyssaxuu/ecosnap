@@ -43,7 +43,6 @@
 }
 .closesupport:hover {
 	cursor: pointer;
-	opacity: .6;
 }
 
 
@@ -68,7 +67,6 @@
 	vertical-align: middle;
 }
 .settings:hover, .help:hover {
-	opacity: .6;
 	cursor: pointer;
 }
 /* Callout */
@@ -86,7 +84,6 @@
 }
 .callout:hover{
 	cursor: pointer;
-	opacity: .6;
 }
 .callout img {
 	height: 100%;
