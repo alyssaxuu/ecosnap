@@ -10,7 +10,7 @@ EcoSnap tells you what, how, and where to recycle your items from a simple pictu
 
 👉 [Try it now - it's free with no sign in needed](ecosnap.vercel.app)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alyssaxuu/ecosnap)
 
 > You can support this project (and many others) through [GitHub Sponsors](https://github.com/sponsors/alyssaxuu)! ❤️
 
@@ -23,7 +23,7 @@ Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.c
 	- [Dataset](#data)
 	- [Training your own model](#training)
 	- [Prediction](#prediction)
-    	- [The feedback loop](#feedback)
+    - [The feedback loop](#feedback)
 - [Credit](#credit)
 - [Libraries used](#libraries-used)
 - [What's Next](whats-next)
@@ -68,13 +68,12 @@ Training a specific model is hard, the model always gets things wrong. So if it 
 - [React Camera Pro](https://github.com/purple-technology/react-camera-pro) - for the camera
 - [Next.js](https://nextjs.org/) - for the frontend
 
-
 ## What's next?
 
 We want to implement a few more ideas after the Hackathon:
 1. A map that shows you where your nearest recycling point is
-2. Top Tips on how to recycle
-3. Articals and research about plastic
+2. Top tips on how to recycle
+3. Articles and research about plastic
 4. Get the user's permission to use their images for retraining the model
 
 
