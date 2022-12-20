@@ -24,6 +24,7 @@ const Dashboard = (props) => {
 	}
 
 	useEffect(() => {
+		localStorage.removeItem("support")
 		if (typeof window !== 'undefined') {
 			if (localStorage.getItem("support") != null) {
 				setSupport(false);
