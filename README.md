@@ -1,6 +1,6 @@
 # EcoSnap
 
-![Preview](preview.gif)
+https://user-images.githubusercontent.com/7581348/208559262-877cf50b-3711-464f-8942-c1ffd8068da0.mp4
 <br>
 <br>
 Recycle your plastic better with Artificial Intelligence 🔥
