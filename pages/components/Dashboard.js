@@ -3,7 +3,7 @@ import styles from "./../../styles/Dashboard.module.css";
 import HowTo from "./HowTo";
 
 const Dashboard = (props) => {
-	const [support, setSupport] = useState(true);
+	const [support, setSupport] = useState(false);
 
 	const handleShare = () => {
 		if (navigator.share) {
@@ -25,11 +25,11 @@ const Dashboard = (props) => {
 
 	useEffect(() => {
 		localStorage.removeItem("support")
-		if (typeof window !== 'undefined') {
-			if (localStorage.getItem("support") != null) {
-				setSupport(false);
-			}
-		}
+		//if (typeof window !== 'undefined') {
+		//	if (localStorage.getItem("support") != null) {
+		//		setSupport(false);
+		//	}
+		//}
 	}, []);
 
 	const handleSupport = (e) => {
