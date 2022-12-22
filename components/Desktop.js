@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./../../styles/Desktop.module.css";
+import styles from "./../styles/Desktop.module.css";
 import Splash from "./Splash";
 
 const Desktop = (props) => {

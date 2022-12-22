@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./../../styles/Settings.module.css";
+import styles from "./../styles/Settings.module.css";
 
 const Settings = (props) => {
 	return (

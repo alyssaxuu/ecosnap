@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./../../styles/Splash.module.css"
+import styles from "./../styles/Splash.module.css"
 import RegionSelect from "./RegionSelect";
 import Onboarding from "./Onboarding";
 import Dashboard from "./Dashboard";

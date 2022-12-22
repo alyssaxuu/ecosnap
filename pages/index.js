@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
-import Desktop from './components/Desktop';
+import Desktop from '../components/Desktop';
 
 export default function Home() {
 	const [region, setRegion] = useState(0);

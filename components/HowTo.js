@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import styles from "./../../styles/HowTo.module.css";
+import styles from "./../styles/HowTo.module.css";
 
 const HowTo = (props) => {
 	const [searchField, setSearchField] = useState("");

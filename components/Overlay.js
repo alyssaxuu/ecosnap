@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./../../styles/Overlay.module.css"
+import styles from "./../styles/Overlay.module.css"
 import PlasticInfo from "./PlasticInfo";
 import saveImage from "./Firebase";
 

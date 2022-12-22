@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./../../styles/PlasticInfo.module.css"
+import styles from "./../styles/PlasticInfo.module.css"
 
 const PlasticInfo = (props) => {
 	const [info, setInfo] = useState({
@@ -194,7 +194,7 @@ const PlasticInfo = (props) => {
 			</div>
 			<div className={styles.steps}>
 				{info.steps.map((item, i) => 
-					<div className={styles.step}>
+					<div key={i} className={styles.step}>
 						<div className={styles.number}>
 							{i+1}
 						</div>
@@ -214,7 +214,7 @@ const PlasticInfo = (props) => {
 				</div>
 				<div className={styles.steps}>
 					{info.nolist.map((item, i) => 
-						<div className={styles.step}>
+						<div key={i} className={styles.step}>
 							<div className={styles.cross}>
 							<img src="cross.svg"/>
 							</div>

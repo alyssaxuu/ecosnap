@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./../../styles/RegionSelect.module.css";
+import styles from "./../styles/RegionSelect.module.css";
 
 const RegionSelect = (props) => {
 	const [option, setOption] = useState(props.region);

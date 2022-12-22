@@ -1,6 +1,6 @@
 import { progressBarHelper } from "@tensorflow/tfjs-node/dist/callbacks";
 import React, { useState } from "react";
-import styles from "./../../styles/Onboarding.module.css"
+import styles from "./../styles/Onboarding.module.css"
 
 const Onboarding = (props) => {
 	const [step, setStep] = useState(1);

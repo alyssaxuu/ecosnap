@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import styles from "./../../styles/Viewer.module.css"
+import styles from "./../styles/Viewer.module.css"
 import Overlay from "./Overlay";
 import {Camera} from "react-camera-pro";
 
