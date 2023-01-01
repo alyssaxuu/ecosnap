@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     //  'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
 
     // This will not work on localhost, the model JSON needs to be in a server
-    Model = await tf.loadGraphModel("./model.json");
+    Model = await tf.loadGraphModel(process.env.MODEL_URL);
   }
 
   const b = Buffer.from(
