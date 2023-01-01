@@ -2,12 +2,7 @@ import loadTf from "tfjs-node-lambda";
 import { Readable } from "stream";
 import axios from "axios";
 
-// https://github.com/tensorflow/tfjs-examples/blob/master/firebase-object-detection-node/functions/index.js
 export default async function handler(req, res) {
-  //const loadTf = require('tensorflow-lambda')
-  //const tf = require('@tensorflow/tfjs-node')
-  //const tf = await loadTf()
-
   const response = await axios.get(
     "https://github.com/jlarmstrongiv/tfjs-node-lambda/releases/download/v2.0.10/nodejs12.x-tf2.8.6.br",
     { responseType: "arraybuffer" }
@@ -37,13 +32,7 @@ export default async function handler(req, res) {
   }
 
   if (!Model) {
-    // Load the TensorFlow SavedModel through tfjs-node API. You can find more
-    // details in the API documentation:
-    // https://js.tensorflow.org/api_node/1.3.1/#node.loadSavedModel
-    // Model = await tf.node.loadSavedModel(
-    //  'https://ecosnap2.vercel.app/4', ['serve'], 'serving_default');
-
-    // This will not work on localhost, the model JSON needs to be in a server
+    // Make sure to update the MODEL_URL environment variable on Vercel (or .env file) to point to the model.json on /public. Does not work on localhost or with a local file path.
     Model = await tf.loadGraphModel(process.env.MODEL_URL);
   }
 
