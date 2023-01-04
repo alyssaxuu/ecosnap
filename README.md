@@ -34,7 +34,7 @@ Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.c
 📸 Snap a picture of a plastic code<br>  🔍 Search for specific item<br>  ♻️ Learn how to recycle effectively using AI <br> 🥤 Keep track of how many plastic items you've recycled<br>🌍 Change your location for specific advice<br> ✨...and much more to come - all for free & no sign in needed!
 
 ## Installation
-You can deploy to Vercel directly by [clicking here]((https://vercel.com/new/clone?repository-url=https://github.com/alyssaxuu/ecosnap)). 
+You can deploy to Vercel directly by [clicking here](https://vercel.com/new/clone?repository-url=https://github.com/alyssaxuu/ecosnap). 
 
 **Important:** Make sure to update the environment variable for [MODEL_URL](https://github.com/alyssaxuu/ecosnap/blob/a9c7e7e1ec19f106db69abd6d66be558bd21445a/.env#L16) in the .env file, and set it to an absolute URL where you host the [model.json](https://github.com/alyssaxuu/ecosnap/blob/main/public/model.json) (on Vercel it would be at the root level of your domain. It will not work by pointing to localhost or a local file path because it's running a serverless version of TensorflowJs (to run it locally, use [tfjs-node](https://www.npmjs.com/package/@tensorflow/tfjs-node) directly).
 
