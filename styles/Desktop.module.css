@@ -4,29 +4,59 @@
 	position: absolute;
 	background: #FFF;
 }
-.credit {
+.badge {
 	position: absolute;
-	bottom: 20px;
-	left: 20px;
-	font-size: 16px;
+	left: 0px;
+	bottom: 0px;
+}
+.badge img {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 150px;
+}
+.badgewrap {
+	position: absolute;
+	left: 80px;
+	bottom: 18px;
+	width: 200px;
+}
+.name {
+	font-size: 14px;
+}
+.credit {
+	margin-top: 8px;
+	font-size: 14px;
 	font-weight: 500;
 	font-family: "DM Sans";
+	color: #8C8C8C;
 }
 .credit a {
 	text-decoration: none;
+	position: relative;
+}
+.credit a:after {
+	display: inline-block;
+	width: 100%;
+	height: 1.5px;
+	background: #D9D9D9;
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
 }
 .share {
 	position: absolute;
-	right: 200px;
-	bottom: 20px;
+	left: 170px;
+	top: 20px;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 14px;
 	font-family: "DM Sans";
 }
 .share img {
 	vertical-align: middle;
 	width: 18px;
-	margin-right: 3px;
+	margin-right: 2px;
 	margin-top: -3px;
 }
 .share:hover, .github:hover, .credit a:hover {
@@ -35,19 +65,55 @@
 }
 .github {
 	position: absolute;
-	right: 20px;
-	bottom: 20px;
-	font-size: 16px;
+	left: 20px;
+	top: 20px;
+	font-size: 14px;
 	font-weight: 500;
 	font-family: "DM Sans";
 }
 .github img {
 	vertical-align: middle;
 	margin-top: -3px;
-	margin-right: 3px;
+	margin-right: 2px;
+}
+.awards {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.award1 {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	height: 50px;
+}
+.award2 {
+	position: absolute;
+	right: 140px;
+	top: 20px;
+	height: 50px;
+}
+.qrcode {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	text-align: center;
+}
+.qrcode span {
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	color: #8C8C8C;
+	font-family: "DM Sans";
+	text-align: center;
+	margin-top: 10px;
+}
+.qrcode img {
+	width: 120px;
+	box-shadow: 0px 0px 50px rgba(31, 31, 31, 0.1);
 }
 @media only screen and (max-width: 550px) {
-	.credit, .github, .share {
+	.credit, .github, .share, .qrcode, .badge, .awards {
 		display: none;
 	}
 }
