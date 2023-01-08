@@ -36,7 +36,7 @@ Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.c
 ## Installation
 You can deploy to Vercel directly by [clicking here](https://vercel.com/new/clone?repository-url=https://github.com/alyssaxuu/ecosnap). 
 
-**Important:** Make sure to update the environment variable for [MODEL_URL](https://github.com/alyssaxuu/ecosnap/blob/a9c7e7e1ec19f106db69abd6d66be558bd21445a/.env#L16) in the .env file, and set it to an absolute URL where you host the [model.json](https://github.com/alyssaxuu/ecosnap/tree/main/ml/models/efficient_net/10/predict) (make sure to include the other shard bin files).
+**Important:** Make sure to update the environment variable for [NEXT_PUBLIC_MODEL_URL](https://github.com/alyssaxuu/ecosnap/blob/a9c7e7e1ec19f106db69abd6d66be558bd21445a/.env#L16) in the .env file, and set it to an absolute URL where you host the [model.json](https://github.com/alyssaxuu/ecosnap/tree/main/ml/models/efficient_net/10/predict) (make sure to include the other shard bin files alongside the JSON).
 
 
 ## The AI Model
@@ -51,7 +51,7 @@ The final model was trained using [TensorFlow's EfficientNet](https://www.tensor
 
 ### Prediction
 
-To predict the plastic resin code, the model had to be integrated with the front end app for real-time results, to do this we had to convert the model in a way that was compatible with `Node.js`, this is when [TensorFlow.js](https://www.tensorflow.org/js) came to the rescue.
+To predict the plastic resin code, the model had to be integrated with the front end app for real-time results, to do this we had to convert the model in a way that was compatible with `TensorFlow.js`(https://www.tensorflow.org/js).
 
 The app passes the image Tensor onto the model that then gives a probability for each of the plastic resin codes, the one with the highest probability gets shown to the user, *along with bespoke advice*!
 
@@ -70,7 +70,7 @@ Training a specific model is hard, the model always gets things wrong. So if it 
 - [Unsplash](https://unsplash.com/) - for the images
 
 ## Libraries used
-- [Tensorflow](https://www.tensorflow.org/) - for anything model related, the AI
+- [Tensorflow](https://www.tensorflow.org/) - for training the model and doing the prediction
 - [React Camera Pro](https://github.com/purple-technology/react-camera-pro) - for the camera
 - [Next.js](https://nextjs.org/) - for the frontend
 
