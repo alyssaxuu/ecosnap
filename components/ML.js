@@ -1,13 +1,8 @@
 import React from "react";
-import { Readable } from "stream";
 import * as tf from "@tensorflow/tfjs";
-import { model } from "@tensorflow/tfjs";
 
 // Create a function to classify the image with a Readable stream
 const classifyImage = async (image) => {
-  //const readStream = Readable.from(image);
-  //const tf = await loadTf(readStream);
-
   let Model;
 
   function indexOfMax(arr) {
@@ -30,7 +25,7 @@ const classifyImage = async (image) => {
 
   if (!Model) {
     console.log(tf);
-    // Make sure to update the MODEL_URL environment variable on Vercel (or .env file) to point to the model.json on /public. Does not work on localhost or with a local file path.
+    // Make sure to update the NEXT_PUBLIC_MODEL_URL environment variable on Vercel (or .env file) to point to the model.json file
     Model = await tf.loadGraphModel(process.env.NEXT_PUBLIC_MODEL_URL);
   }
 

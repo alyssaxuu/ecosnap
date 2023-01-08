@@ -27,29 +27,9 @@ const Viewer = (props) => {
     setNext(false);
   };
 
-  const fetchData = async () => {
-    /*
-    try {
-      const res = await fetch("/api/ml", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ image: image }),
-      });
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
-		*/
-    return classifyImage(image);
-  };
-
   useEffect(() => {
     const run = async () => {
-      const data = await fetchData();
+      const data = await classifyImage(image);
       props.setTensor(data.tensor);
       props.setPred(parseInt(data.number));
       setPlastic(data.number);
