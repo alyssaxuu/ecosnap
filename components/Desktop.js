@@ -18,10 +18,14 @@ const Desktop = (props) => {
           setRegion={props.setRegion}
         />
       )}
-      <div className={styles.awards}>
+      <a
+        href="https://alyssax.substack.com/p/we-built-an-ai-recycling-app-in-a"
+        target="_blank"
+        className={styles.awards}
+      >
         <img className={styles.award1} src="./award1.svg" />
         <img className={styles.award2} src="./award2.svg" />
-      </div>
+      </a>
       <div className={styles.badge}>
         <img src="logo-with-back.svg" />
         <div className={styles.badgewrap}>

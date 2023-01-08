@@ -81,6 +81,9 @@
 	top: 0px;
 	right: 0px;
 }
+.awards:hover {
+	opacity: .6;
+}
 .award1 {
 	position: absolute;
 	right: 20px;
