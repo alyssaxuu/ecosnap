@@ -109,6 +109,7 @@
 	animation-direction: alternate;
 	animation-fill-mode: forwards;
 	pointer-events: none;
+	will-change: top;
 }
 @keyframes moving {
 	from {

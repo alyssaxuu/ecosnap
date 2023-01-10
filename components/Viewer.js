@@ -16,6 +16,7 @@ const Viewer = (props) => {
   const inputRef = useRef(null);
   const canvas = useRef(null);
   const [backImage, setBackImage] = useState(null);
+  const [data, setData] = useState([]);
 
   const handleUploadClick = () => {
     inputRef.current?.click();
@@ -28,8 +29,7 @@ const Viewer = (props) => {
   };
 
   useEffect(() => {
-    const run = async () => {
-      const data = await classifyImage(image);
+    if (data.number) {
       props.setTensor(data.tensor);
       props.setPred(parseInt(data.number));
       setPlastic(data.number);
@@ -40,10 +40,17 @@ const Viewer = (props) => {
       }
       setLoading(false);
       setNext(true);
-    };
+    }
+  }, [data]);
+
+  const getData = async () => {
+    classifyImage(image, setData);
+  };
+
+  useEffect(() => {
     if (image) {
       scan();
-      run();
+      getData();
     }
   }, [image]);
 
@@ -86,7 +93,8 @@ const Viewer = (props) => {
   };
 
   const takePhoto = async () => {
-    const photo = camera.current.takePhoto();
+    console.log(camera.current);
+    const photo = await camera.current.takePhoto();
     cropImage(photo);
   };
 

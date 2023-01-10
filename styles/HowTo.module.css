@@ -1,8 +1,11 @@
-.howto {
+.howto, .howtosupport {
 	margin-top: 20px;
 	margin-left: 20px;
 	overflow: hidden;
-	height: 80%;
+	height: calc(100% - 260px);
+}
+.howtosupport {
+	height: calc(100% - 350px);
 }
 .input {
 	margin-top: 15px;
@@ -35,13 +38,13 @@
 
 
 /* Results */
-.results {
+.results, .resultssupport {
 	margin-top: 20px;
 	overflow: overlay;
-	height: 80%;
-	padding-bottom: 80px;
+	height: calc(100% - 120px);
+	padding-bottom: 20px;
 }
-.results:after {
+.results:after, .resultssupport:after {
 	display: block;
 	content: "";
 	width: 100%;
@@ -50,6 +53,9 @@
 	bottom: 0px;
 	left: 0px;
 	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 70.83%);
+}
+.resultssupport {
+	height: calc(100% - 110px);
 }
 .result {
 	margin-bottom: 15px;

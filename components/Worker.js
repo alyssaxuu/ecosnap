@@ -1,10 +1,8 @@
-import React from "react";
 import * as tf from "@tensorflow/tfjs";
 
-// Create a function to classify the image with a Readable stream
-const classifyImage = async (image, setData) => {
+addEventListener("message", async ({ data }) => {
   let Model;
-  const worker = new Worker(new URL("./Worker.js", import.meta.url));
+  const input = tf.tensor(JSON.parse(data));
 
   function indexOfMax(arr) {
     if (arr.length === 0) {
@@ -29,22 +27,13 @@ const classifyImage = async (image, setData) => {
     // Make sure to update the NEXT_PUBLIC_MODEL_URL environment variable on Vercel (or .env file) to point to the model.json file
     Model = await tf.loadGraphModel(process.env.NEXT_PUBLIC_MODEL_URL);
   }
+  const result = await Model.predict(tf.expandDims(input, 0));
+  const index = await result.data();
 
-  const b = Buffer.from(
-    image.replace(/^data:image\/(png|jpeg);base64,/, ""),
-    "base64"
-  );
-
-  var img = new Image();
-  img.src = image;
-  var input = tf.browser.fromPixels(img);
-  const data = JSON.stringify(input.arraySync());
-
-  worker.postMessage(data);
-
-  worker.onmessage = (e) => {
-    setData(e.data);
+  const final = {
+    number: indexOfMax(index) + 1,
+    tensor: JSON.stringify(input.arraySync()),
   };
-};
 
-export default classifyImage;
+  postMessage(final);
+});
