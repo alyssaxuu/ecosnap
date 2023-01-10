@@ -27,7 +27,6 @@ Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.c
     - [The feedback loop](#feedback)
 - [Credit](#credit)
 - [Libraries used](#libraries-used)
-- [What's Next](whats-next)
 
 ## Features
 
@@ -51,7 +50,7 @@ The final model was trained using [TensorFlow's EfficientNet](https://www.tensor
 
 ### Prediction
 
-To predict the plastic resin code, the model had to be integrated with the front end app for real-time results, to do this we had to convert the model in a way that was compatible with `TensorFlow.js`(https://www.tensorflow.org/js).
+To predict the plastic resin code, the model had to be integrated with the front end app for real-time results, to do this we had to convert the model in a way that was compatible with [TensorFlow.js](https://www.tensorflow.org/js). We used [Web Workers](https://github.com/alyssaxuu/ecosnap/blob/main/components/Worker.js) to prevent the main thread from being block while running the prediction in the client.
 
 The app passes the image Tensor onto the model that then gives a probability for each of the plastic resin codes, the one with the highest probability gets shown to the user, *along with bespoke advice*!
 
@@ -61,26 +60,19 @@ Training a specific model is hard, the model always gets things wrong. So if it 
 
 1. The user gets the information they need on how to recycle their item
 2. We can see how the model is performing in production
-3. We get new data ( if the user lets us) to train the model with and improve it for everyone
+3. We get new data (if the user lets us) to train the model with and improve it for everyone
+
+While we implemented the front end for the feedback loop, we ended up not connecting it to the backend as it added complexity and cost, and we wanted the app to be very lightweight and running entirely on the client. We'd also have to communicate clearly to the user how exactly their images would be used, and set up either an opt-in or opt-out system, which felt a bit cumbersome.
 
 ## Credit
-
 - [Kaggle Dataset](https://www.kaggle.com/datasets/piaoya/plastic-recycling-codes) - for the plastic codes
 - [Collletttivo](http://collletttivo.it/) - for the Mattone font
+- [Stubborn](https://stubborn.fun/) - for some of the illustrations
 - [Unsplash](https://unsplash.com/) - for the images
 
 ## Libraries used
 - [Tensorflow](https://www.tensorflow.org/) - for training the model and doing the prediction
 - [React Camera Pro](https://github.com/purple-technology/react-camera-pro) - for the camera
-- [Next.js](https://nextjs.org/) - for the frontend
-
-## What's next?
-
-We want to implement a few more ideas after the Hackathon:
-1. A map that shows you where your nearest recycling point is
-2. Top tips on how to recycle
-3. Articles and research about plastic
-4. Get the user's permission to use their images for retraining the model
 
 
 Feel free to reach out to us at hi@alyssax.com, to [Alyssa](https://twitter.com/alyssaxuu) or [Leo](https://www.linkedin.com/in/leonorfurtado/) directly if you have any questions or feedback! Hope you find this useful 💜
