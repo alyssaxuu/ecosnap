@@ -30,7 +30,13 @@ Made by [Alyssa X](https://twitter.com/alyssaxuu) & [Leo](https://www.linkedin.c
 
 ## Features
 
-📸 Snap a picture of a plastic code<br>  🔍 Search for specific item<br>  ♻️ Learn how to recycle effectively using AI <br> 🥤 Keep track of how many plastic items you've recycled<br>🌍 Change your location for specific advice<br> ✨...and much more to come - all for free & no sign in needed!
+📸 Snap or upload a picture of a plastic code<br>
+📱 Install the PWA on your phone for easy access<br>
+🔍 Search for specific item to know how to dispose of it<br>
+♻️ Learn how to recycle effectively using AI<br>
+🥤 Keep track of how many plastic items you've recycled<br>
+🌍 Change your location for specific advice<br>
+✨...and much more to come - all for free & no sign in needed!
 
 ## Installation
 You can deploy to Vercel directly by [clicking here](https://vercel.com/new/clone?repository-url=https://github.com/alyssaxuu/ecosnap). 
